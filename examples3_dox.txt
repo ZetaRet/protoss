@@ -1,0 +1,23 @@
+required*
+
+new ZetaRet_PrototypesX() - Extended prototypes, will instantiate ZetaRet_Prototypes, stacking multiple prototypes instances is safe 
+
+abstract(String name, Object amap) : Function 
+name - String, if null will use ZetaRet_Abstract_XXX13XXX 
+amap - Object, if null will use this, i.e. {term:0,date:0,record:3}.abstract()
+return Function, afn is aggregate function which generates methods according to map, if key-value pair is [0,false,null,undefined,""] will throw abstract error, otherwise will return the value from the object map (i.e. .record() returns 3), abstract class throws error on instance, must be subclassed 
+
+implement(Function superfn, Function fn, String name) : Function
+superfn* - Function, the super function of fn or this
+fn - Function, if null will use this function, fn extends superfn in effect, fn is subclass of superfn
+name - String, if null will use default __constructor
+return Fuction, superfn will be returned for chain calls, [implement calls setSuper]
+
+interface(String name, Object imap) : Function
+name - String, if null will use ZetaRet_Interface_XXX13XXX
+imap - Object, if null will use this, i.e. {term:[String, Number],date:[Date],record:[CustomRecordClass, IRecordData]}.interface()
+return Function, ifn is aggregate function which generates methods according to map, methods will test arguments against map value input types, each method returns true or false, depending on matched types
+
+final(function_arguments|Array args) : Object
+args* - function_arguments|Array, compares this.constructor and args.callee, will throw error if not equal, a class with final call must not be a super
+return Object, this
