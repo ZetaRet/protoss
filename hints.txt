@@ -1,0 +1,30 @@
+Ambiguity testing:
+
+Case 1. Interfaces. In custom framework developed on top of ProtoSS (Zeta Ret Clockwork), the solution comes from simple String->Class resolving in runtime. Interface arguments arrays are preserved in the interface itself, but with string i.e. "zetaret.global.packages.clockwork.events.interfaces::IEvent"
+
+Realworld example:
+window.package("zetaret.global.packages.clockwork.interfaces").IFrontEnd=
+	IButton:{over:["zetaret.global.packages.clockwork.events.interfaces::IEvent"]},//IEvent is added in a different interface map and placed in a different package
+	IAnotherInterface:{do1:[String, Number], do2:[Date]},
+	IOtherInterface:{selftest:["zetaret.global.packages.clockwork.interfaces::IButton"]}//IButton is in the same interface map, after resolving class name it is visible
+}
+//code generator iterates over all interface maps and directly creates interfaces in runtime
+//using strings resolves any conflicts, you must resolve classes immediately after generating all interfaces and before execution of application
+
+//ambiguity test
+var ib=new zetaret.global.packages.clockwork.ui.interfaces.IButton();
+var ie=new zetaret.global.packages.clockwork.events.interfaces.IEvent();
+ib.over(ie);//return true, interface class string parameter is replaced in runtime with IEvent
+
+//you must parse the string into package and class name, obtain the function object from its package and replace it back into interface arguments array i.e. interfaces.IButton.over[0]
+
+Case 2. Implementations and Extends of Super classes. Any such calls must be executed after declaration of all classes, you might want to use header objects or global/static function calls which once again resolve super/interface/abstract class name from String
+
+Case 3. Calling multiple functions with the same name. You must use a design pattern if you are not doing this in compile time. Double/Multiple dispatch design pattern resolves such scenario, you will need interface instances/supers with the function to test against at runtime. Best scenario is to add them in an array and iterate over all of them using the function name (performance), you might also decide to add them in the superList or already are part of the inheritance tree, in this case you should resolve the ambiguity by obtaining all interfaces from the inheritance tree, verify function name in interest and test arguments against them, this scenario opens the possibility of caching supers/interfaces in an array which delivers again the first option. Note the fact that argument types might be part of the inheritance tree, do not rely on their name, i.e. you will test an argument with a different base constructor in comparison to the interface, if it is part of the inheritance tree, then it will be valid solution.
+
+Interface maps:
+
+Case 1. Runtime maps. As it is demonstrated in the example, maps are used predefined and attached to packages, this allows easier lookup/iteration/exchange at any time, also adding more than one interface at a time.
+
+Case 2. Move maps. Some interface maps are defined in one package but attached in another package.
+
