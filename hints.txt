@@ -3,7 +3,7 @@ Ambiguity testing:
 Case 1. Interfaces. In custom framework developed on top of ProtoSS (Zeta Ret Clockwork), the solution comes from simple String->Class resolving in runtime. Interface arguments arrays are preserved in the interface itself, but with string i.e. "zetaret.global.packages.clockwork.events.interfaces::IEvent"
 
 Realworld example:
-window.package("zetaret.global.packages.clockwork.interfaces").IFrontEnd=
+window.package("zetaret.global.packages.clockwork.interfaces").IFrontEnd={
 	IButton:{over:["zetaret.global.packages.clockwork.events.interfaces::IEvent"]},//IEvent is added in a different interface map and placed in a different package
 	IAnotherInterface:{do1:[String, Number], do2:[Date]},
 	IOtherInterface:{selftest:["zetaret.global.packages.clockwork.interfaces::IButton"]}//IButton is in the same interface map, after resolving class name it is visible
