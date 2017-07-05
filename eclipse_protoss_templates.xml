@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><templates><template autoinsert="true" context="javaScript" deleted="false" description="Zeta Ret ProtoSS" enabled="true" name="protoss">function ${ClassName}(){
+	var o=this;
+	o.super(arguments,true);
+	var m={};
+	o.superize(arguments,m,true,true);
+	return o;
+}</template></templates>
