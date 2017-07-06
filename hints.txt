@@ -28,3 +28,63 @@ Case 1. Runtime maps. As it is demonstrated in the example, maps are used predef
 
 Case 2. Move maps. Some interface maps are defined in one package but attached in another package.
 
+String class resolve:
+
+Case 1. Multi resolve.
+"///events::EventDispatcher|/IObserver|ZetaRet_EventDispatcher"
+slash "/" refers to path, where 1 slash is current path, and multiple slashes refer to parent package
+pipe "|" means optional class if the previous one failed to resolve
+i.e. "zetaret.global.packages.clockwork.patterns.interfaces" path resolves to "zetaret.global.packages.clockwork.events::EventDispatcher" or "zetaret.global.packages.clockwork.patterns.interfaces::IObserver" or window.ZetaRet_EventDispatcher
+
+Case 2. Implementation.
+
+m.stringPattern=function(pat, str, pos){
+    if(!pos)pos=0;
+    var num=0;
+	while(str.indexOf(pat, pos)==pos){
+		num++;
+		str=str.substr(0,pos)+str.substr(pos+pat.length,str.length);
+	}
+	return [num,str];
+};
+m.getSuperCls=function(sname, toppack, path){
+	var many=sname.split("|");
+	var cls=null;
+	for(var i=0;i<many.length;i++){
+		var sn=many[i];
+		var tp=toppack;
+		var sp=o.stringPattern("/",sn);
+		if (path && sp[0]>0){
+			var pathsplit=path.split(".");
+			tp=tp.package(pathsplit.slice(0, pathsplit.length-sp[0]+1).join("."));
+		}
+		var s=sp[1].split("::");
+		if (s.length==1){
+			cls=tp[s[0]];
+			if(cls)return cls;
+		}
+		cls=tp.package(s[0])[s[1]];
+		if(cls)return cls;
+	}
+	return cls;
+};
+m.resolveCls=function(s, toppack, path){
+	for(var k in s){
+		if (k=="__name")continue;
+		var sk=s[k];
+		for(var kk in sk){
+			var skk=sk[kk];
+			for(var i=0;i<skk.length;i++){
+				if (skk[i].constructor==String){
+					console.log(skk[i])
+					skk[i]=o.getSuperCls(skk[i], toppack, path);
+				}
+			}
+		}
+	}
+	return o;
+};
+
+Example call resolveCls(zetaret.global.packages.clockwork.interfaces.IPatterns, window, "zetaret.global.packages.clockwork.patterns.interfaces");
+IPatterns is interface map, previously generated but attached to new path
+
