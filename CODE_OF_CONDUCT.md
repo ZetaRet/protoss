@@ -38,6 +38,14 @@ Instances of abusive, harassing, or otherwise unacceptable behavior may be repor
 
 Project maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project's leadership.
 
+## Terms of use
+
+Zeta Ret Terms apply https://zetaret.com/terms/ 
+
+## Privacy Policy
+
+Zeta Ret Privacy Policy apply https://zetaret.com/legal/privacy/ 
+
 ## Attribution
 
 This Code of Conduct is adapted from the [Contributor Covenant][homepage], version 1.4, available at [http://contributor-covenant.org/version/1/4][version]
