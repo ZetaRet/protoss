@@ -1,5 +1,10 @@
 # protoss
-Zeta Ret ProtoSS Library - Prototype Supers-Subclass
+:alien: Zeta Ret ProtoSS Library - Prototype Supers-Subclass
+
+# ProtoSS
+## Zeta Ret ProtoSS Library - Prototype Supers-Subclass
+
+![Zeta Ret ProtoSS Cover](https://zetaret.com/images/protoss_cover.jpg)
 
 Tern.js-compliant Prototypes Framework with Polymorphism
 
