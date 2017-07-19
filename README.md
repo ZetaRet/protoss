@@ -41,4 +41,5 @@ Note: This library may be used directly for OOP in Javascript, still, a cross-co
 
 Author: Zeta Ret, Ivo Yankulovski, 2017 http://zetaret.com/
 
+---
 ![ProtoSS Splash](http://moheban-ahlebeit.com/images/Protoss-Wallpaper/Protoss-Wallpaper-23.jpg)
