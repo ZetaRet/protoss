@@ -1,6 +1,8 @@
 # protoss
 :alien: Zeta Ret ProtoSS Library - Prototype Supers-Subclass
 
+![Zeta Ret ProtoSS Logo](https://zetaret.com/images/protoss_logo_name.png)
+
 # ProtoSS
 ## Zeta Ret ProtoSS Library - Prototype Supers-Subclass
 
