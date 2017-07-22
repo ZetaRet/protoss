@@ -1,7 +1,7 @@
 # protoss
 :alien: Zeta Ret ProtoSS Library - Prototype Supers-Subclass
 
-[![Zeta Ret ProtoSS Logo](https://zetaret.com/images/protoss_logo_name.png)](http://protoss.xyz/)
+[![Zeta Ret ProtoSS Logo](https://zetaret.com/images/protoss_logo_name.png)](https://protoss.xyz/)
 
 # ProtoSS
 ## Zeta Ret ProtoSS Library - Prototype Supers-Subclass
@@ -46,8 +46,8 @@ Some Javascript versions or JS servers do not support arguments, it must be recr
 
 Note: This library may be used directly for OOP in Javascript, still, a cross-compiler/code analysis/texttemplate tool is required to take advantage of all features like real method overloading according to arguments length and type. Your interpreter tool must be able to detect types and arguments length before compilation of output js file in order to add the correct function call in the release code. Overloading is a purely syntactic way of using the same name for different semantic objects, the compiler can resolve the ambiguity at compile time, and then proceed as usual.
 
-ProtoSS Website: http://protoss.xyz/  
-Author: Zeta Ret, Ivo Yankulovski, 2017 http://zetaret.com/
+ProtoSS Website: https://protoss.xyz/  
+Author: Zeta Ret, Ivo Yankulovski, 2017 https://zetaret.com/
 
 ---
 ![ProtoSS Splash](http://moheban-ahlebeit.com/images/Protoss-Wallpaper/Protoss-Wallpaper-23.jpg)
