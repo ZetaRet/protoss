@@ -10,11 +10,12 @@ call_arguments* - (cargs) Array used to call "apply" of the super constructor fu
 name - String used to define the name of the constructor in the prototype, default __constructor
 return constructor function result
 
-superize(function_arguments|Array args, Object map, Boolean setname, Boolean setown) : Object
+superize(function_arguments|Array args, Object map, Boolean setname, Boolean setown, Boolean defname) : Object
 arguments* - (args) function arguments object if supported, or manually created Array [] with assigned "callee" reference to the function class object
 map - Object, if null will use "this" object to enumerate all assigned functions, used for member methods, functions in map will be assigned to "this"
-setname - Boolean, changes name of iterated function according to key
-setown - Boolean, adds constructor name to function name, requires setname, i.e. "myfunction#myclass"
+setname - Boolean, changes name of iterated function according to key, function.aname
+setown - Boolean, adds constructor name to function name, requires setname, i.e. "myfunction#myclass", function.oname
+defname - Boolean, adds setname and setown to function.name property
 return Object, with all functions assigned to this function class in particular
 
 setSuper(Function superfn, Function fn, String name) : Function

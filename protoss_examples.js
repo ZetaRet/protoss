@@ -1,60 +1,60 @@
 new ZetaRet_Prototypes();
 
 function superlistdummy0(a1,a2){
-    var o=this;
+    var o=this,a=arguments;
 	o.val=0;
 	var m={};
-    o.super(arguments,true);//required for every subclass
+    o.super(a,true);//required for every subclass
     m.customf=function(){return o;};//always use o instead of this
 	m.customf1=function(){return o.val;};//refer to o instead of this
 	m.setval=function(v){
 		o.val=v;//set to o instead of this
 		return o;//optional - return same object on setters for chain calls
 	};
-    o.superize(arguments,m,true,true);//required
+    o.superize(a,m,true,true,true);//required
     return o;
 }
 
-function superlistdummy1(a){
-    var o=this;
-	o.a=a;//set properties to o
-	o.super(arguments);//required for every subclass
+function superlistdummy1(aa){
+    var o=this,a=arguments;
+	o.a=aa;//set properties to o
+	o.super(a);//required for every subclass
 	var m={};//set methods to m (member map), also to o if you want to tern them
 	m.customf1=function(){return o.val+1;};
     m.customf2=function(){return o.a;};
 	m.basef=function(){return 0;};
-    o.superize(arguments,m,true,true);//required
+    o.superize(a,m,true,true,true);//required
     return o;
 }
 
-function superlistdummy2(a){
-    var o=this;
-	o.a=a;
+function superlistdummy2(aa){
+    var o=this,a=arguments;
+	o.a=aa;
 	var m={};
     //super call not required for top super
 	m.customf2=function(){return o.a;};//overloads customf2#superlistdummy1
-    o.superize(arguments,m,true,true);//required
+    o.superize(a,m,true,true,true);//required
     return o;
 }
 
 function level1(){
-	var o=this;
+	var o=this,a=arguments;
 	var m={};
 	
-	o.super(arguments);
+	o.super(a);
 	
 	m.myf=function(){
 		return o;
 	};
 
-	o.superize(arguments,m,true,true);
+	o.superize(a,m,true,true,true);
 	return o;
 }
 function level2(){
-	var o=this;
+	var o=this,a=arguments;
 	var m={};
 	
-	o.super(arguments);
+	o.super(a);
 	
 	m.basef=function(){
 		return 1;
@@ -63,14 +63,14 @@ function level2(){
 		return o;
 	};
 
-	o.superize(arguments,m,true,true);
+	o.superize(a,m,true,true,true);
 	return o;
 }
 function level3(){
-	var o=this;
+	var o=this,a=arguments;
 	var m={};
 	
-	o.super(arguments);
+	o.super(a);
 	
 	m.basef=function(){
 		return 2;
@@ -79,14 +79,14 @@ function level3(){
 		return o;
 	};
 
-	o.superize(arguments,m,true,true);
+	o.superize(a,m,true,true,true);
 	return o;
 }
 function level4(){
-	var o=this;
+	var o=this,a=arguments;
 	var m={};
 	
-	o.super(arguments);//calling super on top super is safe
+	o.super(a);//calling super on top super is safe
 	
 	m.basef=function(){
 		return 3;
@@ -95,7 +95,7 @@ function level4(){
 		return o;
 	};
 
-	o.superize(arguments,m,true,true);
+	o.superize(a,m,true,true,true);
 	return o;
 }
 

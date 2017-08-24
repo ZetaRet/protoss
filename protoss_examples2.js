@@ -1,18 +1,19 @@
 new ZetaRet_Prototypes();
 
 function ZetaRet_EventDispatcher(target){
-	var o=this;
-	var m={};
-	
+	var o=this,a=arguments;
+	o.super(a);
 	o.eventTarget=target || o;
 	o.events={};
-	
+	var m={};
 	m.setEventTarget=function(target){
-		o.eventTarget=target; 
+		o.eventTarget=target;
+		return o;
 	};
 	m.addEventListener=function(event,callback){
 		o.events[event] = o.events[event] || [];
 		if ( o.events[event] ){	o.events[event].push(callback);	}
+		return o;
 	};
 	m.removeEventListener=function(event,callback){
 		if ( o.events[event] ) {
@@ -26,21 +27,27 @@ function ZetaRet_EventDispatcher(target){
 		}
 		return false;
 	};
+	m.hasEvent=function(type){
+		if (o.events[type])return true;
+		return false;
+	};
 	m.dispatch=function(event,data){
 		if ( o.events[event] ) {
 			var listeners = o.events[event], len = listeners.length;
 			var list=listeners.concat();
-			for(var i=0;i<len;i++)list[i](this.eventTarget, data);
+			for(var i=0;i<len;i++){
+				var r=list[i](o.eventTarget, data);
+				if (r)break;
+			}
 		}
+		return o;
 	};
-	
-	o.superize(arguments,m,true,true);
-	
+	o.superize(a,m,true,true,true);
 	return o;
 }
 
 function ZetaRet_MetaData(){
-	var o=this;
+	var o=this,a=arguments;
 	var m={};
 	
 	o.metadata={};
@@ -52,42 +59,42 @@ function ZetaRet_MetaData(){
 		return o.metadata;
 	};
 	
-	o.superize(arguments,m,true,true);
+	o.superize(a,m,true,true,true);
 	
 	return o;
 }
 
 function GameAtom(name){
-	var o=this;
+	var o=this,a=arguments;
 	o.name=name;
-	o.super(arguments,null);
+	o.super(a,null);
 	var m={};
 	m.addToProperty=function(key,valuetarget){
 		if (o[key]!==undefined)o[key]+=valuetarget[key];
 		return o;
 	};
-    o.superize(arguments,m,true,true);
+    o.superize(a,m,true,true,true);
     return o;
 }
 GameAtom.superList([ZetaRet_EventDispatcher, ZetaRet_MetaData]);
 
 function BaseVehicle(name){
-    var o=this;
+    var o=this,a=arguments;
 	o.life=1;
 	o.speed=0;
 	o.armor=0;
-	o.super(arguments,true);
+	o.super(a,true);
 	var m={};
     m.getName=function(){return o.name;};
-    o.superize(arguments,m,true,true);
+    o.superize(a,m,true,true,true);
     return o;
 }
 BaseVehicle.setSuper(GameAtom);
 
 function BaseBuilder(name){
-	var o=this;
+	var o=this,a=arguments;
 	o.buildingsList={};
-	o.super(arguments,true);
+	o.super(a,true);
 	var m={};
 	m.addToBuildingsList=function(id, cls){
 		o.buildingsList[id]=cls;
@@ -99,31 +106,31 @@ function BaseBuilder(name){
 		inst.name=id+"#"+o.name;
 		return inst;
 	};
-    o.superize(arguments,m,true,true);
+    o.superize(a,m,true,true,true);
     return o;
 }
 BaseBuilder.setSuper(BaseVehicle);
 
 function Probe(name){
-	var o=this;
-	o.super(arguments,true);
+	var o=this,a=arguments;
+	o.super(a,true);
 	o.life=40;
 	o.speed=3;
 	o.addToBuildingsList("nexus",Nexus);
 	o.addToBuildingsList("pylon",Pylon);
 	o.addToBuildingsList("forge",Forge);
 	var m={};
-	o.superize(arguments,m,true,true);
+	o.superize(a,m,true,true,true);
 	return o;
 }
 Probe.setSuper(BaseBuilder);
 
 function BaseBuilding(name){
-	var o=this;
+	var o=this,a=arguments;
 	o.life=1;
 	o.armor=1;
 	o.factory={};
-	o.super(arguments,true);
+	o.super(a,true);
 	var m={};
 	m.addToFactory=function(type, fcls){
 		o.factory[type]=fcls;
@@ -135,41 +142,41 @@ function BaseBuilding(name){
 		inst.name=type+"#"+o.name;
 		return inst;
 	};
-    o.superize(arguments,m,true,true);
+    o.superize(a,m,true,true,true);
     return o;
 }
 BaseBuilding.setSuper(GameAtom);
 
 function Nexus(name){
-	var o=this;
+	var o=this,a=arguments;
 	o.psi=10;
-	o.super(arguments,true);
+	o.super(a,true);
 	o.life=1000;
 	o.addToFactory("worker",Probe);
 	var m={};
 	
-	o.superize(arguments,m,true,true);
+	o.superize(a,m,true,true,true);
 	return o;
 }
 Nexus.setSuper(BaseBuilding);
 
 function Forge(name){
-	var o=this;
-	o.super(arguments,true);
+	var o=this,a=arguments;
+	o.super(a,true);
 	o.life=600;
 	o.addToFactory("shields", Shields);
 	var m={};
-	o.superize(arguments,m,true,true);
+	o.superize(a,m,true,true,true);
 	return o;
 }
 Forge.setSuper(BaseBuilding);
 
 function Pylon(name){
-	var o=this;
+	var o=this,a=arguments;
 	o.psi=8;
 	o.energy=40;
 	o.maxenergy=40;
-	o.super(arguments,true);
+	o.super(a,true);
 	o.life=200;
 	o.addToFactory("photon", Photon);
 	o.setMetaData("photon_cost",30);
@@ -185,37 +192,37 @@ function Pylon(name){
 		}
 		return null;
 	};
-	o.superize(arguments,m,true,true);
+	o.superize(a,m,true,true,true);
 	return o;
 }
 Pylon.setSuper(BaseBuilding);
 
 function Unit(name){
-	var o=this;
+	var o=this,a=arguments;
 	o.damagetype="normal";
 	o.damage=1;
 	o.range=1;
-	o.super(arguments,true);
+	o.super(a,true);
 	var m={};
-	o.superize(arguments,m,true,true);
+	o.superize(a,m,true,true,true);
 	return o;
 }
 Unit.setSuper(BaseVehicle);
 
 function Photon(name){
-	var o=this;
-	o.super(arguments,true);
+	var o=this,a=arguments;
+	o.super(a,true);
 	o.damagetype="splash";
 	o.damage=10;
 	o.range=6;
 	var m={};
-	o.superize(arguments,m,true,true);
+	o.superize(a,m,true,true,true);
 	return o;
 }
 Photon.setSuper(Unit);
 
 function Upgrade(name){
-	var o=this;
+	var o=this,a=arguments;
 	o.units=false;
 	o.workers=false;
 	o.buildings=false;
@@ -224,28 +231,28 @@ function Upgrade(name){
 	o.life=0;
 	o.armor=0;
 	o.energy=0;
-	o.super(arguments,true);
+	o.super(a,true);
 	var m={};
-	o.superize(arguments,m,true,true);
+	o.superize(a,m,true,true,true);
 	return o;
 }
 Upgrade.setSuper(GameAtom);
 
 function Shields(name){
-	var o=this;
-	o.super(arguments,true);
+	var o=this,a=arguments;
+	o.super(a,true);
 	o.armor=1;
 	o.units=true;
 	o.workers=true;
 	o.buildings=true;
 	var m={};
-	o.superize(arguments,m,true,true);
+	o.superize(a,m,true,true,true);
 	return o;
 }
 Shields.setSuper(Upgrade);
 
 function InitGame(){
-	var o=this;
+	var o=this,a=arguments;
 	o.getTotalPsi=function(){
 		var psi=0;
 		for(var i=0;i<o.buildings.length;i++){
