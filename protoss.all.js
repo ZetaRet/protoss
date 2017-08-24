@@ -39,7 +39,7 @@ function ZetaRet_Prototypes(){
 		var _super={};
 		if (!map)map=this;
 		var callee=args.callee;
-		var aname=callee.aname;
+		var aname=callee.aname||callee.name;
 		var cname=defname ? callee.name : aname;
 		for(var k in map){
 			this[k]=map[k];
@@ -276,8 +276,8 @@ function ZetaRet_Prototypes(){
 	};
 	odef(oprot,'final',ef);
 	oprot.statis=function(args,statis,_super,setname,setown,defname){
-		var callee=args.callee,aname=callee.aname,k,ssk;
-		if(!_super)_super=this[prfx+(aname||callee.name)+sffx];
+		var callee=args.callee,aname=callee.aname||calle.name,k,ssk;
+		if(!_super)_super=this[prfx+aname+sffx];
 		var cname=defname ? callee.name : aname;
 		var _statis=_super[cnx][piname+sffx];
 		if(!_statis && statis){

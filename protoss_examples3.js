@@ -84,8 +84,8 @@ function ZetaRet_PrototypesX(){
 	};
 	odef(oprot,'final',ef);
 	oprot.statis=function(args,statis,_super,setname,setown,defname){
-		var callee=args.callee,aname=callee.aname,k,ssk;
-		if(!_super)_super=this[prfx+(aname||callee.name)+sffx];
+		var callee=args.callee,aname=callee.aname||callee.name,k,ssk;
+		if(!_super)_super=this[prfx+aname+sffx];
 		var cname=defname ? callee.name : aname;
 		var _statis=_super[cnx][piname+sffx];
 		if(!_statis && statis){

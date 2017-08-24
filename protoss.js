@@ -35,7 +35,7 @@ function ZetaRet_Prototypes(){
 		var _super={};
 		if (!map)map=this;
 		var callee=args.callee;
-		var aname=callee.aname;
+		var aname=callee.aname||callee.name;
 		var cname=defname ? callee.name : aname;
 		for(var k in map){
 			this[k]=map[k];
