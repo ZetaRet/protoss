@@ -282,21 +282,19 @@ function ZetaRet_Prototypes(){
 		var _statis=_super[cnx][piname+sffx];
 		if(!_statis && statis){
 			_statis={};
-			statis(_statis);
-			if(_statis){
-				for(k in _statis){
-					ssk=_statis[k];
-					if (typeof ssk === 'function'){
-						ssk._s=1;
-						if (setname){
-							ssk.aname=k;
-							if (setown)ssk.oname=cname;
-							if (defname)odef(ssk,"name",{value:k+(setown ? '#'+cname : '')});
-						}
+			statis(_statis,callee);
+			for(k in _statis){
+				ssk=_statis[k];
+				if (typeof ssk === 'function'){
+					ssk._s=1;
+					if (setname){
+						ssk.aname=k;
+						if (setown)ssk.oname=cname;
+						if (defname)odef(ssk,"name",{value:k+(setown ? '#'+cname : '')});
 					}
 				}
-				_super[cnx][piname+sffx]=_statis;
 			}
+			_super[cnx][piname+sffx]=_statis;
 		}
 		if(_statis){
 			for(k in _statis){
