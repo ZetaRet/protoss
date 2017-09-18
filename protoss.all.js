@@ -1,7 +1,7 @@
 /**
  * Author: Zeta Ret, Ivo Yankulovski
  * ProtoSS - Prototype Supers-Subclass Library 
- * Version: 1.02b
+ * Version: 1.02c
  * Date: 2017 
 **/
 function ZetaRet_Prototypes(){
@@ -91,6 +91,15 @@ function ZetaRet_Prototypes(){
 		return this[prfx+(cpc.aname||cpc.name)+sffx][name].apply(this, args);
 	};
 	odef(oprot,'callSuper2',ef);
+	oprot.callSuperX=function(name,args,cname,thiscls){
+		if (!cname)cname=dcname;
+		if(!thiscls)thiscls=this[cnx];
+		if (!thiscls[prn][cname]&&!thiscls[prn][cname+lsffx])return;
+		var f=this.getNextSuperX(name,cname,thiscls);
+		if (f)return f.apply(this, args);
+		return null;
+	};
+	odef(oprot,'callSuperX',ef);
 	oprot.getNextSuper=function(name,cname){
 		var _s=this.getSupers(null,cname);
 		var l=_s.length,tf=this[name];
@@ -105,6 +114,20 @@ function ZetaRet_Prototypes(){
 		return null;
 	};
 	odef(oprot,'getNextSuper',ef);
+	oprot.getNextSuperX=function(name,cname,thiscls){
+		var _s=(thiscls||this).getSupers(null,cname);
+		var l=_s.length,tf=(thiscls?(thiscls[prn][name]||this[prfx+(thiscls.aname||thiscls.name)+sffx][name]):this[name]);
+		for(var i=0;i<l;i++){
+			var si=_s[i];
+			var m=this[prfx+(si.aname||si.name)+sffx];
+			var f=si[prn][name]||(m?m[name]:null);
+			if (f && f!=tf){
+				return f;
+			}
+		}
+		return null;
+	};
+	odef(oprot,'getNextSuperX',ef);
 	oprot.getSuper=function(cname){
 		if (!cname)cname=dcname;
 		var cp=this[cnx][prn],cpc=cp[cname];
@@ -335,6 +358,11 @@ function ZetaRet_Prototypes(){
 		return c.packagename+"::"+(c.aname||c.name);
 	};
 	odef(oprot,"getSuperName",ef);
+	oprot.getSuperName2=function(){
+		var c=typeof this === 'function' ? this[prn][cnx] : this[cnx];
+		return c[pname]+"::"+(c.aname||c.name);
+	};
+	odef(oprot,"getSuperName2",ef);
 	oprot.namespace=function(ns, cls, pack){
 		if(!pack)pack=this;
 		var nsp=pack.package(nsprfx+ns);
