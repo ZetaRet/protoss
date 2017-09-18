@@ -1,7 +1,7 @@
 /**
  * Author: Zeta Ret, Ivo Yankulovski
  * ProtoSS - Prototype Supers-Subclass Library 
- * Version: 1.02a
+ * Version: 1.02b
  * Date: 2017 
 **/
 function ZetaRet_Prototypes(){
@@ -128,6 +128,12 @@ function ZetaRet_Prototypes(){
 		return this[prfx+(pc.aname||pc.name)+sffx][name].apply(this, args);
 	};
 	odef(oprot,'callProto2',ef);
+	oprot.callProtoX=function(proto,name,args){
+		var pr=proto[prn][name];
+		if(pr)return pr.apply(this,args);
+		return this[prfx+(proto.aname||proto.name)+sffx][name].apply(this, args);
+	};
+	odef(oprot,'callProtoX',ef);
 	oprot.superList=function(list,fn,name){
 		if (!fn)fn=this;
 		if (!name)name=dcname;
