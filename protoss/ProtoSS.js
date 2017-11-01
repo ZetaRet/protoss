@@ -3,7 +3,7 @@
  * Zeta Ret ProtoSS
  * ProtoSS Class/Interface/Header Manager
  * Requires: protoss.all.js v1.02c
- * Version: 1.03
+ * Version: 1.04
  * Date: 2017 
 **/
 function ProtoSS(){
@@ -70,6 +70,7 @@ function ProtoSS(){
 		for(i=0;i<ProtoSS.headerImplement.length;i++){
 			v=ProtoSS.headerImplement[i];
 			c1=v[0];
+			if(c1.constructor===String)c1=o.getSuperCls(c1, toppack, path);
 			c2=o.getSuperCls(v[1], toppack, path);
 			if (c2)c1.implement(c2);
 			else ia.push(v);
@@ -79,6 +80,7 @@ function ProtoSS(){
 		for(i=0;i<ProtoSS.headerSuper.length;i++){
 			v=ProtoSS.headerSuper[i];
 			c1=v[0];
+			if(c1.constructor===String)c1=o.getSuperCls(c1, toppack, path);
 			c2=o.getSuperCls(v[1], toppack, path);
 			if (c2)c1.setSuper(c2);
 			else sa.push(v);
@@ -89,6 +91,7 @@ function ProtoSS(){
 		for(i=0;i<ProtoSS.headerSuperList.length;i++){
 			v=ProtoSS.headerSuperList[i];
 			c1=v[0];
+			if(c1.constructor===String)c1=o.getSuperCls(c1, toppack, path);
 			vl=v[1];
 			sl=[];
 			for(j=0;j<vl.length;j++){
@@ -108,6 +111,7 @@ function ProtoSS(){
 		for(i=0;i<ProtoSS.headerSuperList2.length;i++){
 			v=ProtoSS.headerSuperList2[i];
 			c1=v[0];
+			if(c1.constructor===String)c1=o.getSuperCls(c1, toppack, path);
 			vl=v[1];
 			sl=[];
 			for(j=0;j<vl.length;j++){

@@ -40,10 +40,10 @@ path - String, pass var to *getSuperCls*
 
 ### Static  
 
-__*headerImplement*__ - __Array__, define *implement* inheritance using an [ProtoSS Class, super in strings/class] template   
-__*headerSuper*__ - __Array__, define *setSuper* inheritance using an [ProtoSS Class, super in strings/class] template  
-__*headerSuperList*__ - __Array__, define *superList* inheritance using an [ProtoSS Class, Array of supers in strings/class] template   
-__*headerSuperList2*__ - __Array__, define *superList2* inheritance using an [ProtoSS Class, Array of supers in strings/class] template  
+__*headerImplement*__ - __Array__, define *implement* inheritance using an [ProtoSS Class|classsupername string, super in strings/class] template   
+__*headerSuper*__ - __Array__, define *setSuper* inheritance using an [ProtoSS Class|classsupername string, super in strings/class] template  
+__*headerSuperList*__ - __Array__, define *superList* inheritance using an [ProtoSS Clas|classsupername strings, Array of supers in strings/class] template   
+__*headerSuperList2*__ - __Array__, define *superList2* inheritance using an [ProtoSS Class|classsupername string, Array of supers in strings/class] template  
 __*stringmap*__ - __Object__, add dynamic string key-value pairs  
 
 __*eventProps(Object event, Array props) : Object*__   
