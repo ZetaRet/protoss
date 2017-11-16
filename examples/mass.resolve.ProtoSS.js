@@ -35,19 +35,19 @@ function MouseEvent(type, target) {
 		return o.x;
 	};
 	m.getY=function(){
-		return o.x;
+		return o.y;
 	};
 	m.getLocalX=function(){
-		return o.x;
+		return o.lx;
 	};
 	m.getLocalY=function(){
-		return o.x;
+		return o.ly;
 	};
 	m.getOffsetX=function(){
-		return o.x;
+		return o.ox;
 	};
 	m.getOffsetY=function(){
-		return o.x;
+		return o.oy;
 	};
 	m.getKeys=function(){
 		return o.keys;
