@@ -3,7 +3,7 @@
  * Zeta Ret XeltoSS
  * ProtoSS Transformator to JS Class
  * Requires: protoss.all.js v1.02c
- * Version: 1.03b 
+ * Version: 1.03c 
  * Date: 2017 
 **/
 function XeltoSS(){
@@ -58,6 +58,31 @@ function XeltoSS(){
 		for(var key in keyHandlerMap)
 			o.embedMaps[sname][key]=keyHandlerMap[key];
 		return o;
+	};
+	m.argumentKeyMatch=function(orshift,defval){
+		var f=function(obj,k,d,s){
+			var kv="",ak=d[1],akl=ak.length,lk=k.toLowerCase();
+			for(var i=0;i<akl;i++){
+				if(lk===ak[i].toLowerCase()){
+					kv=ak[i];
+					break;
+				}
+			}
+			if(defval!==undefined)kv+="||"+o.valToString(defval);
+			if(orshift)kv+="||"+ak[i-orshift];
+			return kv;
+		};
+		return f;
+	};
+	m.valToString=function(val){
+		if(val===null || val===undefined || val.constructor===Number || val.constructor===Boolean){
+			return ""+val;
+		} else if (val.constructor===String){
+			return '"'+val+'"';
+		} else if (val.constructor===Object || val.constructor===Array){
+			return JSON.stringify(val);
+		}
+		return val.toString();
 	};
 	m.toCls=function(obj, clsname, clssuper, deflat, polymaps, reservedwordsmap, emptify){
 		if(!clsname)clsname=obj.constructor.name;
