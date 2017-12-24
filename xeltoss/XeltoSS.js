@@ -3,7 +3,7 @@
  * Zeta Ret XeltoSS
  * ProtoSS Transformator to JS Class
  * Requires: protoss.all.js v1.02c
- * Version: 1.03a Beta
+ * Version: 1.03b 
  * Date: 2017 
 **/
 function XeltoSS(){
@@ -11,6 +11,7 @@ function XeltoSS(){
 	o.scriptContainer=null;
 	o.protossPrefix="protoss__";
 	o.xeltossPrefix="xeltoss__";
+	o.embedMaps={};
 	o.super(a);
 	var m={};
 	m.hashString=function(str){
@@ -51,17 +52,26 @@ function XeltoSS(){
 		/*parsing value from original function class is an option*/
 		return "";
 	};
+	m.addEmbedMap=function(obj,keyHandlerMap){
+		var sname=obj.getSuperName2();
+		if(!o.embedMaps[sname])o.embedMaps[sname]={};
+		for(var key in keyHandlerMap)
+			o.embedMaps[sname][key]=keyHandlerMap[key];
+		return o;
+	};
 	m.toCls=function(obj, clsname, clssuper, deflat, polymaps, reservedwordsmap, emptify){
 		if(!clsname)clsname=obj.constructor.name;
 		if(!reservedwordsmap)reservedwordsmap={};
-		var clsArgs='',superArgs='',clsf='',clsb='';
+		var clsArgs='',superArgs='',clsf='',clsb='',em=o.embedMaps;
 		var decomp=o.decomposeFunction(obj.constructor);
 		clsArgs=decomp[1].join(',');
-		var mapsupers=[obj.constructor].concat(obj.getSupers());
-		var mapnames=[];
+		var mapsupers=[obj.constructor].concat(obj.getSupers()),
+			mapnames=[],sname=obj.getSuperName2();
 		for(var i=0;i<mapsupers.length;i++)mapnames[i]='__'+mapsupers[i].name+'_super__';
 		for(var k in obj){
-			if (obj[k]===obj){
+			if (em[sname]&&em[sname][k]){
+				clsb+='this.'+k+'='+em[sname][k](obj,k,decomp,sname)+';';
+			} else if (obj[k]===obj){
 				clsb+='this.'+k+'=this;';
 			} else if (typeof obj[k] === 'function'){
 				/*add support of class/function ref*/
