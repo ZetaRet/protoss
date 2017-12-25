@@ -3,7 +3,7 @@
  * Zeta Ret XeltoSS
  * ProtoSS Transformator to JS Class
  * Requires: protoss.all.js v1.02c
- * Version: 1.03d 
+ * Version: 1.03e 
  * Date: 2017 
 **/
 function XeltoSS(){
@@ -12,6 +12,7 @@ function XeltoSS(){
 	o.protossPrefix="protoss__";
 	o.xeltossPrefix="xeltoss__";
 	o.embedMaps={};
+	o.augmentKeyMap={};
 	o.toppack=null;
 	o.scopeMap={};
 	o.preserveScope=true;
@@ -68,12 +69,30 @@ function XeltoSS(){
 			o.embedMaps[sname][key]=keyHandlerMap[key];
 		return o;
 	};
+	m.augmentKey=function(obj,akeyMap){
+		var sname=obj.getSuperName2(),l,i,ak,akeyv,key;
+		if(!o.augmentKeyMap[sname])o.augmentKeyMap[sname]={};
+		for(key in akeyMap){
+			akeyv=akeyMap[key];
+			key=key.toLowerCase();
+			l=akeyv.length;
+			if(!o.augmentKeyMap[sname][key])o.augmentKeyMap[sname][key]=[];
+			for(i=0;i<l;i++){
+				ak=akeyv[i].toLowerCase();
+				if(o.augmentKeyMap[sname][key].indexOf(ak)<0)
+					o.augmentKeyMap[sname][key].push(ak);
+			}
+		}
+		return o;
+	};
 	m.argumentKeyMatch=function(orshift,defval){
 		var f=function(obj,k,d,s){
-			var kv="",ak=d[1],akl=ak.length,lk=k.toLowerCase();
-			for(var i=0;i<akl;i++){
-				if(lk===ak[i].toLowerCase()){
-					kv=ak[i];
+			var kv="",ak=d[1],akl=ak.length,lk=k.toLowerCase(),i,aki,augo=o.augmentKeyMap[s];
+			if(augo)augo=augo[lk];
+			for(i=0;i<akl;i++){
+				aki=ak[i];
+				if(lk===aki.toLowerCase()||(augo&&augo.indexOf(aki)>=0)){
+					kv=aki;
 					break;
 				}
 			}
@@ -87,6 +106,7 @@ function XeltoSS(){
 		if(val===null || val===undefined || val.constructor===Number || val.constructor===Boolean){
 			return ""+val;
 		} else if (val.constructor===String){
+			if(val==="this")return val;
 			return '"'+val+'"';
 		} else if (val.constructor===Object || val.constructor===Array){
 			return JSON.stringify(val);
@@ -100,7 +120,7 @@ function XeltoSS(){
 		var decomp=o.decomposeFunction(obj.constructor);
 		clsArgs=decomp[1].join(',');
 		var mapsupers=[obj.constructor].concat(obj.getSupers()),
-			mapnames=[],sname=obj.getSuperName2(),tp=o.toppack;
+			mapnames=[],sname=obj.getSuperName2(),tp=o.toppack,keyedoutmaps=[];
 		for(var i=0;i<mapsupers.length;i++)mapnames[i]='__'+mapsupers[i].name+'_super__';
 		for(var k in obj){
 			if (em[sname]&&em[sname].hasOwnProperty(k)){
@@ -117,7 +137,7 @@ function XeltoSS(){
 			} else if (obj[k].constructor===String){
 				clsb+=(rwm.t||'this')+'.'+k+'="'+obj[k]+'";';
 			} else if (mapnames.indexOf(k)>=0){
-				/*filter out key of method maps*/
+				keyedoutmaps.push(k);
 			} else if (obj[k].constructor===Object){
 				if(obj[k].__name && tp.package(obj[k].__name)===obj[k]){
 					clsb+=(rwm.t||'this')+'.'+k+'='+obj[k].__name+';';
