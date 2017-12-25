@@ -3,7 +3,7 @@
  * Zeta Ret XeltoSS
  * ProtoSS Transformator to JS Class
  * Requires: protoss.all.js v1.02c
- * Version: 1.03c 
+ * Version: 1.03d 
  * Date: 2017 
 **/
 function XeltoSS(){
@@ -12,6 +12,10 @@ function XeltoSS(){
 	o.protossPrefix="protoss__";
 	o.xeltossPrefix="xeltoss__";
 	o.embedMaps={};
+	o.toppack=null;
+	o.scopeMap={};
+	o.preserveScope=true;
+	o.fractalizedScope=true;
 	o.super(a);
 	var m={};
 	m.hashString=function(str){
@@ -52,6 +56,11 @@ function XeltoSS(){
 		/*parsing value from original function class is an option*/
 		return "";
 	};
+	m.buildInstructions=function(fbody){
+		var fbl=fbody.length,ch,instr=[];
+		/*parse function body into keywords, calls, variables, if, for, while, etc. instructions*/
+		return instr;
+	};
 	m.addEmbedMap=function(obj,keyHandlerMap){
 		var sname=obj.getSuperName2();
 		if(!o.embedMaps[sname])o.embedMaps[sname]={};
@@ -68,8 +77,8 @@ function XeltoSS(){
 					break;
 				}
 			}
-			if(defval!==undefined)kv+="||"+o.valToString(defval);
 			if(orshift)kv+="||"+ak[i-orshift];
+			if(defval!==undefined)kv+="||"+o.valToString(defval);
 			return kv;
 		};
 		return f;
@@ -87,43 +96,51 @@ function XeltoSS(){
 	m.toCls=function(obj, clsname, clssuper, deflat, polymaps, reservedwordsmap, emptify){
 		if(!clsname)clsname=obj.constructor.name;
 		if(!reservedwordsmap)reservedwordsmap={};
-		var clsArgs='',superArgs='',clsf='',clsb='',em=o.embedMaps;
+		var clsArgs='',superArgs='',clsf='',clsb='',em=o.embedMaps,rwm=reservedwordsmap;
 		var decomp=o.decomposeFunction(obj.constructor);
 		clsArgs=decomp[1].join(',');
 		var mapsupers=[obj.constructor].concat(obj.getSupers()),
-			mapnames=[],sname=obj.getSuperName2();
+			mapnames=[],sname=obj.getSuperName2(),tp=o.toppack;
 		for(var i=0;i<mapsupers.length;i++)mapnames[i]='__'+mapsupers[i].name+'_super__';
 		for(var k in obj){
-			if (em[sname]&&em[sname][k]){
-				clsb+='this.'+k+'='+em[sname][k](obj,k,decomp,sname)+';';
+			if (em[sname]&&em[sname].hasOwnProperty(k)){
+				clsb+=(rwm.t||'this')+'.'+k+'='+em[sname][k](obj,k,decomp,sname)+';';
 			} else if (obj[k]===obj){
-				clsb+='this.'+k+'=this;';
+				clsb+=(rwm.t||'this')+'.'+k+'='+(rwm.t||'this')+';';
 			} else if (typeof obj[k] === 'function'){
-				/*add support of class/function ref*/
-				if(obj[k]._s)clsf+=k+obj[k].toString().replace('function','');
-				else clsf+=k+obj[k].toString().replace('{','{var '+(reservedwordsmap.o || 'o')+'=this;').replace('function','');
+				if (obj[k].packagename && tp.package(obj[k].packagename)===obj[k].packobj){
+					clsb+=(rwm.t||'this')+'.'+k+'='+obj[k].packagename+'.'+(obj[k].name||obj[k].aname)+';';
+				} else if(obj[k]._s)clsf+=k+obj[k].toString().replace(rwm.f||'function','');
+				else clsf+=k+obj[k].toString().replace('{','{'+(rwm.v||'var')+' '+(rwm.o||'o')+'='+(rwm.t||'this')+';').replace(rwm.f||'function','');
 			} else if(obj[k]===null || obj[k]===undefined || obj[k].constructor===Number || obj[k].constructor===Boolean){
-				clsb+='this.'+k+'='+obj[k]+';';
+				clsb+=(rwm.t||'this')+'.'+k+'='+obj[k]+';';
 			} else if (obj[k].constructor===String){
-				clsb+='this.'+k+'="'+obj[k]+'";';
+				clsb+=(rwm.t||'this')+'.'+k+'="'+obj[k]+'";';
 			} else if (mapnames.indexOf(k)>=0){
 				/*filter out key of method maps*/
 			} else if (obj[k].constructor===Object){
-				if(emptify)clsb+='this.'+k+'={};';
-				else clsb+='this.'+k+'='+JSON.stringify(obj[k])+';';
+				if(obj[k].__name && tp.package(obj[k].__name)===obj[k]){
+					clsb+=(rwm.t||'this')+'.'+k+'='+obj[k].__name+';';
+				} else if (obj[k].packagename && tp.package(obj[k].packagename)===obj[k].packobj){
+					clsb+=(rwm.t||'this')+'.'+k+'='+obj[k].packagename+'.'+(obj[k].name||obj[k].aname)+';';
+				} else if(emptify)clsb+=(rwm.t||'this')+'.'+k+'={};';
+				else clsb+=(rwm.t||'this')+'.'+k+'='+JSON.stringify(obj[k])+';';
 			} else if (obj[k].constructor===Array){
-				if(emptify)clsb+='this.'+k+'=[];';
-				else clsb+='this.'+k+'='+JSON.stringify(obj[k])+';';
+				if(emptify)clsb+=(rwm.t||'this')+'.'+k+'=[];';
+				else clsb+=(rwm.t||'this')+'.'+k+'='+JSON.stringify(obj[k])+';';
 			} else if (typeof obj[k] === 'object'){
-				/*support namespace*/
-				if (emptify)clsb+='this.'+k+'=null;';
-				else clsb+='this.'+k+'=new '+(obj[k].constructor.packagename?obj[k].constructor.packagename+".":"")+obj[k].constructor.name+'('+o.getConstructorArgs(obj[k].constructor, obj, k)+');';
+				if(obj[k].__name && tp.package(obj[k].__name)===obj[k]){
+					clsb+=(rwm.t||'this')+'.'+k+'='+obj[k].__name+';';
+				} else if (obj[k].packagename && tp.package(obj[k].packagename)===obj[k].packobj){
+					clsb+=(rwm.t||'this')+'.'+k+'='+obj[k].packagename+'.'+(obj[k].name||obj[k].aname)+';';
+				} else if (emptify)clsb+=(rwm.t||'this')+'.'+k+'='+(rwm.n||'null')+';';
+				else clsb+=(rwm.t||'this')+'.'+k+'=new '+(obj[k].constructor.packagename?obj[k].constructor.packagename+".":"")+obj[k].constructor.name+'('+o.getConstructorArgs(obj[k].constructor, obj, k)+');';
 			}else {
-				clsb+='this.'+k+'=null;';
+				clsb+=(rwm.t||'this')+'.'+k+'='+(rwm.n||'null')+';';
 			}
 		}
-		var cls='class '+clsname+(clssuper ? " extends "+clssuper : "")+' {';
-		cls+='constructor('+clsArgs+'){'+(clssuper ? 'super('+superArgs+');' : '');
+		var cls=(rwm.cls||'class')+' '+clsname+(clssuper ? ' '+(rwm.e||'extends')+' '+clssuper : '')+' {';
+		cls+=(rwm.c||'constructor')+'('+clsArgs+'){'+(clssuper ? (rwm.s||'super')+'('+superArgs+');' : '');
 		cls+=clsb;
 		cls+='}';
 		cls+=clsf;
