@@ -3,7 +3,7 @@
  * Zeta Ret XeltoSS
  * ProtoSS Transformator to JS Class
  * Requires: protoss.all.js v1.02c
- * Version: 1.03f 
+ * Version: 1.03g 
  * Date: 2017 
 **/
 function XeltoSS(){
@@ -11,6 +11,7 @@ function XeltoSS(){
 	o.scriptContainer=null;
 	o.protossPrefix="protoss__";
 	o.xeltossPrefix="xeltoss__";
+	o.statisAsStatic=false;
 	o.embedMaps={};
 	o.augmentKeyMap={};
 	o.noKeyIdentificationChain={};
@@ -18,8 +19,108 @@ function XeltoSS(){
 	o.scopeMap={};
 	o.preserveScope=true;
 	o.fractalizedScope=true;
+	o.obscureTimers=false;
+	o.tokens=null;
+	o.keywords=null;
+	o.operators=null;
 	o.super(a);
 	var m={};
+	m.initTokens=function(){
+		var t=o.tokens||{};
+		t.white_space=' ';
+		t.white_newline='\n';
+		t.white_return='\r';
+		t.white_tab='\t';
+		t.separator=',';
+		t.accessor=".";
+		t.string1="'";
+		t.string2='"';
+		t.colon=":";
+		t.semicolon=";";
+		t.array_left="[";
+		t.array_right="]";
+		t.object_left="{";
+		t.object_right="}";
+		t.group_left="(";
+		t.group_right=")";
+		t.tag_left="<";
+		t.tag_right=">";
+		o.tokens=t;
+		return o;
+	};
+	m.initKeywords=function(){
+		var k=o.keywords||{};
+		k.forloop="for";
+		k.forinloop=["for","in"];
+		k.forofloop=["for","of"];
+		k.whileloop="while";
+		k.doloop=["do","while"];
+		k.ifclause="if";
+		k.elseclause="else";
+		k.elseifclause=["else","if"];
+		k.vardef="var";
+		k.constdef="const";
+		k.letdef="let";
+		k.breakloop="break";
+		k.continueloop="continue";
+		k.switchcase=["switch","case","default"];
+		k.trycatch=["try","catch","finally"];
+		k.returnf="return";
+		k.newinstance="new";
+		k.deletekey="delete";
+		k.typeofv="typeof";
+		k.instanceofcls="instanceof";
+		k.functionw="function";
+		k.constructorw="constructor";
+		k.classw="class";
+		k.superw="super";
+		k.thisw="this";
+		k.extendsw="extends";
+		k.nullw="null";
+		k.undefinedw="undefined";
+		k.truew="true";
+		k.falsew="false";
+		k.nanw="NaN";
+		o.keywords=k;
+		return o;
+	};
+	m.initOperators=function(){
+		var p=o.operators||{};
+		p.operator_add="+";
+		p.operator_min="-";
+		p.operator_mul="*";
+		p.operator_div="/";
+		p.operator_bitl="<<";
+		p.operator_bitr=">>";
+		p.operator_bitll="<<<";
+		p.operator_bitrr=">>>";
+		p.operator_mod="%";
+		p.operator_inc="++";
+		p.operator_dec="--";
+		p.operator_eq="=";
+		p.operator_eq2="==";
+		p.operator_eq3="===";
+		p.operator_neq="!=";
+		p.operator_neq2="!==";
+		p.operator_great=">";
+		p.operator_less="<";
+		p.operator_greateq=">=";
+		p.operator_lesseq="<=";
+		p.operator_eq_add="+=";
+		p.operator_eq_min="-=";
+		p.operator_eq_mul="*=";
+		p.operator_eq_div="/=";
+		p.operator_eq_mod="%=";
+		p.operator_bit_and="&";
+		p.operator_bit_or="|";
+		p.operator_bit_not="~";
+		p.operator_bit_xor="^";
+		p.operator_and="&&";
+		p.operator_or="||";
+		p.operator_not="!";
+		o.operators=t;
+		return o;
+	};
 	m.hashString=function(str){
 		var hash=0,l=str.length,i,char;
 		if(l===0)return hash;
@@ -86,14 +187,15 @@ function XeltoSS(){
 		}
 		return o;
 	};
-	m.argumentKeyMatch=function(orshift,defval){
+	m.argumentKeyMatch=function(orshift,defval,formatter){
 		var f=function(obj,k,d,s){
-			var kv="",ak=d[1],akl=ak.length,lk=k.toLowerCase(),i,aki,augo=o.augmentKeyMap[s];
+			var kv="",fkv="",ak=d[1],akl=ak.length,lk=k.toLowerCase(),i,aki,augo=o.augmentKeyMap[s];
 			if(augo)augo=augo[lk];
 			for(i=0;i<akl;i++){
 				aki=ak[i];
 				if(lk===aki.toLowerCase()||(augo&&augo.indexOf(aki)>=0)){
 					kv=aki;
+					fkv=kv;
 					break;
 				}
 			}
@@ -114,6 +216,7 @@ function XeltoSS(){
 					return undefined;
 				} else kv+=(kv?"||":"")+o.valToString(defval);
 			}
+			if(formatter)kv=formatter(kv,fkv,defval,obj,k,d,s);
 			return kv||null;
 		};
 		return f;
@@ -156,7 +259,7 @@ function XeltoSS(){
 			} else if (typeof obj[k] === 'function'){
 				if (obj[k].packagename && tp.package(obj[k].packagename)===obj[k].packobj){
 					clsb+=(rwm.t||'this')+'.'+k+'='+obj[k].packagename+'.'+(obj[k].name||obj[k].aname)+';';
-				} else if(obj[k]._s)clsf+=k+obj[k].toString().replace(rwm.f||'function','');
+				} else if(obj[k]._s)clsf+=(o.statisAsStatic?(rwm.st||"static")+" ":"")+k+obj[k].toString().replace(rwm.f||'function','');
 				else clsf+=k+obj[k].toString().replace('{','{'+(rwm.v||'var')+' '+(rwm.o||'o')+'='+(rwm.t||'this')+';').replace(rwm.f||'function','');
 			} else if(obj[k]===null || obj[k]===undefined || obj[k].constructor===Number || obj[k].constructor===Boolean){
 				clsb+=(rwm.t||'this')+'.'+k+'='+obj[k]+';';
@@ -180,7 +283,7 @@ function XeltoSS(){
 				} else if (obj[k].packagename && tp.package(obj[k].packagename)===obj[k].packobj){
 					clsb+=(rwm.t||'this')+'.'+k+'='+obj[k].packagename+'.'+(obj[k].name||obj[k].aname)+';';
 				} else if (emptify)clsb+=(rwm.t||'this')+'.'+k+'='+(rwm.n||'null')+';';
-				else clsb+=(rwm.t||'this')+'.'+k+'=new '+(obj[k].constructor.packagename?obj[k].constructor.packagename+".":"")+obj[k].constructor.name+'('+o.getConstructorArgs(obj[k].constructor, obj, k)+');';
+				else clsb+=(rwm.t||'this')+'.'+k+'='+(rwm.nw||'new')+' '+(obj[k].constructor.packagename?obj[k].constructor.packagename+".":"")+obj[k].constructor.name+'('+o.getConstructorArgs(obj[k].constructor, obj, k)+');';
 			} else {
 				clsb+=(rwm.t||'this')+'.'+k+'='+(rwm.n||'null')+';';
 			}
