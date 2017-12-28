@@ -118,7 +118,7 @@ function XeltoSS(){
 		p.operator_and="&&";
 		p.operator_or="||";
 		p.operator_not="!";
-		o.operators=t;
+		o.operators=p;
 		return o;
 	};
 	m.hashString=function(str){
