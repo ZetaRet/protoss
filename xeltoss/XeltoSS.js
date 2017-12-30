@@ -3,7 +3,7 @@
  * Zeta Ret XeltoSS
  * ProtoSS Transformator to JS Class
  * Requires: protoss.all.js v1.02c
- * Version: 1.03h 
+ * Version: 1.03i 
  * Date: 2017 
 **/
 window.internal(
@@ -35,6 +35,8 @@ function XeltoSS(){
 	o.deflatInheritance=true;
 	o.objectStringify=null;
 	o.arrayStringify=null;
+	o.allowSetters=true;
+	o.allowGetters=true;
 	o.super(a);
 	var m={};
 	m.initTokens=function(){
@@ -270,7 +272,8 @@ function XeltoSS(){
 		if(!reservedwordsmap)reservedwordsmap={};
 		var cls='',clsArgs='',superArgs='',clsf=[],clsb=[],
 			em=o.embedMaps,emv,rwm=reservedwordsmap,
-			clsh=o.classHandler,oeh=o.overextendHandler;
+			clsh=o.classHandler,oeh=o.overextendHandler,
+			alset=o.allowSetters,alget=o.allowGetters;
 		var decomp=o.decomposeFunction(obj.constructor);
 		clsArgs=decomp[1].join(',');
 		var mapsupers=[obj.constructor].concat(obj.getSupers()),
@@ -283,7 +286,17 @@ function XeltoSS(){
 		}
 		for(i=0;i<mapsupers.length;i++)mapnames[i]='__'+mapsupers[i].name+'_super__';
 		for(k in obj){
-			ok=obj[k];
+			ok=undefined;
+			if (alget){
+				ok=obj.__lookupGetter__(k);
+				if(ok)clsf.push(ok.toString().replace('{','{'+(rwm.v||'var')+' '+(rwm.o||'o')+'='+(rwm.t||'this')+';').replace(rwm.f||'function',''));
+			}
+			if (alset){
+				ok=obj.__lookupSetter__(k);
+				if(ok)clsf.push(ok.toString().replace('{','{'+(rwm.v||'var')+' '+(rwm.o||'o')+'='+(rwm.t||'this')+';').replace(rwm.f||'function',''));
+			}
+			if(!ok)ok=obj[k];
+			else continue;
 			if (em[sname]&&em[sname].hasOwnProperty(k)){
 				emv=em[sname][k](obj,k,decomp,sname);
 				if(emv!==undefined)clsb.push((rwm.t||'this')+'.'+k+'='+emv+';');
