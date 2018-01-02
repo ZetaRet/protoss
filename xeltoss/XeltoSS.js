@@ -150,12 +150,16 @@ function XeltoSS(){
 	};
 	m.initAsync=function(){
 		o.allowAsync=true;
-		o.AsyncFunction=Object.getPrototypeOf(async function(){}).constructor;
+		var cnvrt=Function,
+			expc="Object.getPrototypeOf(async function(){}).constructor";
+		o.AsyncFunction=cnvrt("return "+expc)();
 		return o;
 	};
 	m.initGenerator=function(){
 		o.allowGenerator=true;
-		o.GeneratorFunction=Object.getPrototypeOf(function*(){}).constructor;
+		var cnvrt=Function,
+			expc="Object.getPrototypeOf(function*(){}).constructor";
+		o.GeneratorFunction=cnvrt("return "+expc)();
 		return o;
 	};
 	m.updateTimers=function(obscure){
