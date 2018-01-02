@@ -3,7 +3,7 @@
  * Zeta Ret XeltoSS
  * ProtoSS Transformator to JS Class
  * Requires: protoss.all.js v1.02c
- * Version: 1.03j 
+ * Version: 1.03k 
  * Date: 2017 
 **/
 window.internal(
@@ -43,6 +43,7 @@ function XeltoSS(){
 	o.AsyncFunction=null;
 	o.allowGenerator=false;
 	o.GeneratorFunction=null;
+	o.ASTConstructor=null;
 	o.super(a);
 	var m={};
 	m.initTokens=function(){
@@ -189,7 +190,7 @@ function XeltoSS(){
 	};
 	m.decomposeFunction=function(f){
 		var fa=[],
-			fn=f.name,
+			fn=f.aname||f.name,
 			bodyo='{',
 			fs=f.toString(),
 			bodyoi=fs.indexOf(bodyo),
@@ -284,9 +285,9 @@ function XeltoSS(){
 				} else if (defval==="this"){
 					kv+=(kv?"||":"")+"this";
 				} else if (defval==="byte"&&ok&&ok.constructor){
-					kv+=(kv?"||":"")+"new "+(ok.constructor.packagename?ok.constructor.packagename+".":"")+ok.constructor.name+"()";
+					kv+=(kv?"||":"")+"new "+(ok.constructor.packagename?ok.constructor.packagename+".":"")+(ok.constructor.aname||ok.constructor.name)+"()";
 				} else if (defval==="word"&&ok&&ok.constructor){
-					kv+=(kv?"||":"")+"new "+(ok.constructor.packagename?ok.constructor.packagename+".":"")+ok.constructor.name+"("+o.getConstructorArgs(ok.constructor,ok,k)+")";
+					kv+=(kv?"||":"")+"new "+(ok.constructor.packagename?ok.constructor.packagename+".":"")+(ok.constructor.aname||ok.constructor.name)+"("+o.getConstructorArgs(ok.constructor,ok,k)+")";
 				} else if (defval==="void"){
 					return undefined;
 				} else kv+=(kv?"||":"")+o.valToString(defval);
@@ -300,14 +301,14 @@ function XeltoSS(){
 		if(val===null || val===undefined || val.constructor===Number || val.constructor===Boolean){
 			return ""+val;
 		} else if (typeof val === 'function'){
-			return val.packagename+'.'+(val.name||val.aname);
+			return val.packagename+'.'+(val.aname||val.name);
 		} else if (val.constructor===String){
 			return '"'+val+'"';
 		} else if (val.constructor===Object){
 			if(val.__name && o.toppack.package(val.__name)===val){
 				return val.__name;
 			} else if (val.packobj){
-				return (val.packagename?val.packagename+'.':'')+(val.name||val.aname);
+				return (val.packagename?val.packagename+'.':'')+(val.aname||val.name);
 			}
 			return o.objectStringify?o.objectStringify(val):JSON.stringify(val);
 		} else if (val.constructor===Array){
@@ -316,7 +317,7 @@ function XeltoSS(){
 		return val.toString();
 	};
 	m.toCls=function(obj, clsname, clssuper, deflat, polymaps, reservedwordsmap, emptify){
-		if(!clsname)clsname=obj.constructor.name;
+		if(!clsname)clsname=obj.constructor.aname||obj.constructor.name;
 		if(!reservedwordsmap)reservedwordsmap={};
 		var cls='',clsArgs='',superArgs='',clsf=[],clsb=[],
 			em=o.embedMaps,emv,rwm=reservedwordsmap,prfx="",sffx="",
@@ -333,7 +334,7 @@ function XeltoSS(){
 			polymaps.keyedoutmaps=keyedoutmaps;
 			polymaps.mapnames=mapnames;
 		}
-		for(i=0;i<mapsupers.length;i++)mapnames[i]='__'+mapsupers[i].name+'_super__';
+		for(i=0;i<mapsupers.length;i++)mapnames[i]='__'+(mapsupers[i].aname||mapsupers[i].name)+'_super__';
 		for(k in obj){
 			ok=undefined;
 			ofdecomp=undefined;
@@ -341,14 +342,16 @@ function XeltoSS(){
 				ok=obj.__lookupGetter__(k);
 				if(ok){
 					ofdecomp=o.decomposeFunction(ok);
-					clsf.push((rwm.gt||"get")+" "+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2].replace('{','{'+ovart));
+					if(ok._s)clsf.push((o.statisAsStatic?(rwm.sttc||"static")+" ":"")+(rwm.gt||"get")+" "+k+"()"+ofdecomp[2]);
+					else clsf.push((rwm.gt||"get")+" "+k+"()"+ofdecomp[2].replace('{','{'+ovart));
 				}
 			}
 			if (alset){
 				ok=obj.__lookupSetter__(k);
 				if(ok){
 					ofdecomp=o.decomposeFunction(ok);
-					clsf.push((rwm.st||"set")+" "+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2].replace('{','{'+ovart));
+					if(ok._s)clsf.push((o.statisAsStatic?(rwm.sttc||"static")+" ":"")+(rwm.gt||"set")+" "+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2]);
+					else clsf.push((rwm.st||"set")+" "+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2].replace('{','{'+ovart));
 				}
 			}
 			if(!ok)ok=obj[k];
@@ -375,6 +378,8 @@ function XeltoSS(){
 					clsf.push((rwm.asc||"async")+" "+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2].replace('{','{'+ovart));
 				} else if(algen&&ok.constructor===o.GeneratorFunction){
 					clsf.push((rwm.ga||"*")+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2].replace('{','{'+ovart));
+				} else if(ok.constructor===o.ASTConstructor){
+					clsb.push(o.toString());
 				} else 
 					clsf.push(k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2].replace('{','{'+ovart));
 			} else if(ok===null || ok===undefined || ok.constructor===Number || ok.constructor===Boolean){
@@ -387,7 +392,7 @@ function XeltoSS(){
 				if(ok.__name && tp.package(ok.__name)===ok){
 					clsb.push((rwm.t||'this')+'.'+k+'='+ok.__name+';');
 				} else if (ok.packobj){
-					clsb.push((rwm.t||'this')+'.'+k+'='+(ok.packagename?ok.packagename+'.':'')+(ok.name||ok.aname)+';');
+					clsb.push((rwm.t||'this')+'.'+k+'='+(ok.packagename?ok.packagename+'.':'')+(ok.aname||ok.name)+';');
 				} else if(emptify)clsb.push((rwm.t||'this')+'.'+k+'={};');
 				else clsb.push((rwm.t||'this')+'.'+k+'='+(o.objectStringify?o.objectStringify(ok):JSON.stringify(ok))+';');
 			} else if (ok.constructor===Array){
@@ -397,7 +402,7 @@ function XeltoSS(){
 				if(ok.__name && tp.package(ok.__name)===ok){
 					clsb.push((rwm.t||'this')+'.'+k+'='+ok.__name+';');
 				} else if (ok.packobj){
-					clsb.push((rwm.t||'this')+'.'+k+'='+(ok.packagename?ok.packagename+'.':'')+(ok.name||ok.aname)+';');
+					clsb.push((rwm.t||'this')+'.'+k+'='+(ok.packagename?ok.packagename+'.':'')+(ok.aname||ok.name)+';');
 				} else if (emptify)clsb+=(rwm.t||'this')+'.'+k+'='+(rwm.n||'null')+';';
 				else clsb.push((rwm.t||'this')+'.'+k+'='+(rwm.nw||'new')+' '+(ok.constructor.packagename?ok.constructor.packagename+".":"")+ok.constructor.name+'('+o.getConstructorArgs(ok.constructor, obj, k)+');');
 			} else if (oeh){
