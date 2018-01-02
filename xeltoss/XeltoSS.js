@@ -379,7 +379,7 @@ function XeltoSS(){
 				} else if(algen&&ok.constructor===o.GeneratorFunction){
 					clsf.push((rwm.ga||"*")+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2].replace('{','{'+ovart));
 				} else if(ok.constructor===o.ASTConstructor){
-					clsb.push(o.toString());
+					clsb.push(ok.toString());
 				} else 
 					clsf.push(k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2].replace('{','{'+ovart));
 			} else if(ok===null || ok===undefined || ok.constructor===Number || ok.constructor===Boolean){
