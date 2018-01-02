@@ -3,7 +3,7 @@
  * Zeta Ret XeltoSS ASTConstructor 
  * Generates ASTConstructorInstance of type function 
  * Version: 1.00 
- * Date: 2019 
+ * Date: 2018 
 **/
 function ASTConstructor(key,data,datahandler){
 	var ASTConstructorInstance=function ASTConstructorInstance(){};
