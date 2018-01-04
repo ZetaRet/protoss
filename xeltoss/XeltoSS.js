@@ -3,7 +3,7 @@
  * Zeta Ret XeltoSS
  * ProtoSS Transformator to JS Class
  * Requires: protoss.all.js v1.02c
- * Version: 1.03k 
+ * Version: 1.03l 
  * Date: 2017 
 **/
 window.internal(
@@ -44,6 +44,14 @@ function XeltoSS(){
 	o.allowGenerator=false;
 	o.GeneratorFunction=null;
 	o.ASTConstructor=null;
+	o.bodyAssembler=null;
+	o.methodAssembler=null;
+	o.argsLookup=null;
+	o.aststruct=null;
+	o.proxyASTBuilder=null;
+	o.proxyInstructions=null;
+	o.deflat=null;
+	o.chmod=0;
 	o.super(a);
 	var m={};
 	m.initTokens=function(){
@@ -109,6 +117,7 @@ function XeltoSS(){
 		k.yieldw="yield";
 		k.setterw="set";
 		k.getterw="get";
+		k.staticw="static";
 		o.keywords=k;
 		return o;
 	};
@@ -199,34 +208,40 @@ function XeltoSS(){
 			hspl=header.split(')')[0].split('('),
 			hdata=hspl[0];
 		hdata=hdata.replace('function','').replace(/ /gi,'');
-		if (hdata)fn=hdata;
-		fa[0]=fn;
+		fa[0]=fn||hdata;
 		fa[1]=hspl[1].replace(/ /gi,'').split(',');
 		if(!fa[1][0])fa[1]=[];
 		fa[2]=body;
 		fa[3]=o.hashString(body);
+		fa[4]=hspl[0];
 		return fa;
 	};
 	m.deflatCls=function(obj,maps,interfaces,abstracts,constructs,inheritance){
-		/*create separated classes according to inheritance tree*/
-		/*extends base functionality required, i.e. recursive calls toCls with clssuper*/
+		if(o.deflat){
+			o.deflat.call(o,obj,maps,interfaces,abstracts,constructs,inheritance);
+		}
 		return o;
 	};
-	m.getConstructorArgs=function(clsconstructor, obj, key){
-		/*requires static map of every constructor according to key and object holder*/
-		/*parsing value from original function class is an option*/
+	m.getConstructorArgs=function(clsconstructor,obj,key,data){
+		if(o.argsLookup){
+			return o.argsLookup.call(o,clsconstructor,obj,key,data);
+		}
 		return "";
 	};
-	m.buildInstructions=function(fbody){
-		var fbl=fbody.length,ch,instr=[];
-		/*parse function body into keywords, calls, variables, if, for, while, etc. instructions*/
+	m.buildInstructions=function(fbody,cls){
+		var fbl=fbody.length,ch=o.chmod,instr=[];
+		if(o.proxyInstructions){
+			return o.proxyInstructions.call(o,fbody,cls,ch,instr);
+		}
 		return instr;
 	};
 	m.buildASTObject=function(cls){
-		/*call external AbstractSyntaxTree Builder in VM*/
-		/*parse fbody using buildInstructions*/
-		var ast=new cls();
-		return ast;
+		if(!o.proxyASTBuilder){
+			var ast=new cls();
+			o.aststruct=o.buildInstructions(cls.toString(),cls);
+			return ast;
+		} 
+		return o.proxyASTBuilder.call(o,cls);
 	};
 	m.identifyKeyChain=function(obj,identifyKeyHandler){
 		var sname=obj.getSuperName2();
@@ -322,7 +337,8 @@ function XeltoSS(){
 		var cls='',clsArgs='',superArgs='',clsf=[],clsb=[],
 			em=o.embedMaps,emv,rwm=reservedwordsmap,prfx="",sffx="",
 			clsh=o.classHandler,oeh=o.overextendHandler,
-			alset=o.allowSetters,alget=o.allowGetters,alac=o.allowAsync,algen=o.allowGenerator;
+			alset=o.allowSetters,alget=o.allowGetters,alac=o.allowAsync,algen=o.allowGenerator,
+			ba=o.bodyAssembler,ma=o.methodAssembler;
 		var decomp=o.decomposeFunction(obj.constructor),
 			ofdecomp,ovart=(rwm.v||'var')+' '+(rwm.o||'o')+'='+(rwm.t||'this')+';';
 		clsArgs=decomp[1].join(',');
@@ -335,6 +351,7 @@ function XeltoSS(){
 			polymaps.mapnames=mapnames;
 		}
 		for(i=0;i<mapsupers.length;i++)mapnames[i]='__'+(mapsupers[i].aname||mapsupers[i].name)+'_super__';
+		superArgs=o.getConstructorArgs(obj.constructor,obj,rwm.s||'super',polymaps);
 		for(k in obj){
 			ok=undefined;
 			ofdecomp=undefined;
@@ -344,6 +361,7 @@ function XeltoSS(){
 					ofdecomp=o.decomposeFunction(ok);
 					if(ok._s)clsf.push((o.statisAsStatic?(rwm.sttc||"static")+" ":"")+(rwm.gt||"get")+" "+k+"()"+ofdecomp[2]);
 					else clsf.push((rwm.gt||"get")+" "+k+"()"+ofdecomp[2].replace('{','{'+ovart));
+					if(ma)ma.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 				}
 			}
 			if (alset){
@@ -352,19 +370,25 @@ function XeltoSS(){
 					ofdecomp=o.decomposeFunction(ok);
 					if(ok._s)clsf.push((o.statisAsStatic?(rwm.sttc||"static")+" ":"")+(rwm.gt||"set")+" "+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2]);
 					else clsf.push((rwm.st||"set")+" "+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2].replace('{','{'+ovart));
+					if(ma)ma.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 				}
 			}
 			if(!ok)ok=obj[k];
 			else continue;
 			if (em[sname]&&em[sname].hasOwnProperty(k)){
 				emv=em[sname][k](obj,k,decomp,sname);
-				if(emv!==undefined)clsb.push((rwm.t||'this')+'.'+k+'='+emv+';');
+				if(emv!==undefined){
+					clsb.push((rwm.t||'this')+'.'+k+'='+emv+';');
+					if(ba)ba.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
+				}
 			} else if (ok===obj){
 				clsb.push((rwm.t||'this')+'.'+k+'='+(rwm.t||'this')+';');
+				if(ba)ba.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 			} else if (typeof ok === 'function'){
 				if (!ok.packobj)ofdecomp=o.decomposeFunction(ok);
 				if (ok.packobj){
 					clsb.push((rwm.t||'this')+'.'+k+'='+(ok.packagename?ok.packagename+'.':'')+(ok.name||ok.aname)+';');
+					if(ba)ba.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 				} else if(ok._s){
 					if(alac&&ok.constructor===o.AsyncFunction){
 						clsf.push((o.statisAsStatic?(rwm.sttc||"static")+" ":"")+(rwm.asc||"async")+" "+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2]);
@@ -372,22 +396,32 @@ function XeltoSS(){
 						clsf.push((o.statisAsStatic?(rwm.sttc||"static")+" ":"")+(rwm.ga||"*")+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2]);
 					} else 
 						clsf.push((o.statisAsStatic?(rwm.sttc||"static")+" ":"")+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2]);
+					if(ma)ma.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 				} else if(ok._i||ok._a){
 					iamethods.push(k);
+					if(ma)ma.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 				} else if(alac&&ok.constructor===o.AsyncFunction){
 					clsf.push((rwm.asc||"async")+" "+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2].replace('{','{'+ovart));
+					if(ma)ma.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 				} else if(algen&&ok.constructor===o.GeneratorFunction){
 					clsf.push((rwm.ga||"*")+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2].replace('{','{'+ovart));
+					if(ma)ma.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 				} else if(ok.constructor===o.ASTConstructor){
 					clsb.push(ok.toString());
-				} else 
+					if(ba)ba.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
+				} else {
 					clsf.push(k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2].replace('{','{'+ovart));
+					if(ma)ma.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
+				}
 			} else if(ok===null || ok===undefined || ok.constructor===Number || ok.constructor===Boolean){
 				clsb.push((rwm.t||'this')+'.'+k+'='+ok+';');
+				if(ba)ba.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 			} else if (ok.constructor===String){
 				clsb.push((rwm.t||'this')+'.'+k+'="'+ok+'";');
+				if(ba)ba.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 			} else if (mapnames.indexOf(k)>=0){
 				keyedoutmaps.push(k);
+				if(ba)ba.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 			} else if (ok.constructor===Object){
 				if(ok.__name && tp.package(ok.__name)===ok){
 					clsb.push((rwm.t||'this')+'.'+k+'='+ok.__name+';');
@@ -395,9 +429,11 @@ function XeltoSS(){
 					clsb.push((rwm.t||'this')+'.'+k+'='+(ok.packagename?ok.packagename+'.':'')+(ok.aname||ok.name)+';');
 				} else if(emptify)clsb.push((rwm.t||'this')+'.'+k+'={};');
 				else clsb.push((rwm.t||'this')+'.'+k+'='+(o.objectStringify?o.objectStringify(ok):JSON.stringify(ok))+';');
+				if(ba)ba.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 			} else if (ok.constructor===Array){
 				if(emptify)clsb.push((rwm.t||'this')+'.'+k+'=[];');
 				else clsb.push((rwm.t||'this')+'.'+k+'='+(o.arrayStringify?o.arrayStringify(ok):JSON.stringify(ok))+';');
+				if(ba)ba.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 			} else if (typeof ok === 'object'){
 				if(ok.__name && tp.package(ok.__name)===ok){
 					clsb.push((rwm.t||'this')+'.'+k+'='+ok.__name+';');
@@ -405,15 +441,18 @@ function XeltoSS(){
 					clsb.push((rwm.t||'this')+'.'+k+'='+(ok.packagename?ok.packagename+'.':'')+(ok.aname||ok.name)+';');
 				} else if (emptify)clsb+=(rwm.t||'this')+'.'+k+'='+(rwm.n||'null')+';';
 				else clsb.push((rwm.t||'this')+'.'+k+'='+(rwm.nw||'new')+' '+(ok.constructor.packagename?ok.constructor.packagename+".":"")+ok.constructor.name+'('+o.getConstructorArgs(ok.constructor, obj, k)+');');
+				if(ba)ba.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 			} else if (oeh){
-				clsb.push(oeh(o,obj,k,rwm));
+				clsb.push(oeh.call(obj,o,obj,k,rwm));
+				if(ba)ba.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 			} else {
 				clsb.push((rwm.t||'this')+'.'+k+'='+(rwm.n||'null')+';');
+				if(ba)ba.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 			}
 		}
 		if(deflat)o.deflatCls(obj,polymaps,o.deflatInterfaces,o.deflatAbstracts,o.deflatConstructs,o.deflatInheritance);
 		if(clsh){
-			cls=clsh(o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
+			cls=clsh.call(obj,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 		} else {
 			cls=(rwm.cls||'class')+' '+clsname+(clssuper ? ' '+(rwm.e||'extends')+' '+clssuper : '')+' {';
 			cls+=(rwm.c||'constructor')+'('+clsArgs+'){'+(clssuper ? (rwm.s||'super')+'('+superArgs+');' : '');
