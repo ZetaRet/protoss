@@ -3,7 +3,7 @@
  * Zeta Ret XeltoSS
  * ProtoSS Transformator to JS Class
  * Requires: protoss.all.js v1.02c
- * Version: 1.03l 
+ * Version: 1.03m 
  * Date: 2017 
 **/
 window.internal(
@@ -18,7 +18,7 @@ function XeltoSS(){
 	o.noKeyIdentificationChain={};
 	o.toppack=null;
 	o.scopeMap={};
-	o.preserveScope=true;
+	o.preserveScope=false;
 	o.fractalizedScope=true;
 	o.obscureTimers=false;
 	o.setInterval=null;
@@ -26,6 +26,10 @@ function XeltoSS(){
 	o.tokens=null;
 	o.keywords=null;
 	o.operators=null;
+	o.autoget=true;
+	o.autoGetPrefix="get_";
+	o.autoset=true;
+	o.autoSetPrefix="set_";
 	o.methodJoin="";
 	o.bodyJoin="";
 	o.overextendHandler=null;
@@ -37,6 +41,8 @@ function XeltoSS(){
 	o.deflatInheritance=true;
 	o.objectStringify=null;
 	o.arrayStringify=null;
+	o.autoConstructor=true;
+	o.constructorKeys=["construct","_construct","_constructor"];
 	o.allowSetters=true;
 	o.allowGetters=true;
 	o.allowAsync=false;
@@ -230,7 +236,7 @@ function XeltoSS(){
 	};
 	m.buildInstructions=function(fbody,cls){
 		var fbl=fbody.length,ch=o.chmod,instr=[];
-		if(o.proxyInstructions){
+		if(fbl>0 && o.proxyInstructions){
 			return o.proxyInstructions.call(o,fbody,cls,ch,instr);
 		}
 		return instr;
@@ -334,17 +340,17 @@ function XeltoSS(){
 	m.toCls=function(obj, clsname, clssuper, deflat, polymaps, reservedwordsmap, emptify){
 		if(!clsname)clsname=obj.constructor.aname||obj.constructor.name;
 		if(!reservedwordsmap)reservedwordsmap={};
-		var cls='',clsArgs='',superArgs='',clsf=[],clsb=[],
+		var cls='',clsArgs='',superArgs='',clsf=[],clsb=[],str,stri=-1,
 			em=o.embedMaps,emv,rwm=reservedwordsmap,prfx="",sffx="",
 			clsh=o.classHandler,oeh=o.overextendHandler,
 			alset=o.allowSetters,alget=o.allowGetters,alac=o.allowAsync,algen=o.allowGenerator,
-			ba=o.bodyAssembler,ma=o.methodAssembler;
+			ba=o.bodyAssembler,ma=o.methodAssembler,ckeys=o.constructorKeys;
 		var decomp=o.decomposeFunction(obj.constructor),
 			ofdecomp,ovart=(rwm.v||'var')+' '+(rwm.o||'o')+'='+(rwm.t||'this')+';';
 		clsArgs=decomp[1].join(',');
 		var mapsupers=[obj.constructor].concat(obj.getSupers()),
 			mapnames=[],sname=obj.getSuperName2(),tp=o.toppack,
-			keyedoutmaps=[],iamethods=[],i,k,ok;
+			keyedoutmaps=[],iamethods=[],i,k,ok,docontinue=false;
 		if(polymaps){
 			polymaps.iamethods=iamethods;
 			polymaps.keyedoutmaps=keyedoutmaps;
@@ -355,23 +361,38 @@ function XeltoSS(){
 		for(k in obj){
 			ok=undefined;
 			ofdecomp=undefined;
+			docontinue=false;
+			str=undefined;
+			stri=-1;
 			if (alget){
 				ok=obj.__lookupGetter__(k);
+				if(!ok && (typeof obj[k] === 'function') && k.indexOf(o.autoGetPrefix)==0){
+					ok=obj[k];
+					k=k.substr(o.autoGetPrefix.length,k.length);
+					docontinue=true;
+				}
 				if(ok){
 					ofdecomp=o.decomposeFunction(ok);
 					if(ok._s)clsf.push((o.statisAsStatic?(rwm.sttc||"static")+" ":"")+(rwm.gt||"get")+" "+k+"()"+ofdecomp[2]);
 					else clsf.push((rwm.gt||"get")+" "+k+"()"+ofdecomp[2].replace('{','{'+ovart));
 					if(ma)ma.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 				}
+				if(docontinue)continue;
 			}
 			if (alset){
 				ok=obj.__lookupSetter__(k);
+				if(!ok && (typeof obj[k] === 'function') && k.indexOf(o.autoSetPrefix)==0){
+					ok=obj[k];
+					k=k.substr(o.autoSetPrefix.length,k.length);
+					docontinue=true;
+				}
 				if(ok){
 					ofdecomp=o.decomposeFunction(ok);
 					if(ok._s)clsf.push((o.statisAsStatic?(rwm.sttc||"static")+" ":"")+(rwm.gt||"set")+" "+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2]);
 					else clsf.push((rwm.st||"set")+" "+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2].replace('{','{'+ovart));
 					if(ma)ma.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 				}
+				if(docontinue)continue;
 			}
 			if(!ok)ok=obj[k];
 			else continue;
@@ -409,8 +430,17 @@ function XeltoSS(){
 				} else if(ok.constructor===o.ASTConstructor){
 					clsb.push(ok.toString());
 					if(ba)ba.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
-				} else {
+				} else if(ckeys.indexOf(k)>=0 || (o.autoConstructor && k===clsname)){
+					str=ofdecomp[2].replace('{',ovart);
+					stri=str.lastIndexOf("}");
+					str=str.substring(0, stri);
+					clsb.push(str);
+					if(ba)ba.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
+				}else {
 					clsf.push(k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2].replace('{','{'+ovart));
+					if(o.preserveScope){
+						clsb.push((rwm.t||'this')+'.'+k+'='+(rwm.t||'this')+'.'+k+'.xcoped('+(rwm.t||'this')+')'+';');
+					}
 					if(ma)ma.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 				}
 			} else if(ok===null || ok===undefined || ok.constructor===Number || ok.constructor===Boolean){
@@ -549,3 +579,59 @@ function XeltoSS(){
 	return o;
 }
 );
+XeltoSS.InitXeltoSSPrototypes=function(){
+	var prn="prototype",
+		cnx="constructor",
+		dcname="__constructor",
+		prfx="__",
+		sffx="_super__",
+		lsffx="_list",
+		pname="packagename",
+		piname="__name",
+		nsprfx="__ns_",
+		pref="packobj",
+		oprot=Object.prototype,
+		odef=Object.defineProperty,
+		ef={enumerable:false};
+	
+	oprot.getSuperx=function(fn, name){
+		if (!name)name=dcname;
+		if (!fn)fn=typeof this === 'function' ? this : this[cnx];
+		var ffn=fn.__protoss||fn;
+		var supers=[];
+		while(fn[prn][name]){
+			fn=fn[prn][name];
+			supers.push(fn.__xeltoss||fn);
+		}
+		var list=fn[prn][name+lsffx];
+		if (list){
+			var l=list.length,i=0,xl;
+			for(;i<l;i++){
+				xl=list[i];
+				supers.push(xl.__xeltoss||xl);
+				supers=supers.concat(xl.getSuperx(xl,name));
+			}
+		}
+		return supers;
+	};
+	odef(oprot,'getSuperx',ef);
+	oprot.ix=function(sfn,fn, name){
+		var ffn=fn || (typeof this === 'function' ? this : this[cnx]);
+		if(!sfn)return false;
+		if (ffn==sfn||ffn.__xeltoss==sfn||ffn==sfn.__xeltoss)return true;
+		var _s=this.getSuperx(fn,name);
+		if (_s.indexOf(sfn.__xeltoss||sfn)==-1)return false;
+		return true;
+	};
+	odef(oprot,'ix',ef);
+	Function.prototype.xcoped=function(scope){
+		var superf=this;
+		var scopedf=function scopedf(){return superf.apply(scope,arguments);};
+		scopedf.xf=superf;
+		scopedf.xcope=scope;
+		scopedf.aname=superf.aname||superf.name;
+		return scopedf;
+	};
+	odef(Function.prototype, 'xcoped', ef);
+	return XeltoSS;
+};
