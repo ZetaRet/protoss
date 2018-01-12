@@ -3,7 +3,7 @@
  * Zeta Ret ProtoSS
  * ProtoSS Class/Interface/Header Manager
  * Requires: protoss.all.js v1.02c
- * Version: 1.04a
+ * Version: 1.04b
  * Date: 2017 
 **/
 window.internal(
@@ -166,4 +166,21 @@ ProtoSS.staticProps=function(stat, props){
 	var k;
 	for(k in props)stat[k]=props[k];
 	return stat;
+};
+ProtoSS.getDefinitionByName=function(sname, toppack){
+	if(!toppack)toppack=window;
+	var many=sname.split("|"),
+		cls=null,i,sn,tp,s;
+	for(i=0;i<many.length;i++){
+		sn=many[i];
+		tp=toppack;
+		s=sn.split("::");
+		if (s.length==1){
+			cls=tp[s[0]];
+			if(cls)return cls;
+		}
+		cls=tp.package(s[0])[s[1]];
+		if(cls)return cls;
+	}
+	return cls;
 };
