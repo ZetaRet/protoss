@@ -3,7 +3,7 @@
  * Zeta Ret XeltoSS
  * ProtoSS Transformator to JS Class
  * Requires: protoss.all.js v1.02c
- * Version: 1.03m 
+ * Version: 1.03n 
  * Date: 2017 
 **/
 window.internal(
@@ -12,6 +12,7 @@ function XeltoSS(){
 	o.scriptContainer=null;
 	o.protossPrefix="protoss__";
 	o.xeltossPrefix="xeltoss__";
+	o.xeltossMethodSuffix="X";
 	o.statisAsStatic=false;
 	o.embedMaps={};
 	o.augmentKeyMap={};
@@ -438,7 +439,10 @@ function XeltoSS(){
 					if(ba)ba.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 				}else {
 					clsf.push(k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2].replace('{','{'+ovart));
-					if(o.preserveScope){
+					if(ok._x){
+						clsb.push((rwm.t||'this')+'.'+k+o.xeltossMethodSuffix+'='+(rwm.t||'this')+'.'+k+'.xcoped('+(rwm.t||'this')+')'+';');
+					}
+					if(o.preserveScope||ok._p){
 						clsb.push((rwm.t||'this')+'.'+k+'='+(rwm.t||'this')+'.'+k+'.xcoped('+(rwm.t||'this')+')'+';');
 					}
 					if(ma)ma.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
