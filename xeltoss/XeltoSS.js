@@ -3,7 +3,7 @@
  * Zeta Ret XeltoSS
  * ProtoSS Transformator to JS Class
  * Requires: protoss.all.js v1.02c
- * Version: 1.03n 
+ * Version: 1.03o 
  * Date: 2017 
 **/
 window.internal(
@@ -20,7 +20,7 @@ function XeltoSS(){
 	o.toppack=null;
 	o.scopeMap={};
 	o.preserveScope=false;
-	o.fractalizedScope=true;
+	o.fractalizedScope=false;
 	o.obscureTimers=false;
 	o.setInterval=null;
 	o.setTimeout=null;
@@ -44,6 +44,10 @@ function XeltoSS(){
 	o.arrayStringify=null;
 	o.autoConstructor=true;
 	o.constructorKeys=["construct","_construct","_constructor"];
+	o.mergeConstructors=true;
+	o.constructorMap={};
+	o.autoDestructor=true;
+	o.destructorKeys=["destruct","_destruct","_destructor"];
 	o.allowSetters=true;
 	o.allowGetters=true;
 	o.allowAsync=false;
@@ -341,19 +345,20 @@ function XeltoSS(){
 	m.toCls=function(obj, clsname, clssuper, deflat, polymaps, reservedwordsmap, emptify){
 		if(!clsname)clsname=obj.constructor.aname||obj.constructor.name;
 		if(!reservedwordsmap)reservedwordsmap={};
-		var cls='',clsArgs='',superArgs='',clsf=[],clsb=[],str,stri=-1,
+		var cls='',clsArgs='',superArgs='',clsf=[],clsb=[],pmethods=[],str,stri=-1,
 			em=o.embedMaps,emv,rwm=reservedwordsmap,prfx="",sffx="",
 			clsh=o.classHandler,oeh=o.overextendHandler,
 			alset=o.allowSetters,alget=o.allowGetters,alac=o.allowAsync,algen=o.allowGenerator,
 			ba=o.bodyAssembler,ma=o.methodAssembler,ckeys=o.constructorKeys;
 		var decomp=o.decomposeFunction(obj.constructor),
-			ofdecomp,ovart=(rwm.v||'var')+' '+(rwm.o||'o')+'='+(rwm.t||'this')+';';
+			ofdecomp,ovart=(rwm.v||'var')+' '+(rwm.o||'o')+'='+(rwm.t||'this')+';',ovartset=false;
 		clsArgs=decomp[1].join(',');
-		var mapsupers=[obj.constructor].concat(obj.getSupers()),
-			mapnames=[],sname=obj.getSuperName2(),tp=o.toppack,
+		var supers=obj.getSupers(),mapsupers=[obj.constructor].concat(supers),
+			mapnames=[],sname=obj.getSuperName2(),_sname,tp=o.toppack,
 			keyedoutmaps=[],iamethods=[],i,k,ok,docontinue=false;
 		if(polymaps){
 			polymaps.iamethods=iamethods;
+			polymaps.protectedmethods=pmethods;
 			polymaps.keyedoutmaps=keyedoutmaps;
 			polymaps.mapnames=mapnames;
 		}
@@ -364,6 +369,7 @@ function XeltoSS(){
 			ofdecomp=undefined;
 			docontinue=false;
 			str=undefined;
+			_sname=undefined;
 			stri=-1;
 			if (alget){
 				ok=obj.__lookupGetter__(k);
@@ -432,18 +438,34 @@ function XeltoSS(){
 					clsb.push(ok.toString());
 					if(ba)ba.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 				} else if(ckeys.indexOf(k)>=0 || (o.autoConstructor && k===clsname)){
-					str=ofdecomp[2].replace('{',ovart);
+					if(!ovartset){
+						ovartset=true;
+						clsb.push(ovart);
+					}
+					if(o.mergeConstructors){
+						for(i=supers.length-1;i>=0;i--){
+							_sname=supers[i].getSuperName2();
+							if(o.constructorMap[_sname]){
+								clsb.push(o.constructorMap[_sname].join(o.bodyJoin));
+							}
+						}
+					}
+					str=ofdecomp[2].replace('{','');
 					stri=str.lastIndexOf("}");
 					str=str.substring(0, stri);
+					if(!o.constructorMap[sname])o.constructorMap[sname]=[];
+					o.constructorMap[sname].push(str);
 					clsb.push(str);
 					if(ba)ba.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 				}else {
 					clsf.push(k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2].replace('{','{'+ovart));
 					if(ok._x){
 						clsb.push((rwm.t||'this')+'.'+k+o.xeltossMethodSuffix+'='+(rwm.t||'this')+'.'+k+'.xcoped('+(rwm.t||'this')+')'+';');
+						pmethods.push(k+o.xeltossMethodSuffix);
 					}
 					if(o.preserveScope||ok._p){
 						clsb.push((rwm.t||'this')+'.'+k+'='+(rwm.t||'this')+'.'+k+'.xcoped('+(rwm.t||'this')+')'+';');
+						pmethods.push(k);
 					}
 					if(ma)ma.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 				}
@@ -543,6 +565,7 @@ function XeltoSS(){
 		newclsproto["__"+cls.name+"_super__"]=promapcls;
 		for(k in cls)newcls[k]=cls[k];
 		for(k in promap){
+			if(!newclsproto[k])continue;
 			promapcls[k]=newclsproto[k];
 			if(k!=="constructor")clsproto[k]=newclsproto[k];
 		}
@@ -562,6 +585,14 @@ function XeltoSS(){
 		newcls.__protoss=cls;
 		po[o.protossPrefix+n]=cls;
 		po[o.xeltossPrefix+n]=newcls;
+		if(o.autoDestructor){
+			for(k=0;k<o.destructorKeys.length;k++){
+				if(obj[o.destructorKeys[k]]){
+					obj[o.destructorKeys[k]]();
+					break;
+				}
+			}
+		}
 		return newcls;
 	};
 	m.xeltoss=function(cls, clsname, clssuper, deflat, polymaps, reservedwordsmap, emptify, useclsfactory){
