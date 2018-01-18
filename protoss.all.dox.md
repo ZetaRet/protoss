@@ -84,16 +84,18 @@ __name*__ - String, name of the function to call on the super object map or prot
 args - Array, array of arguments to apply  
 *return Object, result of the super prototype function as it is defined in its function scope, support of XeltoSS (ProtoSS JS Class) prototype chain*
 
-__*superList(Array list, Function fn, String name) : Function*__  
+__*superList(Array list, Function fn, String name, Boolean defname) : Function*__  
 __list*__ - Array, list of constructor functions used as supers  
 fn - Function, if null will use this, fn extends aggregate function which calls the list with constructors, the aggregate function uses __constructor_list instead of __constructor  
 name - String, name of constructor, if null will use __constructor  
+defname - Boolean, adds function.name property, aname is always added now  
 *return Function, fn for chain calls*
 
-__*superList2(Array list, Function fn, String name) : Function*__  
+__*superList2(Array list, Function fn, String name, Boolean defname) : Function*__  
 __list*__ - Array, list of constructor functions used as supers  
 fn - Function, if null will use this, fn extends aggregate function which calls the list with constructors (uses same arguments for all supers, superList requires an array of arguments, each index exactly matching the super index), the aggregate function uses __constructor_list instead of __constructor  
 name - String, name of constructor, if null will use __constructor  
+defname - Boolean, adds function.name property, aname is always added now  
 *return Function, fn for chain calls*
 
 __*getSupers(Function fn, String name) : Array*__  
@@ -118,9 +120,10 @@ fn - Function, if null will use this, to obtain all supers
 name - String, if null will use __constructor  
 *return Boolean, true - if it exists in the inheritance tree or equals this constructor, otherwise false*
 
-__*abstract(String name, Object amap) : Function*__   
+__*abstract(String name, Object amap, Boolean defname) : Function*__   
 name - String, if null will use ZetaRet_Abstract_XXX13XXX   
 amap - Object, if null will use this, i.e. {term:0,date:0,record:3}.abstract()  
+defname - Boolean, adds function.name property, aname is always added now  
 *return Function, afn is aggregate function which generates methods according to map (uses statis), if key-value pair is [0,false,null,undefined,""] will throw abstract error, otherwise will return the value from the object map (i.e. .record() returns 3), abstract class throws error on instance, must be subclassed* 
 
 __*implement(Function superfn, Function fn, String name) : Function*__  
@@ -129,9 +132,10 @@ fn - Function, if null will use this function, fn extends superfn in effect, fn 
 name - String, if null will use default __constructor  
 *return Fuction, superfn will be returned for chain calls, [implement calls setSuper]*
 
-__*interface(String name, Object imap) : Function*__  
+__*interface(String name, Object imap, Boolean defname) : Function*__  
 name - String, if null will use ZetaRet_Interface_XXX13XXX  
 imap - Object, if null will use this, i.e. {term:[String, Number],date:[Date],record:[CustomRecordClass, IRecordData]}.interface()  
+defname - Boolean, adds function.name property, aname is always added now  
 *return Function, ifn is aggregate function which generates methods according to map (uses statis), methods will test arguments against map value input types, each method returns true or false, depending on matched types*
 
 __*final(function_arguments|Array args) : Object*__  
