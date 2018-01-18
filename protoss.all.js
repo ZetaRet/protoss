@@ -1,7 +1,7 @@
 /**
- * Author: Zeta Ret, Ivo Yankulovski
+ * Author: Zeta Ret, Ivo Yankulovski 
  * ProtoSS - Prototype Supers-Subclass Library 
- * Version: 1.02c
+ * Version: 1.03 
  * Date: 2017 
 **/
 function ZetaRet_Prototypes(){
@@ -157,7 +157,7 @@ function ZetaRet_Prototypes(){
 		return this[prfx+(proto.aname||proto.name)+sffx][name].apply(this, args);
 	};
 	odef(oprot,'callProtoX',ef);
-	oprot.superList=function(list,fn,name){
+	oprot.superList=function(list,fn,name,defname){
 		if (!fn)fn=this;
 		if (!name)name=dcname;
 		var fnlist=function(){
@@ -169,14 +169,16 @@ function ZetaRet_Prototypes(){
 			o.superize(a);
 			return o;
 		};
-		odef(fnlist, "name", {value:"ZetaRet_SuperList_"+Object.rndstr(13)});
+		var fname="ZetaRet_SuperList_"+Object.rndstr(13);
+		fnlist.aname=fname;
+		if(defname)odef(fnlist, "name", {value:fname});
 		fn.setSuper(fnlist,fn,name);
 		fnlist[prn][name+lsffx]=list;
 		odef(fnlist, name+lsffx, ef);
 		return fn;
 	};
 	odef(oprot,'superList',ef);
-	oprot.superList2=function(list,fn,name){
+	oprot.superList2=function(list,fn,name,defname){
 		if (!fn)fn=this;
 		if (!name)name=dcname;
 		var fnlist=function(){
@@ -188,7 +190,9 @@ function ZetaRet_Prototypes(){
 			o.superize(a);
 			return o;
 		};
-		odef(fnlist, "name", {value:"ZetaRet_SuperList_"+Object.rndstr(13)});
+		var fname="ZetaRet_SuperList_"+Object.rndstr(13);
+		fnlist.aname=fname;
+		if(defname)odef(fnlist, "name", {value:fname});
 		fn.setSuper(fnlist,fn,name);
 		fnlist[prn][name+lsffx]=list;
 		odef(fnlist, name+lsffx, ef);
@@ -249,7 +253,7 @@ function ZetaRet_Prototypes(){
 		return true;
 	};
 	odef(oprot,'is',ef);
-	oprot.abstract=function(name, amap){
+	oprot.abstract=function(name, amap, defname){
 		if (!amap)amap=this;
 		if (!name)name="ZetaRet_Abstract_"+Object.rndstr(13);
 		function ream(amap, akey){
@@ -274,7 +278,8 @@ function ZetaRet_Prototypes(){
 			return o;
 		};
 		afn._a=1;
-		odef(afn, "name", {value:name});
+		afn.aname=name;
+		if(defname)odef(afn, "name", {value:name});
 		return afn;
 	};
 	odef(oprot,'abstract',ef);
@@ -282,7 +287,7 @@ function ZetaRet_Prototypes(){
 		return this.setSuper(superfn,fn,name);
 	};
 	odef(oprot,'implement',ef);
-	oprot.interface=function(name, imap){
+	oprot.interface=function(name, imap, defname){
 		if (!imap)imap=this;
 		if (!name)name="ZetaRet_Interface_"+Object.rndstr(13);
 		function reim(imap, ikey){
@@ -313,7 +318,8 @@ function ZetaRet_Prototypes(){
 			return o;
 		};
 		ifn._i=1;
-		odef(ifn, "name", {value:name});
+		ifn.aname=name;
+		if(defname)odef(ifn, "name", {value:name});
 		return ifn;
 	};
 	odef(oprot,'interface',ef);
@@ -378,7 +384,7 @@ function ZetaRet_Prototypes(){
 	odef(oprot,"usens",ef);
 	oprot.internal=function(cls, pack){
 		if(!pack)pack=this;
-		pack[cls.name]=cls;
+		pack[cls.aname||cls.name]=cls;
 		cls[pname]=pack[piname];
 		cls[pref]=pack;
 		return pack;
