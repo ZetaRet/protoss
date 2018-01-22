@@ -3,7 +3,7 @@
  * Zeta Ret XeltoSS
  * ProtoSS Transformator to JS Class
  * Requires: protoss.all.js v1.02c
- * Version: 1.03p 
+ * Version: 1.04 
  * Date: 2017 
 **/
 window.internal(
@@ -690,7 +690,10 @@ function XeltoSS(){
 	return o;
 }
 );
-XeltoSS.InitXeltoSSPrototypes=function(){
+XeltoSS.__InitXeltoSSPrototypes=false;
+XeltoSS.InitXeltoSSPrototypes=function(override){
+	if(!override&&XeltoSS.__InitXeltoSSPrototypes)return XeltoSS;
+	XeltoSS.__InitXeltoSSPrototypes=true;
 	var prn="prototype",
 		cnx="constructor",
 		dcname="__constructor",
@@ -705,6 +708,16 @@ XeltoSS.InitXeltoSSPrototypes=function(){
 		odef=Object.defineProperty,
 		ef={enumerable:false};
 	
+	oprot.superx=function(args,cargs,name){
+		if (!name)name=dcname;
+		var c=args.callee;
+		if(!c.aname)c.aname=c.name;
+		var p=c[prn];
+		if (!p[name]||this[prfx+(p[name].aname||p[name].name)+sffx])return;
+		if (cargs===true)cargs=args;
+		return p[name].apply(this, cargs);
+	};
+	odef(oprot,'superx',ef);
 	oprot.getSuperx=function(fn, name){
 		if (!name)name=dcname;
 		if (!fn)fn=typeof this === 'function' ? this : this[cnx];
