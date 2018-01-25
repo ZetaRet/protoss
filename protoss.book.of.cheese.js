@@ -2,7 +2,7 @@
  * Author: Zeta Ret, Ivo Yankulovski
  * Load the book before protoss.*.js to cheese up the browser
  * Provides backwards compatibility in old browsers 
- * Version: 1.01 
+ * Version: 1.02 
  * Date: 2018 
 **/
 
@@ -41,5 +41,17 @@ if(!Function.prototype.apply){
 	        case 13: return f.call(scope, args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9], args[10], args[11], args[12]);
 	        case 14: return f.call(scope, args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9], args[10], args[11], args[12], args[13]);
 	    }
+	};
+}
+/*adds unique array prototype*/
+if(!Array.prototype.unique){
+	Array.prototype.unique=function(){
+		var u=[],l=this.length,i;
+		for (i=0;i<l;i++){
+	    	if(u.indexOf(this[i])===-1){
+	        	u.push(this[i]);
+	    	}
+		}
+	    return u;
 	};
 }
