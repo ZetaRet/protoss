@@ -2,7 +2,7 @@
  * Author: Zeta Ret, Ivo Yankulovski
  * Load the book before protoss.*.js to cheese up the browser
  * Provides backwards compatibility in old browsers 
- * Version: 1.02 
+ * Version: 1.03 
  * Date: 2018 
 **/
 
@@ -43,7 +43,7 @@ if(!Function.prototype.apply){
 	    }
 	};
 }
-/*adds unique array prototype*/
+/*adds unique Array prototype*/
 if(!Array.prototype.unique){
 	Array.prototype.unique=function(){
 		var u=[],l=this.length,i;
@@ -53,5 +53,24 @@ if(!Array.prototype.unique){
 	    	}
 		}
 	    return u;
+	};
+}
+/*adds padStart and padEnd String prototype*/
+if(!String.prototype.padStart){
+	String.prototype.padStart=function(targetLength, padString){
+		var s="",l=this.length,dif=targetLength-l;
+		if(dif<=0)return String(this);
+		if(!padString)padString=' ';
+		while(s.length<dif)s+=padString;
+		return s.slice(0,dif)+String(this);
+	};
+}
+if(!String.prototype.padEnd){
+	String.prototype.padEnd=function(targetLength, padString){
+		var s="",l=this.length,dif=targetLength-l;
+		if(dif<=0)return String(this);
+		if(!padString)padString=' ';
+		while(s.length<dif)s+=padString;
+		return String(this)+s.slice(0,dif);
 	};
 }
