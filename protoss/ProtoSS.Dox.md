@@ -2,12 +2,23 @@ __Author: Zeta Ret, Ivo Yankulovski__
 __Zeta Ret ProtoSS__  
 ## ProtoSS Class/Interface/Header Manager  
 *Requires: protoss.all.js v1.02c*  
-*Version: 1.04*  
+*Version: 1.04c*  
 *Date: 2017*  
 
 __required*__
 
 ### ProtoSS  
+
+*Properties*  
+
+__autoImplement__ default true, resolveHeaders automatically implements interfaces using static __headerImplement__  
+__autoSuper__ default true, resolveHeaders automatically adds setSuper using static __headerSuper__  
+__autoSuperList__ default true, resolveHeaders automatically adds superList using static __headerSuperList__  
+__autoSuperList2__ default true, resolveHeaders automatically adds superList2 using static __headerSuperList2__  
+__errorData__ default null, resolveHeaders outputs error data upon throwing an error  
+__debug__ default null, resolveHeaders calls debug("error", "resolveHeaders", o, o.errorData), where o=this  
+
+*Methods*  
 
 __*toInterface(Object i, Object pack) : Object*__  
 __i*__ - Object, key-value map of interface definitions  
@@ -40,11 +51,15 @@ path - String, pass var to *getSuperCls*
 
 ### Static  
 
+*Properties*  
+
 __*headerImplement*__ - __Array__, define *implement* inheritance using an [ProtoSS Class|classsupername string, super in strings/class] template   
 __*headerSuper*__ - __Array__, define *setSuper* inheritance using an [ProtoSS Class|classsupername string, super in strings/class] template  
 __*headerSuperList*__ - __Array__, define *superList* inheritance using an [ProtoSS Clas|classsupername strings, Array of supers in strings/class] template   
 __*headerSuperList2*__ - __Array__, define *superList2* inheritance using an [ProtoSS Class|classsupername string, Array of supers in strings/class] template  
 __*stringmap*__ - __Object__, add dynamic string key-value pairs  
+
+*Methods*  
 
 __*eventProps(Object event, Array props) : Object*__   
 __event*__ - Object, function object  
@@ -55,3 +70,7 @@ __*staticProps(Object stat, Object props) : Object*__
 __stat*__ - Object, function object  
 __props*__ - Object, key-value pairs attached to stat object  
 *return stat, props attached as is*
+
+__*getDefinitionByName(String sname, Object toppack) : Function*__  
+__sname*__ - String, class super name  
+toppack - Object, default is window  
