@@ -11,12 +11,12 @@ __required*__
 
 *Properties*  
 
-__autoImplement__ default true, resolveHeaders automatically implements interfaces using static __headerImplement__  
-__autoSuper__ default true, resolveHeaders automatically adds setSuper using static __headerSuper__  
-__autoSuperList__ default true, resolveHeaders automatically adds superList using static __headerSuperList__  
-__autoSuperList2__ default true, resolveHeaders automatically adds superList2 using static __headerSuperList2__  
-__errorData__ default null, resolveHeaders outputs error data upon throwing an error  
-__debug__ default null, resolveHeaders calls debug("error", "resolveHeaders", o, o.errorData), where o=this  
+__autoImplement__ Boolean, default true, resolveHeaders automatically implements interfaces using static __headerImplement__  
+__autoSuper__ Boolean, default true, resolveHeaders automatically adds setSuper using static __headerSuper__  
+__autoSuperList__ Boolean, default true, resolveHeaders automatically adds superList using static __headerSuperList__  
+__autoSuperList2__ Boolean, default true, resolveHeaders automatically adds superList2 using static __headerSuperList2__  
+__errorData__ Object, default null, resolveHeaders outputs error data upon throwing an error  
+__debug__ Function, default null, resolveHeaders calls debug("error", "resolveHeaders", o, o.errorData), where o=this  
 
 *Methods*  
 
