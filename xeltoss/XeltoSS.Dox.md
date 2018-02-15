@@ -38,23 +38,19 @@ __augmentKeyMap__ Object
 default {}, used in "augmentKey" and "argumentKeyMatch", identify alternative keys based on augmenting object supername  
 #
 __noKeyIdentificationChain__ Object  
-default {}, used in "argumentKeyMatch" and "identifyKeyChain" to identify missing key values, misconfiguration might result 
-"void"  
+default {}, used in "argumentKeyMatch" and "identifyKeyChain" to identify missing key values, misconfiguration might result "void"  
 #
 __toppack__ Object  
 default null, top package you should set "window" in most cases, used everywhere inside code to obtain classes by supername  
 #
 __scopeMap__ Object  
-default {}, scope cache map used in external or proxy builders (usually will refer to it through XeltoSS this object as shared memory 
-mechanism)  
+default {}, scope cache map used in external or proxy builders (usually will refer to it through XeltoSS this object as shared memory mechanism)  
 #
 __preserveScope__ Boolean  
 default false, protected methods using "\_p" will generate scoped method and replace original (lookup Function.prototype.xcoped)  
 #
 __fractalizedScope__ Boolean  
-default false, used in external and proxy AST/instruction builders to successfully identify stacks of scope (usually achieved by 
-defining functions inside each other and refering to scope outside its own), this concept is not implemented in the majority of source code parsers but in Virtual 
-Machines  
+default false, used in external and proxy AST/instruction builders to successfully identify stacks of scope (usually achieved by defining functions inside each other and refering to scope outside its own), this concept is not implemented in the majority of source code parsers but in Virtual Machines  
 #
 __obscureTimers__ Boolean  
 default false, remove setInterval and setTimeout during hybridization process  
@@ -192,77 +188,77 @@ default 0, used in "buildInstructions" (usually defines mode of character readin
 ### *Methods*  
 ##
 
-__*initTokens() : Object*__  
+__initTokens() : *Object*__  
 constructs "tokens" object  
-> *return XeltoSS Object, self*  
+> *return __XeltoSS Object__, self*  
 
 ##
-__*initKeywords() : Object*__  
+__initKeywords() : *Object*__  
 constructs "keywords" object  
-> *return XeltoSS Object, self*  
+> *return __XeltoSS Object__, self*  
 
 ##
-__*initOperators() : Object*__  
+__initOperators() : *Object*__  
 constructs "operator" object  
-> *return XeltoSS Object, self*  
+> *return __XeltoSS Object__, self*  
 
 ##
-__*initAsync() : Object*__  
+__initAsync() : *Object*__  
 constructs "AsyncFunction" and allows async  
-> *return XeltoSS Object, self*  
+> *return __XeltoSS Object__, self*  
 
 ##
 __*initGenerator() : Object*__  
 constructs "GeneratorFunction" and allows generator  
-> *return XeltoSS Object, self*  
+> *return __XeltoSS Object__, self*  
 
 ##
-__*updateTimers(Boolean obscure) : Object*__  
-- obscure - Boolean, if true will remove setInterval/setTimeout otherwise will revert  
-> *return XeltoSS Object, self*  
+__updateTimers(*Boolean* obscure) : *Object*__  
+- obscure - __*Boolean*__, if true will remove setInterval/setTimeout otherwise will revert  
+> *return __XeltoSS Object__, self*  
 
 ##
-__*hashString(String str) : String*__  
-- __str*__ - String, bitshifted version will be generated  
-> *return String, hash version of input str*  
+__hashString(*String* str) : *String*__  
+- __str*__ - __*String*__, bitshifted version will be generated  
+> *return __String__, hash version of input str*  
 
 ##
-__*decomposeFunction(Function f) : Array*__  
-- __f*__ - Function, any function  
-> *return Array, 0-name:String,1-arguments keyname:Array,2-function body:String,3-hash of f body:String,4-function header:String*  
+__decomposeFunction(*Function* f) : *Array*__  
+- __f*__ - __*Function*__, any function  
+> *return __Array__, 0-name:__String__, 1-arguments keyname:__Array__, 2-function body:__String__, 3-hash of f body:__String__, 4-function header:__String__*  
 
 ##
-__*deflatCls(Object obj, Object maps, Boolean interfaces, Boolean abstracts, Boolean constructs, Boolean inheritance) : Object*__  
-- __obj*__ - Object, object in reconstruction, instance of ProtoSS constructor or custom format  
-- maps - Object, extracted polymorphic maps from "obj"  
-- interfaces - Boolean, modify interfaces  
-- abstracts - Boolean, modify abstract classes  
-- constructs - Boolean, modify constructors  
-- inheritance - Boolean, modify hierachy and its constructors  
+__deflatCls(*Object* obj, *Object* maps, *Boolean* interfaces, *Boolean* abstracts, *Boolean* constructs, *Boolean* inheritance) : *Object*__  
+- __obj*__ - __*Object*__, object in reconstruction, instance of ProtoSS constructor or custom format  
+- maps - __*Object*__, extracted polymorphic maps from "obj"  
+- interfaces - __*Boolean*__, modify interfaces  
+- abstracts - __*Boolean*__, modify abstract classes  
+- constructs - __*Boolean*__, modify constructors  
+- inheritance - __*Boolean*__, modify hierachy and its constructors  
 ```
 if(o.deflat){  
 	o.deflat.call(o,obj,maps,interfaces,abstracts,constructs,inheritance);  
 }
 ```
-> *return XeltoSS Object, self*  
+> *return __XeltoSS Object__, self*  
 
 ##
-__*getConstructorArgs(Function clsconstructor, Object obj, String key, Object data) : String*__  
-- __clsconstructor*__ - Function, corresponding constructor in "obj" key-value  
-- __obj*__ - Object, host object  
-- __key*__ - String, key on host object  
-- data - Object, additional data for "argsLookup", usually polymorphic maps  
+__getConstructorArgs(*Function* clsconstructor, *Object* obj, *String* key, *Object* data) : *String*__  
+- __clsconstructor*__ - __*Function*__, corresponding constructor in "obj" key-value  
+- __obj*__ - __*Object*__, host object  
+- __key*__ - __*String*__, key on host object  
+- data - __*Object*__, additional data for "argsLookup", usually polymorphic maps  
 ```
 if(o.argsLookup){  
 	return o.argsLookup.call(o,clsconstructor,obj,key,data);  
 }
 ```
-> *return String, arguments string representation ready for function construction*  
+> *return __String__, arguments string representation ready for function construction*  
 
 ##
-__*buildInstructions(String fbody, Function cls) : Array*__  
-- __fbody*__ - String, class source in string format  
-- __cls*__ - Function, function reference to fbody string  
+__buildInstructions(*String* fbody, *Function* cls) : *Array*__  
+- __fbody*__ - __*String*__, class source in string format  
+- __cls*__ - __*Function*__, function reference to fbody string  
 ```
 var fbl=fbody.length,ch=o.chmod,instr=[];  
 if(fbl>0 && o.proxyInstructions){  
@@ -270,11 +266,11 @@ if(fbl>0 && o.proxyInstructions){
 }  
 return instr;  
 ```
-> *return Array, code instructions representing source*  
+> *return __Array__, code instructions representing source*  
 
 ##
-__*buildASTObject(Function cls) : Object*__  
-- __cls*__ - Function, uses "proxyASTBuilder" or "new" instance as default behaviour in JS VM and "buildInstructions" aststruct extraction
+__buildASTObject(*Function* cls) : *Object*__  
+- __cls*__ - __*Function*__, uses "proxyASTBuilder" or "new" instance as default behaviour in JS VM and "buildInstructions" aststruct extraction
 ```
 if(!o.proxyASTBuilder){  
 	var ast=new cls();  
@@ -283,137 +279,137 @@ if(!o.proxyASTBuilder){
 }  
 return o.proxyASTBuilder.call(o,cls);  
 ```
-> *return Object, default is cls instance as it is generated by JS VM*  
+> *return __Object__, default is cls instance as it is generated by JS VM*  
 
 ##
-__*identifyKeyChain(Object obj, Function identifyKeyHandler) : Object*__  
-- __obj*__ - Object, host object, obtains supername string   
-- __identifyKeyHandler*__ - Function, function "nkic(obj,k,d,s)" mapped by supername  
-> *return XeltoSS Object, self*  
+__identifyKeyChain(*Object* obj, *Function* identifyKeyHandler) : *Object*__  
+- __obj*__ - __*Object*__, host object, obtains supername string   
+- __identifyKeyHandler*__ - __*Function*__, function "nkic(obj,k,d,s)" mapped by supername  
+> *return __XeltoSS Object__, self*  
 
 ##
-__*addEmbedMap(Object obj, Object keyHandlerMap) : Object*__  
-- __obj*__ - Object, host object, obtains supername string   
-- __keyHandlerMap*__ - Object, key-function object map, "em[sname][k](obj,k,decomp,sname)", functions can be generated with "argumentKeyMatch"  
-> *return XeltoSS Object, self*  
+__addEmbedMap(*Object* obj, *Object* keyHandlerMap) : *Object*__  
+- __obj*__ - __*Object*__, host object, obtains supername string   
+- __keyHandlerMap*__ - __*Object*__, key-function object map, "em[sname][k](obj,k,decomp,sname)", functions can be generated with "argumentKeyMatch"  
+> *return __XeltoSS Object__, self*  
 
 ##
-__*augmentKey(Object obj, Object akeyMap) : Object*__  
-- __obj*__ - Object, host object, obtains supername string  
-- __akeyMap*__ - Object, key-array object map, must be generated "augmentKeyMap[sname][key]=[]" using lower case keys, used in "argumentKeyMatch"  
-> *return XeltoSS Object, self*  
+__augmentKey(*Object* obj, *Object* akeyMap) : *Object*__  
+- __obj*__ - __*Object*__, host object, obtains supername string  
+- __akeyMap*__ - __*Object*__, key-array object map, must be generated "augmentKeyMap[sname][key]=[]" using lower case keys, used in "argumentKeyMatch"  
+> *return __XeltoSS Object__, self*  
 
 ##
-__*argumentKeyMatch(Number orshift, Object defval, Function formatter) : Function*__  
-- orshift - Number, configure argument index shift upon matching it with "augmentKeyMap" by supername "s"  
-- defval - Object, default value, return using "valToString" and special keyword implementations (self, this, byte, word, void), lookup "noKeyIdentificationChain"  
-- formatter - Function, format upon return "formatter(kv,fkv,defval,obj,k,d,s)"  
-> *return Function, function(obj,k,d,s) used in "addEmbedMap"*  
+__argumentKeyMatch(*Number* orshift, *Object* defval, *Function* formatter) : *Function*__  
+- orshift - __*Number*__, configure argument index shift upon matching it with "augmentKeyMap" by supername "s"  
+- defval - __*Object*__, default value, return using "valToString" and special keyword implementations (self, this, byte, word, void), lookup "noKeyIdentificationChain"  
+- formatter - __*Function*__, format upon return "formatter(kv,fkv,defval,obj,k,d,s)"  
+> *return __Function__, function(obj,k,d,s) used in "addEmbedMap"*  
 
 ##
-__*valToString(Object val) : String*__  
-- __val*__ - Object, uses standard methods of convertion, objects and arrays may be converted using "objectStringufy" and "arrayStringify"  
-> *return String, parsed val into String, acceptable by VM as a property, i.e. class constructor property*  
+__valToString(*Object* val) : *String*__  
+- __val*__ - __*Object*__, uses standard methods of convertion, objects and arrays may be converted using "objectStringufy" and "arrayStringify"  
+> *return __String__, parsed val into String, acceptable by VM as a property, i.e. class constructor property*  
 
 ##
-__*findMethodInMaps(Object obj, String key, Function method, Array maps) : Object*__  
-- __obj*__ - Object, obtains maps by map key  
-- __key*__ - String, method key  
-- __method*__ - Function, method reference  
-- __maps*__ - Array, map keys in supers order  
-> *return Object, super method map owner of the method*  
+__findMethodInMaps(*Object* obj, *String* key, *Function* method, *Array* maps) : *Object*__  
+- __obj*__ - __*Object*__, obtains maps by map key  
+- __key*__ - __*String*__, method key  
+- __method*__ - __*Function*__, method reference  
+- __maps*__ - __*Array*__, map keys in supers order  
+> *return __Object__, super method map owner of the method*  
 
 ##
-__*toCls(Object obj, String clsname, String clssuper, Boolean deflat, Object polymaps, Object reservedwordsmap, Boolean emptify) : String*__  
-- __obj*__ - Object, ProtoSS instance or ASTObject used to construct class string  
-- clsname - String, JS Class name or cls name  
-- clssuper - String, JS Super class name (extends property) or none  
-- deflat - Boolean, will call external deflatter to finalize property and method extraction during reconstruction phase  
-- polymaps - Object, initial polymorphic references  
-- reservedwordsmap - Object, default key names  
-- emptify - Boolean, empty Object/Array or null values in properties  
-> *return String, class representation in String format*  
+__toCls(*Object* obj, *String* clsname, *String* clssuper, *Boolean* deflat, *Object* polymaps, *Object* reservedwordsmap, *Boolean* emptify) : *String*__  
+- __obj*__ - __*Object*__, ProtoSS instance or ASTObject used to construct class string  
+- clsname - __*String*__, JS Class name or cls name  
+- clssuper - __*String*__, JS Super class name (extends property) or none  
+- deflat - __*Boolean*__, will call external deflatter to finalize property and method extraction during reconstruction phase  
+- polymaps - __*Object*__, initial polymorphic references  
+- reservedwordsmap - __*Object*__, default key names  
+- emptify - __*Boolean*__, empty Object/Array or null values in properties  
+> *return __String__, class representation in String format*  
 
 ##
-__*ClsFactoryFromStringCls(String clss) : Function*__  
-- __clss*__ - String, class representation in String format, will be wrapped in Function return body  
-> *return Function, factory/generator of XeltoSS class, a call is required to return class reference*  
+__ClsFactoryFromStringCls(*String* clss) : *Function*__  
+- __clss*__ - __*String*__, class representation in String format, will be wrapped in Function return body  
+> *return __Function__, factory/generator of XeltoSS class, a call is required to return class reference*  
 
 ##
-__*toClsFactory(Object obj, String clsname, String clssuper, Boolean deflat, Object polymaps, Object reservedwordsmap, Boolean emptify) : Function*__  
-- __cls*__ - Function, ProtoSS class, exchange in package default to XeltoSS  
-- clsname - String, JS Class name or cls name  
-- clssuper - String, JS Super class name (extends property) or none  
-- deflat - Boolean, will call external deflatter to finalize property and method extraction during reconstruction phase  
-- polymaps - Object, initial polymorphic references  
-- reservedwordsmap - Object, default key names  
-- emptify - Boolean, empty Object/Array or null values in properties  
-> *return Function, factory/generator of XeltoSS class, a call is required to return class reference*  
+__toClsFactory(*Object* obj, *String* clsname, *String* clssuper, *Boolean* deflat, *Object* polymaps, *Object* reservedwordsmap, *Boolean* emptify) : *Function*__  
+- __cls*__ - __*Function*__, ProtoSS class, exchange in package default to XeltoSS  
+- clsname - __*String*__, JS Class name or cls name  
+- clssuper - __*String*__, JS Super class name (extends property) or none  
+- deflat - __*Boolean*__, will call external deflatter to finalize property and method extraction during reconstruction phase  
+- polymaps - __*Object*__, initial polymorphic references  
+- reservedwordsmap - __*Object*__, default key names  
+- emptify - __*Boolean*__, empty Object/Array or null values in properties  
+> *return __Function__, factory/generator of XeltoSS class, a call is required to return class reference*  
 
 ##
-__*toClsBlobScript(String clss, String prefix, String suffix) : HTMLElement*__  
-- __clss*__ - String, script body converted to blob file with url  
-- prefix - String, surround prefix of script body  
-- suffix - String, surround suffix of script body  
-> *return HTMLElement, script tag with blob url to js file*  
+__toClsBlobScript(*String* clss, *String* prefix, *String* suffix) : *HTMLElement*__  
+- __clss*__ - __*String*__, script body converted to blob file with url  
+- prefix - __*String*__, surround prefix of script body  
+- suffix - __*String*__, surround suffix of script body  
+> *return __HTMLElement__, script tag with blob url to js file*  
 
 ##
 __*toClsScript(String clss, String prefix, String suffix) : HTMLElement*__  
-- __clss*__ - String, script body imported in tag directly  
-- prefix - String, surround prefix of script body  
-- suffix - String, surround suffix of script body  
-> *return HTMLElement, script tag with js body*  
+- __clss*__ - __*String*__, script body imported in tag directly  
+- prefix - __*String*__, surround prefix of script body  
+- suffix - __*String*__, surround suffix of script body  
+> *return __HTMLElement__, script tag with js body*  
 
 ##
-__*reconstruct(Function cls, String clsname, String clssuper, Boolean deflat, Object polymaps, Object reservedwordsmap, Boolean emptify, Boolean useclsfactory) : Function*__  
-- __cls*__ - Function, ProtoSS class, exchange in package default to XeltoSS  
-- clsname - String, JS Class name or cls name  
-- clssuper - String, JS Super class name (extends property) or none  
-- deflat - Boolean, will call external deflatter to finalize property and method extraction during reconstruction phase  
-- polymaps - Object, initial polymorphic references  
-- reservedwordsmap - Object, default key names  
-- emptify - Boolean, empty Object/Array or null values in properties  
-- useclsfactory - Boolean, use "toClsFactory" instead of "toClsScript"   
-> *return Function, XeltoSS class*  
+__reconstruct(*Function* cls, *String* clsname, *String* clssuper, *Boolean* deflat, *Object* polymaps, *Object* reservedwordsmap, *Boolean* emptify, *Boolean* useclsfactory) : *Function*__  
+- __cls*__ - __*Function*__, ProtoSS class, exchange in package default to XeltoSS  
+- clsname - __*String*__, JS Class name or cls name  
+- clssuper - __*String*__, JS Super class name (extends property) or none  
+- deflat - __*Boolean*__, will call external deflatter to finalize property and method extraction during reconstruction phase  
+- polymaps - __*Object*__, initial polymorphic references  
+- reservedwordsmap - __*Object*__, default key names  
+- emptify - __*Boolean*__, empty Object/Array or null values in properties  
+- useclsfactory - __*Boolean*__, use "toClsFactory" instead of "toClsScript"   
+> *return __Function__, XeltoSS class*  
 
 ##
-__*autodestroy(Object obj) : Boolean*__  
-- __obj*__ - Object, if "autoDestructor" will try "destructorKeys" on obj to call destructor method  
-> *return Boolean, true=successful destroy*  
+__autodestroy(*Object* obj) : *Boolean*__  
+- __obj*__ - __*Object, if "autoDestructor" will try "destructorKeys" on obj to call destructor method  
+> *return __Boolean__, true=successful destroy*  
 
 ##
-__*hybrid(Function escls, Function protcls, Object obj, Boolean swap, Object polymaps) : Object*__  
-- __escls*__ - Function, JS Class, any class can be converted to XeltoSS Hybrid  
-- __protcls*__ - Function, ProtoSS Class, any class can be converted to prototype class of the XeltoSS Hybrid  
-- __obj*__ - Object, ProtoSS or JS Class instance, extracts super hierarchy  
-- swap - Boolean, exchange in package to XeltoSS Hybrid (JS+ProtoSS class)  
-- polymaps - Object, polymorphic references as usually constructed by "toCls"  
-> *return XeltoSS Object, self*  
+__hybrid(*Function* escls, *Function* protcls, *Object* obj, *Boolean* swap, *Object* polymaps) : *Object*__  
+- __escls*__ - __*Function*__, JS Class, any class can be converted to XeltoSS Hybrid  
+- __protcls*__ - __*Function*__, ProtoSS Class, any class can be converted to prototype class of the XeltoSS Hybrid  
+- __obj*__ - __*Object*__, ProtoSS or JS Class instance, extracts super hierarchy  
+- swap - __*Boolean*__, exchange in package to XeltoSS Hybrid (JS+ProtoSS class)  
+- polymaps - __*Object*__, polymorphic references as usually constructed by "toCls"  
+> *return __XeltoSS Object__, self*  
 
 ##
-__*xeltoss(Function cls, String clsname, String clssuper, Boolean deflat, Object polymaps, Object reservedwordsmap, Boolean emptify, Boolean useclsfactory) : Function*__  
-- __cls*__ - Function, ProtoSS class, exchange in package default to XeltoSS  
-- clsname - String, JS Class name or cls name  
-- clssuper - String, JS Super class name (extends property) or none  
-- deflat - Boolean, will call external deflatter to finalize property and method extraction during reconstruction phase  
-- polymaps - Object, initial polymorphic references  
-- reservedwordsmap - Object, default key names  
-- emptify - Boolean, empty Object/Array or null values in properties  
-- useclsfactory - Boolean, use "toClsFactory" instead of "toClsScript"   
-> *return Function, XeltoSS class*  
+__xeltoss(*Function* cls, *String* clsname, *String* clssuper, *Boolean* deflat, *Object* polymaps, *Object* reservedwordsmap, *Boolean* emptify, *Boolean* useclsfactory) : *Function*__  
+- __cls*__ - __*Function*__, ProtoSS class, exchange in package default to XeltoSS  
+- clsname - __*String*__, JS Class name or cls name  
+- clssuper - __*String*__, JS Super class name (extends property) or none  
+- deflat - __*Boolean*__, will call external deflatter to finalize property and method extraction during reconstruction phase  
+- polymaps - __*Object*__, initial polymorphic references  
+- reservedwordsmap - __*Object*__, default key names  
+- emptify - __*Boolean*__, empty Object/Array or null values in properties  
+- useclsfactory - __*Boolean*__, use "toClsFactory" instead of "toClsScript"   
+> *return __Function__, XeltoSS class*  
 
 ##
-__*protoss(Function cls) : Function*__  
-- __cls*__ - Function, XeltoSS class, exchange in package default to ProtoSS  
-> *return Function, ProtoSS class*  
+__protoss(*Function* cls) : *Function*__  
+- __cls*__ - __*Function*__, XeltoSS class, exchange in package default to ProtoSS  
+> *return __Function__, ProtoSS class*  
 
 ##
-__*_constructor() : void*__  
-> *return void, creates static instance*  
+__\_constructor() : *void*__  
+> *return __void__, creates static instance*  
 
 ##
-__*_destructor() : void*__  
-> *return void, cleans static instances*  
+__\_destructor() : *void*__  
+> *return __void__, cleans static instances*  
 
 
 ## Static  
@@ -428,37 +424,37 @@ default false, flag state of InitXeltoSSPrototypes
 ### *Methods*  
 ##
 
-__*InitXeltoSSPrototypes(Boolean override) : XeltoSS*__  
-- override - Boolean, mark XeltoSS Prototype for overriding, will reinstall prototypes in effect  
-> *return Function, self XeltoSS class*  
+__InitXeltoSSPrototypes(*Boolean* override) : *XeltoSS*__  
+- override - __*Boolean*__, mark XeltoSS Prototype for overriding, will reinstall prototypes in effect  
+> *return __Function__, self XeltoSS class*  
 
 ##
 ### *Object Prototype*  
 ##
 
-__*superx(function_arguments|Array arguments, Array|Boolean call_arguments, String name) : Object*__  
+__superx(*function_arguments|Array* arguments, *Array|Boolean* call_arguments, *String* name) : *Object*__  
 - __arguments*__ - (args) function arguments object if supported, or manually created Array [] with assigned "callee" reference to the function class object  
 - __call_arguments*__ - (cargs) Array used to call "apply" of the super constructor function, Boolean true will use arguments as call arguments (cargs=args)  
-- name - String used to define the name of the constructor in the prototype, default __constructor  
+- name - __*String*__ used to define the name of the constructor in the prototype, default __constructor  
 > *return constructor function result or "undefined" for duplicated super constructor (or no constructor)*  
 
 ##
-__*getSuperx(Function fn, String name) : Array*__  
-- fn - Function, if null will use this  
-- name - String, if null will use __constructor  
-> *return Array, of super constructor function or functions in XeltoSS mode (if super is aggregate will use __constructor_list)*  
+__getSuperx(*Function* fn, *String* name) : *Array*__  
+- fn - __*Function*__, if null will use this  
+- name - __*String*__, if null will use __constructor  
+> *return __Array__, of super constructor function or functions in XeltoSS mode (if super is aggregate will use __constructor_list)*  
 
 ##
-__*ix(Function sfn, Function fn, String name) : Boolean*__  
-- __sfn*__ - Function, super XeltoSS function to check against  
-- fn - Function, if null will use this, to obtain all supers  
-- name - String, if null will use __constructor  
-> *return Boolean, true - if it exists in the inheritance tree or equals this constructor in XeltoSS mode, otherwise false*
+__ix(*Function* sfn, *Function* fn, *String* name) : *Boolean*__  
+- __sfn*__ - __*Function*__, super XeltoSS function to check against  
+- fn - __*Function*__, if null will use this, to obtain all supers  
+- name - __*String*__, if null will use __constructor  
+> *return __Boolean__, true - if it exists in the inheritance tree or equals this constructor in XeltoSS mode, otherwise false*
 
 ##
 ### *Function Prototype*  
 ##
 
-__*xcoped(Object scope) : Function*__  
-- __scope*__ - Object, usually "this" in classes or original function owner  
-> *return Function, new function wrapper calling original using scope*  
+__xcoped(*Object* scope) : *Function*__  
+- __scope*__ - __*Object*__, usually "this" in classes or original function owner  
+> *return __Function__, new function wrapper calling original using scope*  
