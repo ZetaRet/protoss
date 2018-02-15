@@ -208,7 +208,7 @@ constructs "AsyncFunction" and allows async
 > *return __XeltoSS Object__, self*  
 
 ##
-__*initGenerator() : Object*__  
+__initGenerator() : *Object*__  
 constructs "GeneratorFunction" and allows generator  
 > *return __XeltoSS Object__, self*  
 
