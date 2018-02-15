@@ -290,13 +290,13 @@ __identifyKeyChain(*Object* obj, *Function* identifyKeyHandler) : *Object*__
 ##
 __addEmbedMap(*Object* obj, *Object* keyHandlerMap) : *Object*__  
 - __obj*__ - __*Object*__, host object, obtains supername string   
-- __keyHandlerMap*__ - __*Object*__, key-function object map, "em[sname][k](obj,k,decomp,sname)", functions can be generated with "argumentKeyMatch"  
+- __keyHandlerMap*__ - __*Object*__, key-function object map, "em[sname]\[k]\(obj,k,decomp,sname)", functions can be generated with "argumentKeyMatch"  
 > *return __XeltoSS Object__, self*  
 
 ##
 __augmentKey(*Object* obj, *Object* akeyMap) : *Object*__  
 - __obj*__ - __*Object*__, host object, obtains supername string  
-- __akeyMap*__ - __*Object*__, key-array object map, must be generated "augmentKeyMap[sname][key]=[]" using lower case keys, used in "argumentKeyMatch"  
+- __akeyMap*__ - __*Object*__, key-array object map, must be generated "augmentKeyMap[sname]\[key]=[]" using lower case keys, used in "argumentKeyMatch"  
 > *return __XeltoSS Object__, self*  
 
 ##
