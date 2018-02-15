@@ -374,7 +374,7 @@ __reconstruct(*Function* cls, *String* clsname, *String* clssuper, *Boolean* def
 
 ##
 __autodestroy(*Object* obj) : *Boolean*__  
-- __obj*__ - __*Object, if "autoDestructor" will try "destructorKeys" on obj to call destructor method  
+- __obj*__ - __*Object*__, if "autoDestructor" will try "destructorKeys" on obj to call destructor method  
 > *return __Boolean__, true=successful destroy*  
 
 ##
