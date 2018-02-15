@@ -158,7 +158,7 @@ default null, AsyncFunction Primitive definition
 __allowGenerator__ Boolean  
 default false, extract and verify defined generator methods into new class  
 #
-__GeneratorFunction__ Function 
+__GeneratorFunction__ Function  
 default null, GeneratorFunction Primitive definition  
 #
 __ASTConstructor__ Function  
