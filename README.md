@@ -8,6 +8,8 @@
 
 [![Zeta Ret ProtoSS Cover](https://zetaret.com/images/protoss_cover.jpg)](https://zetaret.com/projects/protoss/)
 
+Canvas Live Demo [ProtoSS + XeltoSS]: http://clockwork.lovesvn.com/demo/  
+
 Tern.js-compliant Prototypes Framework with Polymorphism
 
 This library leverages the use of Tern.js server in Eclipse allowing the developer to view inheritances in the outline. In addition adds several features on top of regular prototyping:
@@ -42,9 +44,9 @@ https://jsfiddle.net/zetaret/8h0ugxym/
 d) Extended Prototypes framework with getSuperName, namespace, usens, internal, package.  
 https://jsfiddle.net/zetaret/sw0j28qj/  
 
-Some Javascript versions or JS servers do not support arguments, it must be recreated manually (or by your compiler/interpreter/texttemplate) in the beginning of the function as an array with the same behaviour including a reference to the class function in callee parameter.
+Some JavaScript versions or JS servers do not support arguments, it must be recreated manually (or by your compiler/interpreter/texttemplate) in the beginning of the function as an array with the same behaviour including a reference to the class function in callee parameter.
 
-Note: This library may be used directly for OOP in Javascript, still, a cross-compiler/code analysis/texttemplate tool is required to take advantage of all features like real method overloading according to arguments length and type. Your interpreter tool must be able to detect types and arguments length before compilation of output js file in order to add the correct function call in the release code. Overloading is a purely syntactic way of using the same name for different semantic objects, the compiler can resolve the ambiguity at compile time, and then proceed as usual.
+Note: This library may be used directly for OOP in JavaScript, still, a cross-compiler/code analysis/texttemplate tool is required to take advantage of all features like real method overloading according to arguments length and type. Your interpreter tool must be able to detect types and arguments length before compilation of output js file in order to add the correct function call in the release code. Overloading is a purely syntactic way of using the same name for different semantic objects, the compiler can resolve the ambiguity at compile time, and then proceed as usual.
 
 ProtoSS Website: https://protoss.xyz/  
 Author: Zeta Ret, Ivo Yankulovski, 2017 https://zetaret.com/
