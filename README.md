@@ -8,7 +8,9 @@
 
 [![Zeta Ret ProtoSS Cover](https://zetaret.com/images/protoss_cover.jpg)](https://zetaret.com/projects/protoss/)
 
-Canvas Live Demo [ProtoSS + XeltoSS]: http://clockwork.lovesvn.com/demo/  
+Canvas Live Demo based on OOP ProtoSS in ES6 Class Standard [ProtoSS + XeltoSS]:  
+Zeta Ret Clockwork website: https://zetaret.com/projects/clockwork/  
+Zeta Ret Clockwork demo: http://clockwork.lovesvn.com/demo/  
 
 Tern.js-compliant Prototypes Framework with Polymorphism
 
