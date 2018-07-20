@@ -1,8 +1,8 @@
 /**
  * Author: Zeta Ret, Ivo Yankulovski 
  * ProtoSS - Prototype Supers-Subclass Library 
- * Version: 1.03 
- * Date: 2017 
+ * Version: 1.04 
+ * Date: 2017 - Today
 **/
 function ZetaRet_Prototypes(){
 	var prn="prototype",
@@ -202,7 +202,6 @@ function ZetaRet_Prototypes(){
 	oprot.getSupers=function(fn, name){
 		if (!name)name=dcname;
 		if (!fn)fn=typeof this === 'function' ? this : this[cnx];
-		var ffn=fn;
 		var supers=[];
 		while(fn[prn][name]){
 			fn=fn[prn][name];
@@ -223,10 +222,9 @@ function ZetaRet_Prototypes(){
 		if (!name)name=dcname;
 		if (!fn)fn=typeof this === 'function' ? this : this[cnx];
 		var supers=[];
-		while(fn[prn][name]){
+		if(fn[prn][name]){
 			fn=fn[prn][name];
 			supers.push(fn);
-			break;
 		}
 		var list=fn[prn][name+lsffx];
 		if (list){
@@ -241,15 +239,15 @@ function ZetaRet_Prototypes(){
 	odef(oprot,'getSupers2',ef);
 	oprot.hasSuper=function(sfn,fn, name){
 		var _s=this.getSupers(fn,name);
-		if (_s.indexOf(sfn)==-1)return false;
+		if (_s.indexOf(sfn)===-1)return false;
 		return true;
 	};
 	odef(oprot,'hasSuper',ef);
 	oprot.is=function(sfn,fn, name){
 		var ffn=fn || (typeof this === 'function' ? this : this[cnx]);
-		if (ffn==sfn)return true;
+		if (ffn===sfn)return true;
 		var _s=this.getSupers(fn,name);
-		if (_s.indexOf(sfn)==-1)return false;
+		if (_s.indexOf(sfn)===-1)return false;
 		return true;
 	};
 	odef(oprot,'is',ef);
@@ -274,7 +272,7 @@ function ZetaRet_Prototypes(){
 			var m={};
 			var s=o.superize(a,m,true);
 			o.statis(a,statis,s,true);
-			if (o[cnx]==afn)throw(new Error("Illegal instance of Abstract class: "+name));
+			if (o[cnx]===afn)throw(new Error("Illegal instance of Abstract class: "+name));
 			return o;
 		};
 		afn._a=1;
@@ -395,7 +393,7 @@ function ZetaRet_Prototypes(){
 		var ns=name.split('.'),nss=scope[piname] || "";
 		for(var i=0;i<ns.length;i++){
 			var n=ns[i];
-			if (!scope[n] || (typeof scope[n] == "function"))scope[n]={};
+			if (!scope[n] || (typeof scope[n] === "function"))scope[n]={};
 			scope=scope[n];
 			nss=nss ? nss+"."+n : n;
 			scope[piname]=nss;
