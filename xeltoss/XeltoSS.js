@@ -4,7 +4,7 @@
  * ProtoSS Transformator to JS Class
  * Requires: protoss.all.js v1.02c
  * Version: 1.04 
- * Date: 2017 
+ * Date: 2017 - Today
 **/
 window.internal(
 function XeltoSS(){
@@ -358,7 +358,7 @@ function XeltoSS(){
 		if(!clsname)clsname=obj.constructor.aname||obj.constructor.name;
 		if(!reservedwordsmap)reservedwordsmap={};
 		var cls='',clsArgs='',superArgs='',clsf=[],clsb=[],pmethods=[],str,stri=-1,
-			em=o.embedMaps,emv,rwm=reservedwordsmap,prfx="",sffx="",
+			em=o.embedMaps,emv,rwm=reservedwordsmap,
 			clsh=o.classHandler,oeh=o.overextendHandler,
 			alset=o.allowSetters,alget=o.allowGetters,alac=o.allowAsync,algen=o.allowGenerator,
 			ba=o.bodyAssembler,ma=o.methodAssembler,ckeys=o.constructorKeys;
@@ -383,9 +383,6 @@ function XeltoSS(){
 			ok=undefined;
 			ofdecomp=undefined;
 			docontinue=false;
-			str=undefined;
-			_sname=undefined;
-			stri=-1;
 			if (alget){
 				ok=obj.__lookupGetter__(k);
 				if(!ok && (typeof obj[k] === 'function') && k.indexOf(o.autoGetPrefix)==0){
@@ -451,8 +448,9 @@ function XeltoSS(){
 						clsf.push((o.statisAsStatic?(rwm.sttc||"static")+" ":"")+(rwm.asc||"async")+" "+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2]);
 					} else if(algen&&ok.constructor===o.GeneratorFunction){
 						clsf.push((o.statisAsStatic?(rwm.sttc||"static")+" ":"")+(rwm.ga||"*")+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2]);
-					} else 
+					} else {
 						clsf.push((o.statisAsStatic?(rwm.sttc||"static")+" ":"")+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2]);
+					}
 					if(ma)ma.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 				} else if(ok._i||ok._a){
 					iamethods.push(k);
@@ -646,7 +644,7 @@ function XeltoSS(){
 						newclsproto["__"+sn+"_super__"]=promap;
 						if(o.methodTransfer){
 							for(k in promap){
-								if(k!=="constructor")newclsproto[k]=promap[k];
+								if(k!=="constructor" && !newclsproto[k])newclsproto[k]=promap[k];
 							}
 						}
 					}
@@ -678,12 +676,10 @@ function XeltoSS(){
 	};
 	m._constructor=function(){
 		if(!o.constructor.Instance)o.constructor.Instance=o;
-		/*XeltoSS constructor*/
 	};
 	m._destructor=function(){
 		if(XeltoSS.Instance===o)XeltoSS.Instance=null;
 		if(o.constructor.Instance===o)o.constructor.Instance=null;
-		/*XeltoSS destructor*/
 	};
 	o.superize(a,m,true,true);
 	m._constructor.call(o);
@@ -700,10 +696,6 @@ XeltoSS.InitXeltoSSPrototypes=function(override){
 		prfx="__",
 		sffx="_super__",
 		lsffx="_list",
-		pname="packagename",
-		piname="__name",
-		nsprfx="__ns_",
-		pref="packobj",
 		oprot=Object.prototype,
 		odef=Object.defineProperty,
 		ef={enumerable:false};
@@ -721,7 +713,6 @@ XeltoSS.InitXeltoSSPrototypes=function(override){
 	oprot.getSuperx=function(fn, name){
 		if (!name)name=dcname;
 		if (!fn)fn=typeof this === 'function' ? this : this[cnx];
-		var ffn=fn.__protoss||fn;
 		var supers=[];
 		while(fn[prn][name]){
 			fn=fn[prn][name];
