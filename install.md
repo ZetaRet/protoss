@@ -11,7 +11,6 @@ __protoss.zip__ contains __protoss.js__
 __protoss.js.gz__ contains __protoss.js__  
 __protoss.min.js.zip__ contains __protoss.min.js__  
 __protoss.min.js.gz__ contains __protoss.min.js__  
-__screenshots__ folder exposes ProtoSS structure within browser and Eclipse standard outline (not Tern Outline)  
 __readme.txt__ and __README.md__ present ProtoSS home screen  
 
 # Examples  
