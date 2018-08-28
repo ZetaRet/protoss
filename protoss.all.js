@@ -1,7 +1,7 @@
 /**
  * Author: Zeta Ret, Ivo Yankulovski 
  * ProtoSS - Prototype Supers-Subclass Library 
- * Version: 1.04 
+ * Version: 1.04a 
  * Date: 2017 - Today
 **/
 function ZetaRet_Prototypes(){
@@ -202,18 +202,23 @@ function ZetaRet_Prototypes(){
 	oprot.getSupers=function(fn, name){
 		if (!name)name=dcname;
 		if (!fn)fn=typeof this === 'function' ? this : this[cnx];
-		var supers=[];
-		while(fn[prn][name]){
-			fn=fn[prn][name];
-			supers.push(fn);
-		}
-		var list=fn[prn][name+lsffx];
-		if (list){
-			var l=list.length,i=0;
-			for(;i<l;i++){
-				supers.push(list[i]);
-				supers=supers.concat(list[i].getSupers(list[i],name));
+		var afn=fn,supers=fn.supers||[];
+		if(!afn._csupers){
+			while(fn[prn][name]){
+				fn=fn[prn][name];
+				supers.push(fn);
 			}
+			var list=fn[prn][name+lsffx];
+			if (list){
+				var l=list.length,i=0,li;
+				for(;i<l;i++){
+					li=list[i];
+					supers.push(li);
+					supers=supers.concat(li.getSupers(li,name));
+				}
+			}
+			afn.supers=supers;
+			afn._csupers=true;
 		}
 		return supers;
 	};
@@ -245,6 +250,7 @@ function ZetaRet_Prototypes(){
 	odef(oprot,'hasSuper',ef);
 	oprot.is=function(sfn,fn, name){
 		var ffn=fn || (typeof this === 'function' ? this : this[cnx]);
+		if(!sfn)return false;
 		if (ffn===sfn)return true;
 		var _s=this.getSupers(fn,name);
 		if (_s.indexOf(sfn)===-1)return false;
