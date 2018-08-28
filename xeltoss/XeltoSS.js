@@ -3,7 +3,7 @@
  * Zeta Ret XeltoSS
  * ProtoSS Transformator to JS Class
  * Requires: protoss.all.js v1.02c
- * Version: 1.04 
+ * Version: 1.04a 
  * Date: 2017 - Today
 **/
 window.internal(
@@ -713,19 +713,23 @@ XeltoSS.InitXeltoSSPrototypes=function(override){
 	oprot.getSuperx=function(fn, name){
 		if (!name)name=dcname;
 		if (!fn)fn=typeof this === 'function' ? this : this[cnx];
-		var supers=[];
-		while(fn[prn][name]){
-			fn=fn[prn][name];
-			supers.push(fn.__xeltoss||fn);
-		}
-		var list=fn[prn][name+lsffx];
-		if (list){
-			var l=list.length,i=0,xl;
-			for(;i<l;i++){
-				xl=list[i];
-				supers.push(xl.__xeltoss||xl);
-				supers=supers.concat(xl.getSuperx(xl,name));
+		var afn=fn,supers=fn.supersX||[];
+		if(!afn._csuperx){
+			while(fn[prn][name]){
+				fn=fn[prn][name];
+				supers.push(fn.__xeltoss||fn);
 			}
+			var list=fn[prn][name+lsffx];
+			if (list){
+				var l=list.length,i=0,xl;
+				for(;i<l;i++){
+					xl=list[i];
+					supers.push(xl.__xeltoss||xl);
+					supers=supers.concat(xl.getSuperx(xl,name));
+				}
+			}
+			afn.supersX=supers;
+			afn._csuperx=true;
 		}
 		return supers;
 	};
@@ -733,12 +737,21 @@ XeltoSS.InitXeltoSSPrototypes=function(override){
 	oprot.ix=function(sfn,fn, name){
 		var ffn=fn || (typeof this === 'function' ? this : this[cnx]);
 		if(!sfn)return false;
-		if (ffn==sfn||ffn.__xeltoss==sfn||ffn==sfn.__xeltoss)return true;
+		if (ffn===sfn||ffn.__xeltoss===sfn||ffn===sfn.__xeltoss)return true;
 		var _s=this.getSuperx(fn,name);
-		if (_s.indexOf(sfn.__xeltoss||sfn)==-1)return false;
+		if (_s.indexOf(sfn.__xeltoss||sfn)===-1)return false;
 		return true;
 	};
 	odef(oprot,'ix',ef);
+	oprot.is=function(sfn,fn, name){
+		var ffn=fn || (typeof this === 'function' ? this : this[cnx]);
+		if(!sfn)return false;
+		if (ffn===sfn||ffn.__protoss===sfn||ffn===sfn.__protoss)return true;
+		var _s=this.getSupers(fn,name);
+		if (_s.indexOf(sfn.__protoss||sfn)===-1)return false;
+		return true;
+	};
+	odef(oprot,'is',ef);
 	Function.prototype.xcoped=function(scope){
 		var superf=this;
 		var scopedf=function scopedf(){return superf.apply(scope,arguments);};
