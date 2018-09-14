@@ -1,6 +1,6 @@
 /**
  * Author: Zeta Ret, Ivo Yankulovski
- * Load the book before protoss.*.js to cheese up the browser
+ * Protoss book of cheese. Load the book before protoss.*.js to cheese up the browser
  * Provides backwards compatibility in old browsers 
  * Version: 1.04 
  * Date: 2018 - Today
