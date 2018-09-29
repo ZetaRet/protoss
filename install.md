@@ -7,7 +7,6 @@ __protoss.tomin.js__  - Standard ProtoSS functionality, prepared for minimizatio
 
 # Additional Files  
 __protoss.book.of.cheese.js__ must be preloaded before any other ProtoSS code, it adds polyfill implementation on base prototype primitives, usually not supported on mobile devices or old browsers  
-__protoss.zip__ contains __protoss.js__  
 __protoss.min.js.gz__ contains __protoss.min.js__  
 __readme.txt__ and __README.md__ present ProtoSS home screen  
 
