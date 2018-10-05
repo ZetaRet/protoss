@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><templates><template autoinsert="true" context="javaScript" deleted="false" description="Zeta Ret ProtoSS" enabled="true" name="protoss">function ${ClassName}(${}){
+	var o=this,a=arguments;
+	o.super(a,${true});
+	var m={};
+	o.superize(a,m,true,true);
+	return o;
+}</template><template autoinsert="true" context="javaScript" deleted="false" description="o.name = [];" enabled="true" name="protossarray">o.${name} = [${}];</template><template autoinsert="true" context="javaScript" deleted="false" description="o.name = false;" enabled="true" name="protossbool">o.${name} = ${false};</template><template autoinsert="true" context="javaScript" deleted="false" description="m.name = function fname(){};" enabled="true" name="protossmethod">m.${name} = function ${fname}(${}){&#13;
+	${cursor}&#13;
+	return ${undefined};&#13;
+};</template><template autoinsert="true" context="javaScript" deleted="false" description="o.name = new type(arguments);" enabled="true" name="protossnew">o.${name} = new ${type}(${});</template><template autoinsert="true" context="javaScript" deleted="false" description="o.name = {};" enabled="true" name="protossobject">o.${name} = {${}};</template><template autoinsert="true" context="javaScript" deleted="false" description="window.package(&quot;zetaret&quot;).internal( ProtoSS );" enabled="true" name="protosspackage">window.package("${zetaret}").internal(&#13;
+function ${ProtoSS}(${}){&#13;
+	var o = this, a = arguments;&#13;
+	${cursor}&#13;
+	o.super(a, ${true});&#13;
+	var m = {};&#13;
+	&#13;
+	o.superize(a, m, true, true);&#13;
+	return o;&#13;
+});</template><template autoinsert="true" context="javaScript" deleted="false" description="o.name = &quot;&quot;;" enabled="true" name="protosstext">o.${name} = "${}";</template><template autoinsert="true" context="javaScript" deleted="false" description="o.name = type;" enabled="true" name="protosstype">o.${name} = ${type};</template><template autoinsert="true" context="javaScript" deleted="false" description="var name = {};" enabled="true" name="protossvar">var ${name} = ${};</template></templates>
