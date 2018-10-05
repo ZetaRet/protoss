@@ -8,26 +8,24 @@ __protoss.tomin.js__  - Standard ProtoSS functionality, prepared for minimizatio
 # Additional Files  
 __protoss.book.of.cheese.js__ must be preloaded before any other ProtoSS code, it adds polyfill implementation on base prototype primitives, usually not supported on mobile devices or old browsers  
 __protoss.min.js.gz__ contains __protoss.min.js__  
-__readme.txt__ and __README.md__ present ProtoSS home screen  
+__README.md__ present ProtoSS home screen  
 
 # Examples  
-__protoss_examples.js__ supports basic inheritance example cases  
-__protoss_examples2.js__ builds basic game model example  
-__protoss_examples3.js__ demonstrates interfaces, abstracts and finalization of classes  
-__protoss_examples4.js__ supports packaging and super name concept  
+__examples/protoss_examples.js__ supports basic inheritance example cases  
+__examples/protoss_examples2.js__ builds basic game model example  
+__examples/protoss_examples3.js__ demonstrates interfaces, abstracts and finalization of classes  
+__examples/protoss_examples4.js__ supports packaging and super name concept  
 __examples/mass.resolve.ProtoSS.js__ builds mass resolve example based on __protoss/ProtoSS.js__ manager  
 
 # Documentation  
-__protoss.all.js__ uses __protoss.all.dox.md__  
-__protoss.js__ uses __protoss.dox.md__  
-__protoss.min.js__ uses __protoss.dox.md__  
-__protoss.tomin.js__ uses __protoss.dox.md__  
-__protoss.all_dox.txt__ equals __protoss.all.dox.md__  
-__protoss_dox.txt__ equals __protoss.dox.md__  
-__examples3_dox.txt__ are also included in __protoss.all_dox.txt__  and documents __protoss_examples3.js__  
-__examples4_dox.txt__ are also included in __protoss.all_dox.txt__  and documents __protoss_examples4.js__  
-__hints.txt__ exposes end case scenarios in OOP js concept  
-__eclipse_protoss_templates.xml__ can be imported in __Eclipse__ suggestion templates, uses "protoss" keyword in javascript context  
+__protoss.all.js__ uses __dox/protoss.all.dox.md__  
+__protoss.js__ uses __dox/protoss.dox.md__  
+__protoss.min.js__ uses __dox/protoss.dox.md__  
+__protoss.tomin.js__ uses __dox/protoss.dox.md__  
+__dox/examples3_dox.txt__ __protoss_examples3.js__  
+__dox/examples4_dox.txt__ documents __protoss_examples4.js__  
+__dox/hints.txt__ exposes end case scenarios in OOP js concept  
+__eclipse_templates/eclipse_protoss_templates.xml__ can be imported in __Eclipse__ suggestion templates, uses "protoss" keyword in javascript context  
 
 # Extensions  
 __ProtoSS.js__ can be found in __protoss/ProtoSS.js__ including documentation, header and interface  
