@@ -1,0 +1,11 @@
+Packager guide: 
+
+[1] vendor.category.type.name... 
+[2] vendor.name... 
+
+vendor - name of organization/entity/product/group 
+category - categorization under the same vendor global/local/web/client/server 
+type - typification under the same vendor or category packages/examples/family, used to create standard construction based on standard assumptions 
+name - name of library and its namespace under vendor 
+
+Ideal types or pure types are based on subjective element in theory and research. Elements from the same type are supposed to interconnect by design pattern concepts. 
