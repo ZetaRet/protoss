@@ -1,0 +1,27 @@
+required*
+
+new ZetaRet_PrototypesZ() - Extended prototypes, will instantiate ZetaRet_Prototypes, stacking multiple prototypes instances is safe 
+
+getSuperName() : String
+return String, package+::+name, works only on instances using constructor static properties
+
+namespace(String ns, Function cls, Object pack) : Object
+ns* - String, id of namespace, will create new package in effect with prefix
+cls* - Function, function to import into package, uses internal call
+pack - Object, if null uses this 
+return Object, package object defining new namespace
+
+usens(String ns, Object pack) : Object
+ns* - String, id of namespace
+pack - Object, if null uses this
+return Object, resolved package object using namespace prefix
+
+internal(Function cls, Object pack) : Object
+cls* - Function, class function, must provide name 
+pack - Object, if null uses this
+return Object, last package object
+
+package(String name, Object scope) : Object
+name* - String, name of package, use "." (dot) for delimiter
+scope - Object, if null uses this, scope for attaching/reading package, use window in most of the time or globally accessible object
+return Object, last package object
