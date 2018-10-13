@@ -88,7 +88,7 @@ __stringmap__  Object
 default {}, add dynamic string key-value pairs  
 #
 
-## *Methods*  
+### *Methods*  
 
 __eventProps(*Object* event, *Array* props) : *Object*__  
 __event*__ - Object, function object  
