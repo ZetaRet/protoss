@@ -10,8 +10,8 @@ __required*__
 ## ProtoSS  
 
 ### *Properties*  
+##
 
-#
 __autoImplement__ Boolean  
 default true, resolveHeaders automatically implements interfaces using static __headerImplement__  
 #
@@ -70,8 +70,8 @@ __resolveHeaders(*Object* toppack, *String* path) : *ProtoSS*__
 ## Static  
 
 ### *Properties*  
+##
 
-#
 __headerImplement__ Array  
 default [], define *implement* inheritance using an [ProtoSS Class|classsupername string, super in strings/class] template  
 #
@@ -86,9 +86,10 @@ default [], define *superList2* inheritance using an [ProtoSS Class|classsuperna
 #
 __stringmap__  Object  
 default {}, add dynamic string key-value pairs  
-#
 
+##
 ### *Methods*  
+##
 
 __eventProps(*Object* event, *Array* props) : *Object*__  
 - __event*__ - Object, function object  
