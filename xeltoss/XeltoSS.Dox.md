@@ -1,9 +1,9 @@
 > __Author: Zeta Ret, Ivo Yankulovski__  
 > __Zeta Ret XeltoSS__  
 # ProtoSS Transformator to JS Class  
-> *Requires: protoss.all.js v1.02c*  
-> *Version: 1.04*  
-> *Date: 2017*  
+> *Requires: protoss.all.js v1.04a*  
+> *Version: 1.04a*  
+> *Date: 2017 - Today*  
 
 __required*__
 
