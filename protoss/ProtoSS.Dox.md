@@ -86,10 +86,10 @@ default [], define *superList2* inheritance using an [ProtoSS Class|classsuperna
 #
 __stringmap__  Object  
 default {}, add dynamic string key-value pairs  
+#
 
 ## *Methods*  
 
-##
 __eventProps(*Object* event, *Array* props) : *Object*__  
 __event*__ - Object, function object  
 __props*__ - Array, string properties  
