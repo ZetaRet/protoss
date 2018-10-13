@@ -2,9 +2,9 @@
  * Author: Zeta Ret, Ivo Yankulovski
  * Zeta Ret ProtoSS
  * ProtoSS Class/Interface/Header Manager
- * Requires: protoss.all.js v1.02c
- * Version: 1.04b
- * Date: 2017 
+ * Requires: protoss.all.js v1.04a
+ * Version: 1.04c
+ * Date: 2017 - Today
 **/
 window.internal(
 function ProtoSS(){
@@ -13,6 +13,8 @@ function ProtoSS(){
 	o.autoSuper=true;
 	o.autoSuperList=true;
 	o.autoSuperList2=true;
+	o.errorData=null;
+	o.debug=null;
 	o.super(a);
 	var m={};
 	m.toInterface=function(i, pack){
@@ -70,43 +72,47 @@ function ProtoSS(){
 		}
 		return o;
 	};
-	m.resolveHeaders=function(toppack, path){
-		var i,j,v,vl,c1,c2,sla,ia,sl,sa;
+	m.resolveHeaders=function(toppack, path, protoss){
+		var i,j,v,vl,c1,c2,sla,ia,sl,sa,ta;
+		try{
 		if(o.autoImplement){
 			ia=[];
-			for(i=0;i<ProtoSS.headerImplement.length;i++){
-				v=ProtoSS.headerImplement[i];
+			ta=ProtoSS.headerImplement;
+			for(i=0;i<ta.length;i++){
+				v=ta[i];
 				c1=v[0];
 				if(c1.constructor===String)c1=o.getSuperCls(c1, toppack, path);
 				c2=o.getSuperCls(v[1], toppack, path);
-				if (c2)c1.implement(c2);
+				if (c2)c1.implement(protoss?c2.__protoss||c2:c2);
 				else ia.push(v);
 			}
 			ProtoSS.headerImplement=ia;
 		}
 		if(o.autoSuper){
 			sa=[];
-			for(i=0;i<ProtoSS.headerSuper.length;i++){
-				v=ProtoSS.headerSuper[i];
+			ta=ProtoSS.headerSuper;
+			for(i=0;i<ta.length;i++){
+				v=ta[i];
 				c1=v[0];
 				if(c1.constructor===String)c1=o.getSuperCls(c1, toppack, path);
 				c2=o.getSuperCls(v[1], toppack, path);
-				if (c2)c1.setSuper(c2);
+				if (c2)c1.setSuper(protoss?c2.__protoss||c2:c2);
 				else sa.push(v);
 			}
 			ProtoSS.headerSuper=sa;
 		}
 		if(o.autoSuperList){
 			sla=[];
-			for(i=0;i<ProtoSS.headerSuperList.length;i++){
-				v=ProtoSS.headerSuperList[i];
+			ta=ProtoSS.headerSuperList;
+			for(i=0;i<ta.length;i++){
+				v=ta[i];
 				c1=v[0];
 				if(c1.constructor===String)c1=o.getSuperCls(c1, toppack, path);
 				vl=v[1];
 				sl=[];
 				for(j=0;j<vl.length;j++){
 					c2=o.getSuperCls(vl[j], toppack, path);
-					if (c2)sl.push(c2);
+					if (c2)sl.push(protoss?c2.__protoss||c2:c2);
 					else {
 						sla.push(v);
 						break;
@@ -120,15 +126,16 @@ function ProtoSS(){
 		}
 		if(o.autoSuperList2){
 			sla=[];
-			for(i=0;i<ProtoSS.headerSuperList2.length;i++){
-				v=ProtoSS.headerSuperList2[i];
+			ta=ProtoSS.headerSuperList2;
+			for(i=0;i<ta.length;i++){
+				v=ta[i];
 				c1=v[0];
 				if(c1.constructor===String)c1=o.getSuperCls(c1, toppack, path);
 				vl=v[1];
 				sl=[];
 				for(j=0;j<vl.length;j++){
 					c2=o.getSuperCls(vl[j], toppack, path);
-					if (c2)sl.push(c2);
+					if (c2)sl.push(protoss?c2.__protoss||c2:c2);
 					else {
 						sla.push(v);
 						break;
@@ -140,6 +147,12 @@ function ProtoSS(){
 			}
 			ProtoSS.headerSuperList2=sla;
 		}
+		} catch(e){
+			o.errorData=[ta,ta[i-1],i,j,v,vl,c1,c2,sla,ia,sl,sa];
+			if(o.debug)o.debug("error", "resolveHeaders", o, o.errorData);
+			throw(e);
+		}
+		
 		return o;
 	};
 	o.superize(a,m,true,true);
