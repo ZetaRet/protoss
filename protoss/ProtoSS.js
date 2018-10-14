@@ -27,8 +27,8 @@ function ProtoSS(){
 		return imap;
 	};
 	m.stringPattern=function(pat, str, pos){
-	    if(!pos)pos=0;
-	    var num=0;
+		if(!pos)pos=0;
+		var num=0;
 		while(str.indexOf(pat, pos)==pos){
 			num++;
 			str=str.substr(0,pos)+str.substr(pos+pat.length,str.length);
