@@ -444,12 +444,14 @@ function XeltoSS(){
 						inherited.push(k);
 						if(o.methodTransfer)continue;
 					}
-					if(alac&&ok.constructor===o.AsyncFunction){
-						clsf.push((o.statisAsStatic?(rwm.sttc||"static")+" ":"")+(rwm.asc||"async")+" "+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2]);
-					} else if(algen&&ok.constructor===o.GeneratorFunction){
-						clsf.push((o.statisAsStatic?(rwm.sttc||"static")+" ":"")+(rwm.ga||"*")+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2]);
-					} else {
-						clsf.push((o.statisAsStatic?(rwm.sttc||"static")+" ":"")+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2]);
+					if(ofdecomp){
+						if(alac&&ok.constructor===o.AsyncFunction){
+							clsf.push((o.statisAsStatic?(rwm.sttc||"static")+" ":"")+(rwm.asc||"async")+" "+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2]);
+						} else if(algen&&ok.constructor===o.GeneratorFunction){
+							clsf.push((o.statisAsStatic?(rwm.sttc||"static")+" ":"")+(rwm.ga||"*")+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2]);
+						} else {
+							clsf.push((o.statisAsStatic?(rwm.sttc||"static")+" ":"")+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2]);
+						}
 					}
 					if(ma)ma.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 				} else if(ok._i||ok._a){
@@ -464,14 +466,14 @@ function XeltoSS(){
 						inherited.push(k);
 						if(o.methodTransfer)continue;
 					}
-					clsf.push((rwm.asc||"async")+" "+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2].replace('{','{'+ovart));
+					if(ofdecomp)clsf.push((rwm.asc||"async")+" "+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2].replace('{','{'+ovart));
 					if(ma)ma.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 				} else if(algen&&ok.constructor===o.GeneratorFunction){
 					if(o.findMethodInMaps(obj, k, ok, mapnames)!==mymethods){
 						inherited.push(k);
 						if(o.methodTransfer)continue;
 					}
-					clsf.push((rwm.ga||"*")+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2].replace('{','{'+ovart));
+					if(ofdecomp)clsf.push((rwm.ga||"*")+k+"("+ofdecomp[1].join(',')+")"+ofdecomp[2].replace('{','{'+ovart));
 					if(ma)ma.call(obj,k,ok,o,clsname,clssuper,clsArgs,superArgs,clsb,clsf,polymaps,rwm);
 				} else if(ok.constructor===o.ASTConstructor){
 					clsb.push(ok.toString());
