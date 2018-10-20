@@ -47,7 +47,7 @@ __name*__ - String, name of super function
 args - Array, array of arguments to apply  
 cname - String, constructor name, if null will use __constructor  
 thiscls - Function, accepts current constructor class scope for continues upwards super calls, uses getNextSuperX, works with super constructor lists, compatible with XeltoSS (ProtoSS JS Class)  
-*return Object, result of next super function different than this[name] function or thiscls.prototype[name] function*
+*return Object, result of next super function different than thiscls.prototype.map[name] function or this.map[name] function*
 
 __*getNextSuper(String name, String cname) : Function*__  
 __name*__ - String, search super function by name in super map created by superize  
@@ -57,8 +57,8 @@ cname - String, constructor name, if null will use __constructor
 __*getNextSuperX(String name, String cname, Function thiscls) : Function*__  
 __name*__ - String, search super function by name in super map created by superize  
 cname - String, constructor name, if null will use __constructor  
-thiscls - Function, accepts current constructor class scope for interpolating next super properly, detects prototype methods and method maps, compatible with XeltoSS (ProtoSS JS Class)  
-*return Function, next function in super maps after calling getSupers() on this or thiscls*
+thiscls - Function, accepts current constructor class scope for interpolating next super properly, detects prototype method maps, compatible with XeltoSS (ProtoSS JS Class)  
+*return Function, next function in super maps after calling getSupers() on thiscls or this*
 
 __*getSuper() : Object*__  
 *return Object, super object map of next super class as it was created by superize*
