@@ -2,8 +2,8 @@
  * Author: Zeta Ret, Ivo Yankulovski
  * Zeta Ret XeltoSS
  * ProtoSS Transformator to JS Class
- * Requires: protoss.all.js v1.04a
- * Version: 1.04a 
+ * Requires: protoss.all.js v1.04b
+ * Version: 1.04b 
  * Date: 2017 - Today
 **/
 window.internal(
@@ -48,6 +48,8 @@ function XeltoSS(){
 	o.autoConstructor=true;
 	o.constructorKeys=["construct","_construct","_constructor"];
 	o.mergeConstructors=true;
+	o.inverseMergeConstructors=false;
+	o.replicaConstructors=false;
 	o.constructorMap={};
 	o.autoDestructor=true;
 	o.destructorKeys=["destruct","_destruct","_destructor"];
@@ -365,7 +367,7 @@ function XeltoSS(){
 		var decomp=o.decomposeFunction(obj.constructor),
 			ofdecomp,ovart=(rwm.v||'var')+' '+(rwm.o||'o')+'='+(rwm.t||'this')+';',ovartset=false;
 		clsArgs=decomp[1].join(',');
-		var supers=obj.getSupers(),mapsupers=[obj.constructor].concat(supers),
+		var supers=obj.getSupers(),rsupers=obj.getReversedSupers(),mapsupers=[obj.constructor].concat(supers),
 			mapnames=[],mymethods=obj['__'+clsname+'_super__'],
 			sname=obj.getSuperName2(),_sname,tp=o.toppack,
 			keyedoutmaps=[],iamethods=[],inherited=[],
@@ -484,9 +486,15 @@ function XeltoSS(){
 						clsb.push(ovart);
 					}
 					if(o.mergeConstructors){
-						for(i=supers.length-1;i>=0;i--){
-							_sname=supers[i].getSuperName2();
-							if(o.constructorMap[_sname]){
+						var dupc={}, ms=supers.concat();
+						if(!o.inverseMergeConstructors){
+							ms=rsupers.concat();
+							ms.reverse();
+						}
+						for(i=ms.length-1;i>=0;i--){
+							_sname=ms[i].getSuperName2();
+							if(o.constructorMap[_sname] && !dupc[_sname]){
+								if(!o.replicaConstructors)dupc[_sname]=1;
 								clsb.push(o.constructorMap[_sname].join(o.bodyJoin));
 							}
 						}
