@@ -116,11 +116,12 @@ function ZetaRet_Prototypes(){
 	odef(oprot,'getNextSuper',ef);
 	oprot.getNextSuperX=function(name,cname,thiscls){
 		var _s=(thiscls||this).getSupers(null,cname);
-		var l=_s.length,tf=(thiscls?(thiscls[prn][name]||this[prfx+(thiscls.aname||thiscls.name)+sffx][name]):this[name]);
+		var l=_s.length,tfmn=thiscls?prfx+(thiscls.aname||thiscls.name)+sffx:null,tf=(thiscls?((thiscls[prn][tfmn]?thiscls[prn][tfmn][name]:null)||this[tfmn][name]):this[name]);
 		for(var i=0;i<l;i++){
 			var si=_s[i];
 			var m=this[prfx+(si.aname||si.name)+sffx];
-			var f=si[prn][name]||(m?m[name]:null);
+			var f=(m?m[name]:null);
+			if(!tf)tf=f;
 			if (f && f!=tf){
 				return f;
 			}
