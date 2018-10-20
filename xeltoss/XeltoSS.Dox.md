@@ -1,8 +1,8 @@
 > __Author: Zeta Ret, Ivo Yankulovski__  
 > __Zeta Ret XeltoSS__  
 # ProtoSS Transformator to JS Class  
-> *Requires: protoss.all.js v1.04a*  
-> *Version: 1.04a*  
+> *Requires: protoss.all.js v1.04b*  
+> *Version: 1.04b*  
 > *Date: 2017 - Today*  
 
 __required*__
@@ -129,6 +129,12 @@ default ["construct","_construct","_constructor"], add constructor body to class
 #
 __mergeConstructors__ Boolean  
 default true, allow all constructors including inherited to be merged in class constructor  
+#
+__inverseMergeConstructors__ Boolean  
+default false, use reversed order of super constructors  
+#
+__replicaConstructors__ Boolean  
+default false, allow merge of the same super constructor in diamond inheritance  
 #
 __constructorMap__ Object  
 default {}, inherited cache of constructors, used in "mergeConstructors" process  
