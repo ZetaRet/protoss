@@ -101,12 +101,17 @@ defname - Boolean, adds function.name property, aname is always added now
 __*getSupers(Function fn, String name) : Array*__  
 fn - Function, if null will use this  
 name - String, if null will use __constructor  
-*return Array, of all super constructor functions*
+*return Array, of all super constructor functions, allows caching inside function object*
 
 __*getSupers2(Function fn, String name) : Array*__  
 fn - Function, if null will use this  
 name - String, if null will use __constructor  
 *return Array, of super constructor function or functions (if super is aggregate will use __constructor_list)*
+
+__*getReversedSupers(Function fn, String name) : Array*__  
+fn - Function, if null will use this  
+name - String, if null will use __constructor  
+*return Array, of all super constructor functions, reversed order*
 
 __*hasSuper(Function sfn, Function fn, String name) : Boolean*__  
 __sfn*__ - Function, super function to check against  
