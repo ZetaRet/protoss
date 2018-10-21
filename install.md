@@ -16,6 +16,7 @@ __examples/protoss_examples2.js__ builds basic game model example
 __examples/protoss_examples3.js__ demonstrates interfaces, abstracts and finalization of classes  
 __examples/protoss_examples4.js__ supports packaging and super name concept  
 __examples/mass.resolve.ProtoSS.js__ builds mass resolve example based on __protoss/ProtoSS.js__ manager  
+__examples/transform.ProtoSS.XeltoSS.js__ transform ProtoSS Class to XeltoSS Class in ES6 standard  
 
 # Documentation  
 __protoss.all.js__ uses __dox/protoss.all.dox.md__  
