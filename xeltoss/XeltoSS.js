@@ -3,7 +3,7 @@
  * Zeta Ret XeltoSS
  * ProtoSS Transformator to JS Class
  * Requires: protoss.all.js v1.04b
- * Version: 1.04b 
+ * Version: 1.04c 
  * Date: 2017 - Today
 **/
 window.internal(
@@ -386,7 +386,7 @@ function XeltoSS(){
 			ofdecomp=undefined;
 			docontinue=false;
 			if (alget){
-				ok=obj.__lookupGetter__(k);
+				ok=obj.__lookupGetter__ ? obj.__lookupGetter__(k) : Object.getOwnPropertyDescriptor(obj, k).get;
 				if(!ok && (typeof obj[k] === 'function') && k.indexOf(o.autoGetPrefix)==0){
 					ok=obj[k];
 					k=k.substr(o.autoGetPrefix.length,k.length);
@@ -405,7 +405,7 @@ function XeltoSS(){
 				if(docontinue)continue;
 			}
 			if (alset){
-				ok=obj.__lookupSetter__(k);
+				ok=obj.__lookupSetter__ ? obj.__lookupSetter__(k) : Object.getOwnPropertyDescriptor(obj, k).set;
 				if(!ok && (typeof obj[k] === 'function') && k.indexOf(o.autoSetPrefix)==0){
 					ok=obj[k];
 					k=k.substr(o.autoSetPrefix.length,k.length);
