@@ -11,9 +11,7 @@ Zeta Ret Clockwork demo: https://clockwork.lovesvn.com/demo/
 
 ## Summary
 
-Tern.js-compliant Prototypes Framework with Polymorphism
-
-This library leverages the use of Tern.js server in Eclipse allowing the developer to view inheritances in the outline. In addition adds several features on top of regular prototyping:
+Features on top of regular prototyping:
 
 allows super() calls safely from any instance of the inheritance tree  
 setSuper() adds quickly new super/parent function class, supports chain calls  
