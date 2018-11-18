@@ -1,5 +1,3 @@
-new ZetaRet_Prototypes();
-
 function ZetaRet_EventDispatcher(target){
 	var o=this,a=arguments;
 	o.super(a);
@@ -73,21 +71,21 @@ function GameAtom(name){
 		if (o[key]!==undefined)o[key]+=valuetarget[key];
 		return o;
 	};
-    o.superize(a,m,true,true,true);
-    return o;
+	o.superize(a,m,true,true,true);
+	return o;
 }
 GameAtom.superList([ZetaRet_EventDispatcher, ZetaRet_MetaData]);
 
 function BaseVehicle(name){
-    var o=this,a=arguments;
+	var o=this,a=arguments;
 	o.life=1;
 	o.speed=0;
 	o.armor=0;
 	o.super(a,true);
 	var m={};
-    m.getName=function(){return o.name;};
-    o.superize(a,m,true,true,true);
-    return o;
+	m.getName=function(){return o.name;};
+	o.superize(a,m,true,true,true);
+	return o;
 }
 BaseVehicle.setSuper(GameAtom);
 
@@ -106,8 +104,8 @@ function BaseBuilder(name){
 		inst.name=id+"#"+o.name;
 		return inst;
 	};
-    o.superize(a,m,true,true,true);
-    return o;
+	o.superize(a,m,true,true,true);
+	return o;
 }
 BaseBuilder.setSuper(BaseVehicle);
 
@@ -142,8 +140,8 @@ function BaseBuilding(name){
 		inst.name=type+"#"+o.name;
 		return inst;
 	};
-    o.superize(a,m,true,true,true);
-    return o;
+	o.superize(a,m,true,true,true);
+	return o;
 }
 BaseBuilding.setSuper(GameAtom);
 
@@ -252,7 +250,7 @@ function Shields(name){
 Shields.setSuper(Upgrade);
 
 function InitGame(){
-	var o=this,a=arguments;
+	var o=this;
 	o.getTotalPsi=function(){
 		var psi=0;
 		for(var i=0;i<o.buildings.length;i++){
