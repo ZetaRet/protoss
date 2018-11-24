@@ -32,6 +32,9 @@ __eclipse_templates/eclipse_protoss_templates.xml__ can be imported in __Eclipse
 __ProtoSS.js__ can be found in __protoss/ProtoSS.js__ including documentation, header and interface  
 __XeltoSS.js__ can be found in __xeltoss/XeltoSS.js__ including documentation, header and interface  
 
+# Headers & Load Order
+Classes are loaded always before Headers in HTML. Each Header requires a hard reference to ProtoSS Class definition, any other reference-to inside the Header Array, present or super class(es), can be soft string literal which is resolved later. Backend may pack JS code in either way of <script src="file.js"> method or output it directly into the script tag.
+
 # Commit  
 Plus (+) stands for added content  
 Minus (-) stands for removed content  
