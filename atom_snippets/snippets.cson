@@ -1,0 +1,13 @@
+'.source.js':
+  'ProtoSS':
+    'prefix': 'protoss'
+    'body': 'function $1($2) {\n\tvar o = this,\n\t\ta = arguments;\n\t$3\n\to.super(a$4);\n\tvar m = {};\n\t$5\n\to.superize(a, m, true, true);\n\treturn o;\n}'
+  'ProtoSS Method':
+    'prefix': 'protossmethod'
+    'body': 'm.$1 = function $2($3) {\n\t$4\n\treturn $5;\n};'
+  'ProtoSS Var':
+    'prefix': 'protossvar'
+    'body': 'o.$1 = $2;'
+  'ProtoSS Package':
+    'prefix': 'protosspackage'
+    'body': 'window.package("$1").internal(\nfunction $2($3) {\n\tvar o = this,\n\t\ta = arguments;\n\t$4\n\to.super(a$5);\n\tvar m = {};\n\t$6\n\to.superize(a, m, true, true);\n\treturn o;\n});'
