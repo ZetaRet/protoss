@@ -27,6 +27,7 @@ __dox/examples3_dox.txt__ documents __protoss_examples3.js__
 __dox/examples4_dox.txt__ documents __protoss_examples4.js__  
 __dox/hints.txt__ exposes end case scenarios in OOP js concept  
 __eclipse_templates/eclipse_protoss_templates.xml__ can be imported in __Eclipse__ suggestion templates, uses "protoss" keyword in javascript context  
+__atom_snippets/snippets.cson__ can be imported in __Atom__ IDE Snippets (access from File->Snippets and copy-paste), uses "protoss" keyword in javascript context  
 
 # Extensions  
 __ProtoSS.js__ can be found in __protoss/ProtoSS.js__ including documentation, header and interface  
