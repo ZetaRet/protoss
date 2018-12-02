@@ -1,0 +1,41 @@
+{
+    "author":"",
+    "description":"",
+    "text":"",
+    "requires":"",
+    "version":"",
+    "date":"",
+    "supername":"",
+    "inherits":[],
+    "interfaces":[],
+    "static":{
+        "public_properties":{},
+        "protected_properties":{},
+        "private_properties":{},
+        "public_methods":{},
+        "protected_methods":{},
+        "private_methods":{}
+    },
+    "public_properties":{
+        "propertyName":"Type: default"
+    },
+    "protected_properties":{},
+    "private_properties":{},
+    "public_methods":{
+        "methodName":"importantArg*: Type, arg: Type2; return Type3"
+    },
+    "protected_methods":{},
+    "private_methods":{},
+    "static_descriptions":{},
+    "descriptions":{
+        "propertyName":"property description",
+        "methodName":{
+            "this":"method description",
+            "importantArg":"important arg description",
+            "arg":"arg description",
+            "return":"return description"
+        }
+    },
+    "static_examples":{},
+    "examples":{}
+}
