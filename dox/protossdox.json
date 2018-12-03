@@ -2,6 +2,7 @@
 	"name": "Zeta Ret ProtoSS Package",
 	"type": "protossdox",
 	"path": "jsondox/",
+	"src": "",
 	"namespace": "zetaret.global.packages.protoss",
 	"relative": true,
 	"markdown": true
