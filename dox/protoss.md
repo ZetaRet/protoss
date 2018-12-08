@@ -9,7 +9,7 @@ __*rndstr(int length) : String*__
 __*super(function_arguments|Array arguments, Array|Boolean call_arguments, String name) : Object*__  
 - __arguments*__ - (args) function arguments object if supported, or manually created Array [] with assigned "callee" reference to the function class object  
 - __call_arguments*__ - (cargs) Array used to call "apply" of the super constructor function, Boolean true will use arguments as call arguments (cargs=args)  
-name - String used to define the name of the constructor in the prototype, default __constructor  
+- name - String used to define the name of the constructor in the prototype, default __constructor  
 >*return constructor function result*  
 
 #  
