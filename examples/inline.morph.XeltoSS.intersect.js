@@ -82,6 +82,8 @@
 			}
 		);
 	})(reference.ProtectB);
+
+	reference = null;
 })();
 
 var instA = new classes.set.depth.A();
