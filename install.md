@@ -17,6 +17,7 @@ __examples/protoss_examples3.js__ demonstrates interfaces, abstracts and finaliz
 __examples/protoss_examples4.js__ supports packaging and super name concept  
 __examples/mass.resolve.ProtoSS.js__ builds mass resolve example based on __protoss/ProtoSS.js__ manager  
 __examples/transform.ProtoSS.XeltoSS.js__ transform ProtoSS Class to XeltoSS Class in ES6 standard  
+__examples/inline.morph.XeltoSS.js__ design template of protected scope using printed XeltoSS classes  
 
 # Documentation  
 __protoss.all.js__ uses __dox/protoss.all.md__  
