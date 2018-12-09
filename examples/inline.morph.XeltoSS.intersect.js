@@ -37,7 +37,7 @@
 				protectedScope[o.instanceId].data[name] = value;
 			}
 		}
-		if (reference) reference.internal(ProtectB);
+		if (reference) reference.ProtectB = ProtectB;
 
 		window.package('classes.set').internal(
 			class B {
