@@ -3,7 +3,7 @@
  * Zeta Ret XeltoSS
  * ProtoSS Transformator to JS Class
  * Requires: protoss.all.js v1.04b
- * Version: 1.04c 
+ * Version: 1.04c
  * Date: 2017 - Today
 **/
 window.internal(
@@ -256,7 +256,7 @@ function XeltoSS(){
 			var ast=new cls();
 			o.aststruct=o.buildInstructions(cls.toString(),cls);
 			return ast;
-		} 
+		}
 		return o.proxyASTBuilder.call(o,cls);
 	};
 	m.identifyKeyChain=function(obj,identifyKeyHandler){
@@ -634,7 +634,7 @@ function XeltoSS(){
 			newclsproto=escls.prototype,
 			promapcls={constructor:escls},
 			supers=obj.getSupers(),supers2=obj.getSupers2();
-		
+
 		if(swap)po[n]=escls;
 		newclsproto["__"+n+"_super__"]=promapcls;
 		for(k in protcls)escls[k]=protcls[k];
@@ -654,7 +654,10 @@ function XeltoSS(){
 						newclsproto["__"+sn+"_super__"]=promap;
 						if(o.methodTransfer){
 							for(k in promap){
-								if(k!=="constructor" && !newclsproto[k])newclsproto[k]=promap[k];
+								if(k!=="constructor" && !newclsproto[k]){
+									newclsproto[k]=promap[k];
+									Object.defineProperty(newclsproto, k, {enumerable:false});
+								}
 							}
 						}
 					}
@@ -709,7 +712,7 @@ XeltoSS.InitXeltoSSPrototypes=function(override){
 		oprot=Object.prototype,
 		odef=Object.defineProperty,
 		ef={enumerable:false};
-	
+
 	oprot.superx=function(args,cargs,name){
 		if (!name)name=dcname;
 		var c=args.callee;
