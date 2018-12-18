@@ -20,7 +20,15 @@ Object.prototype.getAccessAttribute = function(namespace, accessor, methods, iid
 		nsa,
 		class AccessAttribute {
 			static access(target, method, args) {
+				var iid = target.instanceId;
+				if (!scope[iid]) throw Error('Unauthorized access of scope.');
+				else if (scope[iid].scope !== target) throw Error('Illegal access of foreign scope.');
 				return AccessAttribute.prototype[method].apply(target, args);
+			}
+			static verify(target) {
+				var iid = target.instanceId;
+				if (!scope[iid] || scope[iid].scope !== target) return false;
+				return true;
 			}
 			constructor() {
 				throw Error('[Access Attribute] can not be an instance.');
@@ -30,25 +38,34 @@ Object.prototype.getAccessAttribute = function(namespace, accessor, methods, iid
 				var iid = o.instanceId;
 				if (!iid) {
 					iid = o.constructor.packagename + '::' + o.constructor.name + '#' + o.rndstr(iidLength);
+					if (scope[iid]) throw Error('Unauthorized override of scope.');
 					o.instanceId = iid;
-				}
+				} else if (scope[iid] && scope[iid].scope !== o) throw Error('Illegal access of foreign scope.');
 				scope[iid] = {
 					scope: o,
 					data: {}
 				};
 			}
 			read(name) {
-				var o = this;
-				return scope[o.instanceId].data[name];
+				var o = this,
+					iid = o.instanceId;
+				if (!scope[iid]) throw Error('Unauthorized read of scope.');
+				else if (scope[iid].scope !== o) throw Error('Illegal access of foreign scope.');
+				return scope[iid].data[name];
 			}
 			update(name, value) {
-				var o = this;
-				scope[o.instanceId].data[name] = value;
+				var o = this,
+					iid = o.instanceId;
+				if (!scope[iid]) throw Error('Unauthorized update of scope.');
+				else if (scope[iid].scope !== o) throw Error('Illegal access of foreign scope.');
+				scope[iid].data[name] = value;
 			}
 			destroy() {
-				var o = this;
-				if (scope[o.instanceId].scope !== o) return false;
-				return delete scope[o.instanceId];
+				var o = this,
+					iid = o.instanceId;
+				if (!scope[iid]) throw Error('Unauthorized destroy of scope.');
+				else if (scope[iid].scope !== o) return false;
+				return delete scope[iid];
 			}
 		}
 	);
@@ -77,6 +94,8 @@ Object.defineProperty(Object.prototype, 'getAccessAttribute', {
 
 /**
  * Program package design
+ * IDE defines names of access attribute variable, i.e. [ProtectB, Internal, CustomNS].
+ * Compilator computes random names on each compilation.
  */
 (function() {
 	var reference = {};
