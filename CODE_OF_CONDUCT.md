@@ -44,7 +44,7 @@ Zeta Ret Terms apply https://zetaret.com/terms/
 
 ## Privacy Policy
 
-Zeta Ret Privacy Policy apply https://zetaret.com/legal/privacy/ 
+Zeta Ret Privacy Policy apply https://zetaret.com/privacy/ 
 
 ## Attribution
 
