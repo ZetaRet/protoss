@@ -11,25 +11,13 @@ Zeta Ret Clockwork demo: https://clockwork.lovesvn.com/demo/
 
 ## Summary
 
-Features on top of regular prototyping:
+Features on top of regular prototyping: super, superize, setSuper, setSubclass, getSupers, getSupers2, getReversedSupers, superList, superList2, getThis, getSuper, callSuper, callSuper2, callSuperX, callProto, callProto2, callProtoX, hasSuper, is, getNextSuper, getNextSuperX, abstract, implement, interface, final, statis, getSuperName, getSuperName2, namespace, usens, internal, package, rndstr
 
-allows super() calls safely from any instance of the inheritance tree  
-setSuper() adds quickly new super/parent function class, supports chain calls  
-setSubclass() adds quickly new subclass/child function class, supports chain calls  
-getSupers() returns list of all super class functions  
-getSupers2() returns list of the first meaningful super class function in the list, respectively constructor lists of more than one super class  
-superList() adds several functions to the super tree (extend more than one class), it creates a dummy class in between to manage multiple constructors  
-getThis() returns the constructor map of the current object, without any methods from super classes  
-getSuper() returns the constructor map of the super object, without any methods from upper supers or current object  
-callSuper() executes function call on super method map, use for overloaded functions, searches for next super function in the inheritance tree  
-callSuper2() executes function call on super method map, use for overloaded functions, may call the same function  
-callProto() executes function call on any of the subclass/supers inheritance tree object maps, uses function object as input  
-callProto2() executes function call on any of the subclass/supers inheritance tree object maps, uses class object map as input  
-superize() generates function class object map, saves methods and adds names to anonymous prototype functions, may add class name to the function for better identification  
-hasSuper() checks whether this object/class inherits another class  
-is() checks whether this object/class inherits or equals another class  
-getNextSuper() returns next super function different than this.function  
-rndstr() generates random string, used for dummy function name  
+## Documentation  
+[Wiki Documentation](https://github.com/ZetaRet/protoss/wiki/Documentation)  
+[Install and Repository](https://github.com/ZetaRet/protoss/wiki/Install-and-Repository)  
+[ProtoSS Documentation](https://github.com/ZetaRet/protoss/wiki/ProtoSS-Documentation)  
+[XeltoSS Documentation](https://github.com/ZetaRet/protoss/wiki/XeltoSS-Documentation)  
 
 Minimized ProtoSS, ~1kb in gzip transfer
 
