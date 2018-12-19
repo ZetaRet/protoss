@@ -34,7 +34,7 @@ https://jsfiddle.net/zetaret/sw0j28qj/
 Some JavaScript versions or JS servers do not support arguments, it must be recreated manually (or by your compiler/interpreter/texttemplate) in the beginning of the function as an array with the same behaviour including a reference to the class function in callee parameter.
 
 Note: This library may be used directly for OOP in JavaScript, still, a cross-compiler/code analysis/texttemplate tool is required to take advantage of all features like real method overloading according to arguments length and type. Your interpreter tool must be able to detect types and arguments length before compilation of output js file in order to add the correct function call in the release code. Overloading is a purely syntactic way of using the same name for different semantic objects, the compiler can resolve the ambiguity at compile time, and then proceed as usual.  
-Polymorphism Source of Theory: http://lucacardelli.name/indexPapers.html 
+[Polymorphism Source of Theory](http://lucacardelli.name/indexPapers.html)  
 
 :alien: ProtoSS Website: https://protoss.xyz/  
 Author: Zeta Ret, Ivo Yankulovski, 2017 https://zetaret.com/
