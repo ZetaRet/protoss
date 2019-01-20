@@ -2,7 +2,7 @@
  * Author: Zeta Ret, Ivo Yankulovski
  * Zeta Ret SkytoSS
  * ProtoSS GPU Acceleration and Web Workers
- * Requires: protoss.all.js v1.04b
+ * Requires: protoss.all.js v1.05
  * Version: 1.05
  * Date: 2018 - Today
 **/
