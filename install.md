@@ -36,6 +36,7 @@ __atom_snippets/snippets.cson__ can be imported in __Atom__ IDE Snippets (access
 # Extensions  
 __ProtoSS.js__ can be found in __protoss/ProtoSS.js__ including documentation, header and interface  
 __XeltoSS.js__ can be found in __xeltoss/XeltoSS.js__ including documentation, header and interface  
+__SkytoSS.js__ can be found in __skytoss/SkytoSS.js__ including documentation, header and interface  
 
 # Headers & Load Order
 Classes are loaded always before Headers in HTML. Each Header requires a hard reference to ProtoSS Class definition, any other reference-to inside the Header Array, present or super class(es), can be soft string literal which is resolved later. Backend may pack JS code in either way of <script src="file.js"> method or output it directly into the script tag.
