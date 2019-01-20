@@ -117,7 +117,7 @@ __setExpressionMap(*Function* type, *Function* handler) : *SkytoSS*__
 > *return __SkytoSS__, self*  
 
 ##  
-__evalExpression(*Object* exp) : *SkytoSS*__  
+__evalExpression(*Object* exp) : *Object*__  
 - exp - __Object*__, expression to evaluate using 'expressionMap'  
 > *return __Object__, type evaluation by map or exp*  
 
@@ -361,7 +361,7 @@ __shell(*Array* keys) : *Object*__
 > *return __Object__, object with key-types based on constructor of value from scope*  
 
 ##  
-__ys(*Object* shell, *Object* dome) : *Object*__  
+__ys(*Object* shell, *Object* dome) : *Boolean*__  
 - shell - __Object*__, object to test type interface in the dome  
 - dome - __Object*__, dome definition in package or scope  
 > *return __Boolean__, shell keys must not be in dome holes, must be defined and value of the key must pass test of the type [constructor, instanceOf, ProtoSS.is]*  
