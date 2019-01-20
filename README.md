@@ -20,6 +20,7 @@ Minimized ProtoSS, ~1kb in gzip transfer
 [Install and Repository](https://github.com/ZetaRet/protoss/wiki/Install-and-Repository)  
 [ProtoSS Documentation](https://github.com/ZetaRet/protoss/wiki/ProtoSS-Documentation)  
 [XeltoSS Documentation](https://github.com/ZetaRet/protoss/wiki/XeltoSS-Documentation)  
+[SkytoSS Documentation](https://github.com/ZetaRet/protoss/wiki/SkytoSS-Documentation)  
 
 ## Examples:  
 - https://github.com/ZetaRet/protoss/tree/master/examples  
