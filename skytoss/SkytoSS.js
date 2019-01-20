@@ -167,12 +167,17 @@ function SkytoSS(){
 		return shader;
 	};
 	m.gpuBuffer=function(gpu, bufferdata, target, type, usage){
-		var buffer=gpu.createBuffer();
+		var buffer=bufferdata.buffer||gpu.createBuffer(),bft;
 		if(!target)target=gpu.ARRAY_BUFFER;
 		if(!type)type=Float32Array;
 		if(!usage)usage=gpu.STATIC_DRAW;
 		gpu.bindBuffer(target, buffer);
-		gpu.bufferData(target, new type(bufferdata), usage);
+		bft=bufferdata.typed||new type(bufferdata);
+		if(!bufferdata.nocache){
+			bufferdata.typed=bft;
+			bufferdata.buffer=buffer;
+		}
+		gpu.bufferData(target, bft, usage);
 		return buffer;
 	};
 	m.gpuPreProgrammer=function(gpu, gpuData, id, settings, bufferData){
