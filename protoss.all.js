@@ -325,7 +325,8 @@ function ZetaRet_Prototypes(){
 					ai=a[i];
 					try{
 						if(cls.constructor===Array){
-							for(j=0;j<cls.length;j++){if (!ai.is(cls[j]))return false;}
+							for(j=0;j<cls.length;j++){if (ai.is(cls[j]))break;}
+							if(j===cls.length)return false;
 						}
 						else {if (!ai.is(cls))return false;}
 					} catch(Object){
