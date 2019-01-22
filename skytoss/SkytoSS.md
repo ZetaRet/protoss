@@ -347,7 +347,7 @@ __InitSkytoSSPrototypes(*Boolean* override) : *SkytoSS*__
 
 __const(*String* key, *Object* value) : *Object*__  
 - __key*__ - __*String*__ - key of constant  
-- __value*__ - __*value*__ - value of constant  
+- __value*__ - __*Object*__ - value of constant  
 > *return __Object__, argument value, dynamically defined constant to scope*  
 
 ##  
