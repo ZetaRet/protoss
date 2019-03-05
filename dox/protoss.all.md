@@ -218,7 +218,7 @@ __final(*function_arguments|Array* args) : *Object*__
 > *return __Object__, this*  
 
 ##  
-__statis(*function_arguments|Array* args, *Function* statis, *Object* _super, *Boolean* setname, *Boolean* setown, *Boolean* defname) : *Object*__  
+__statis(*function_arguments|Array* args, *Function* statis, *Object* \_super, *Boolean* setname, *Boolean* setown, *Boolean* defname) : *Object*__  
   
 - __args*__ - __*function_arguments|Array*__, function arguments object if supported, or manually created Array [] with assigned 'callee' reference to the function class object  
 - statis - __*Function*__, static function assign to object, these functions act like prototype functions and as such are not generated per new instance (superize), statis(Object s, Function constructor){s.myf=function(){};}  
