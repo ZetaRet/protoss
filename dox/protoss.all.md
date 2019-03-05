@@ -26,14 +26,14 @@ __*setSuper(Function superfn, Function fn, String name) : Function*__
 - __superfn*__ - Function, the super function of fn or this  
 - fn - Function, if null will use this function, fn extends superfn in effect, fn is subclass of superfn  
 - name - String, if null will use default __constructor  
->*return Fuction, superfn will be returned for chain calls*  
+>*return Function, superfn will be returned for chain calls*  
 
 #  
 __*setSubclass(Function fn, Function superfn, String name) : Function*__  
 - __fn*__ - Function, fn extends superfn in effect, fn is subclass of superfn  
 - superfn - Function, if null will use this function, the super function of fn  
 - name - String, if null will use default __constructor  
->*return Fuction, superfn will be returned for chain calls*  
+>*return Function, superfn will be returned for chain calls*  
 
 #  
 __*callSuper(String name, Array args, String cname) : Object*__  
@@ -159,7 +159,7 @@ __*implement(Function superfn, Function fn, String name) : Function*__
 - __superfn*__ - Function, the super function of fn or this  
 - fn - Function, if null will use this function, fn extends superfn in effect, fn is subclass of superfn  
 - name - String, if null will use default __constructor  
->*return Fuction, superfn will be returned for chain calls, [implement calls setSuper]*  
+>*return Function, superfn will be returned for chain calls, [implement calls setSuper]*  
 
 #  
 __*interface(String name, Object imap, Boolean defname) : Function*__  
