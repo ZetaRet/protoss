@@ -1,0 +1,249 @@
+{
+	"author": "Zeta Ret, Ivo Yankulovski",
+	"description": "Object prototypes for OOP",
+	"text": "ProtoSS - Prototype Supers-Subclass",
+	"requires": null,
+	"version": "1.05",
+	"date": "2017 - Today",
+	"supername": "ZetaRet_Prototypes",
+	"inherits": null,
+	"interfaces": null,
+	"nohierarchy": "All ProtoSS functionality, instance is generated immediately",
+	"static": {
+		"public_properties": {},
+		"protected_properties": {},
+		"private_properties": {},
+		"public_methods": {},
+		"protected_methods": {},
+		"private_methods": {}
+	},
+	"public_properties": {},
+	"protected_properties": {},
+	"private_properties": {},
+	"public_methods": {
+		"ZetaRet_Prototypes": "",
+		"rndstr": "l*: Number; return String",
+		"super": "args*: function_arguments|Array, cargs*: Array|Boolean, name: String; return Object",
+		"superize": "args*: function_arguments|Array, map: Object, setname: Boolean, setown: Boolean, defname: Boolean; return Object",
+		"setSuper": "superfn*: Function, fn: Function, name: String; return Function",
+		"setSubclass": "fn*: Function, superfn: Function, name: String; return Function",
+		"callSuper": "name*: String, args: Array, cname: String; return Object",
+		"callSuper2": "name*: String, args: Array, cname: String; return Object",
+		"callSuperX": "name*: String, args: Array, cname: String, thiscls: Function; return Object",
+		"getNextSuper": "name*: String, cname: String; return Function",
+		"getNextSuperX": "name*: String, cname: String, thiscls: Function; return Function",
+		"getSuper": "; return Object",
+		"getThis": "; return Object",
+		"callProto": "proto*: Function, name*: String, args: Array; return Object",
+		"callProto2": "proto*: Object, name*: String, args: Array; return Object",
+		"callProtoX": "proto*: Object, name*: String, args: Array; return Object",
+		"superList": "list*: Array, fn: Function, name: String, defname: Boolean; return Function",
+		"superList2": "list*: Array, fn: Function, name: String, defname: Boolean; return Function",
+		"getSupers": "fn: Function, name: String; return Array",
+		"getSupers2": "fn: Function, name: String; return Array",
+		"getReversedSupers": "fn: Function, name: String; return Array",
+		"hasSuper": "sfn*: Function, fn: Function, name: String; return Boolean",
+		"is": "sfn*: Function, fn: Function, name: String; return Boolean",
+		"abstract": "name: String, amap: Object, defname: Boolean; return Function",
+		"implement": "superfn*: Function, fn: Function, name: String; return Function",
+		"interface": "name: String, imap: Object, defname: Boolean; return Function",
+		"final": "args*: function_arguments|Array; return Object",
+		"statis": "args*: function_arguments|Array, statis: Function, _super: Object, setname: Boolean, setown: Boolean, defname: Boolean; return Object",
+		"getSuperName": "; return String",
+		"getSuperName2": "; return String",
+		"namespace": "ns*: String, cls*: Function, pack: Object; return Object",
+		"usens": "ns*: String, pack: Object; return Object",
+		"internal": "cls*: Function, pack: Object; return Object",
+		"package": "name*: String, scope: Object; return Object"
+	},
+	"protected_methods": {},
+	"private_methods": {},
+	"static_descriptions": {},
+	"descriptions": {
+		"rndstr": {
+			"l": "generates random string with length of characters",
+			"return": "random string"
+		},
+		"super": {
+			"args": "function arguments object if supported, or manually created Array [] with assigned 'callee' reference to the function class object",
+			"cargs": "Array used to call 'apply' of the super constructor function, Boolean true will use arguments as call arguments (cargs=args)",
+			"name": "String used to define the name of the constructor in the prototype, default __constructor",
+			"return": "constructor function result"
+		},
+		"superize": {
+			"args": "function arguments object if supported, or manually created Array [] with assigned 'callee' reference to the function class object",
+			"map": "if null will use 'this' object to enumerate all assigned functions, used for member methods, functions in map will be assigned to 'this'",
+			"setname": "changes name of iterated function according to key, function.aname",
+			"setown": "adds constructor name to function name, requires setname, i.e. 'myfunction#myclass', function.oname",
+			"defname": "adds setname and setown to function.name property",
+			"return": "with all functions assigned to this function class in particular"
+		},
+		"setSuper": {
+			"superfn": "the super function of fn or this",
+			"fn": "if null will use this function, fn extends superfn in effect, fn is subclass of superfn",
+			"name": "if null will use default __constructor",
+			"return": "superfn will be returned for chain calls"
+		},
+		"setSubclass": {
+			"fn": "fn extends superfn in effect, fn is subclass of superfn",
+			"superfn": "if null will use this function, the super function of fn",
+			"name": "if null will use default __constructor",
+			"return": "superfn will be returned for chain calls"
+		},
+		"callSuper": {
+			"name": "name of super function",
+			"args": "array of arguments to apply",
+			"cname": "constructor name, if null will use __constructor",
+			"return": "result of next super function different than this[name] function"
+		},
+		"callSuper2": {
+			"name": "name of super function",
+			"args": "array of arguments to apply",
+			"cname": "constructor name, if null will use __constructor",
+			"return": "result of super function, may call the same function object as this[name] function"
+		},
+		"callSuperX": {
+			"name": "name of super function",
+			"args": "array of arguments to apply",
+			"cname": "constructor name, if null will use __constructor",
+			"thiscls": "accepts current constructor class scope for continues upwards super calls, uses getNextSuperX, works with super constructor lists, compatible with XeltoSS (ProtoSS JS Class)",
+			"return": "result of next super function different than thiscls.prototype.map[name] function or this.map[name] function"
+		},
+		"getNextSuper": {
+			"name": "search super function by name in super map created by superize",
+			"cname": "constructor name, if null will use __constructor",
+			"return": "next function in super maps after calling getSupers()"
+		},
+		"getNextSuperX": {
+			"name": "search super function by name in super map created by superize",
+			"cname": "constructor name, if null will use __constructor",
+			"thiscls": "accepts current constructor class scope for interpolating next super properly, detects prototype method maps, compatible with XeltoSS (ProtoSS JS Class)",
+			"return": "next function in super maps after calling getSupers() on thiscls or this"
+		},
+		"getSuper": {
+			"return": "super object map of next super class as it was created by superize"
+		},
+		"getThis": {
+			"return": "super object map of this object as it was created by superize"
+		},
+		"callProto": {
+			"proto": "prototype constructor function of any of the supers, it will use super object map by proto.name",
+			"name": "name of the function to call on the super object map",
+			"args": "array of arguments to apply",
+			"return": "result of the super prototype function as it is defined in its function scope"
+		},
+		"callProto2": {
+			"proto": "super object map obtained from the same object, may simulate by using an Object with assigned 'constructor' from the supers",
+			"name": "name of the function to call on the super object map",
+			"args": "array of arguments to apply",
+			"return": "result of the super prototype function as it is defined in its function scope"
+		},
+		"callProtoX": {
+			"proto": "prototype constructor function of any of the supers, it will use super object map by proto.name or prototype of the function",
+			"name": "name of the function to call on the super object map or prototype of the function",
+			"args": "array of arguments to apply",
+			"return": "result of the super prototype function as it is defined in its function scope, support of XeltoSS (ProtoSS JS Class) prototype chain"
+		},
+		"superList": {
+			"list": "list of constructor functions used as supers",
+			"fn": "if null will use this, fn extends aggregate function which calls the list with constructors, the aggregate function uses __constructor_list instead of __constructor",
+			"name": "name of constructor, if null will use __constructor",
+			"defname": "adds function.name property, aname is always added now",
+			"return": "fn for chain calls"
+		},
+		"superList2": {
+			"list": "list of constructor functions used as supers",
+			"fn": "if null will use this, fn extends aggregate function which calls the list with constructors (uses same arguments for all supers, superList requires an array of arguments, each index exactly matching the super index), the aggregate function uses __constructor_list instead of __constructor",
+			"name": "name of constructor, if null will use __constructor",
+			"defname": "adds function.name property, aname is always added now",
+			"return": "fn for chain calls"
+		},
+		"getSupers": {
+			"fn": "if null will use this",
+			"name": "if null will use __constructor",
+			"return": "all super constructor functions, allows caching inside function object"
+		},
+		"getSupers2": {
+			"fn": "if null will use this",
+			"name": "if null will use __constructor",
+			"return": "super constructor function or functions (if super is aggregate will use __constructor_list"
+		},
+		"getReversedSupers": {
+			"fn": "if null will use this",
+			"name": "if null will use __constructor",
+			"return": "all super constructor functions, reversed order"
+		},
+		"hasSuper": {
+			"sfn": "super function to check against",
+			"fn": "if null will use this, to obtain all supers",
+			"name": "if null will use __constructor",
+			"return": "true - if it exists in the inheritance tree, otherwise false"
+		},
+		"is": {
+			"sfn": "super function to check against",
+			"fn": "if null will use this, to obtain all supers",
+			"name": "if null will use __constructor",
+			"return": "true - if it exists in the inheritance tree or equals this constructor, otherwise false"
+		},
+		"abstract": {
+			"name": "if null will use ZetaRet_Abstract_XXX13XXX",
+			"amap": "if null will use this, i.e. {term:0,date:0,record:3}.abstract()",
+			"defname": "adds function.name property, aname is always added now",
+			"return": "afn is aggregate function which generates methods according to map (uses statis), if key-value pair is [0,false,null,undefined,''] will throw abstract error, otherwise will return the value from the object map (i.e. .record() returns 3), abstract class throws error on instance, must be subclassed"
+		},
+		"implement": {
+			"superfn": "the super function of fn or this",
+			"fn": "if null will use this function, fn extends superfn in effect, fn is subclass of superfn",
+			"name": "if null will use default __constructor",
+			"return": "superfn will be returned for chain calls, [implement calls setSuper]"
+		},
+		"interface": {
+			"name": "if null will use ZetaRet_Interface_XXX13XXX",
+			"imap": "if null will use this, i.e. {term:[String, Number],date:[Date],record:[CustomRecordClass, IRecordData]}.interface()",
+			"defname": "adds function.name property, aname is always added now",
+			"return": "ifn is aggregate function which generates methods according to map (uses statis), methods will test arguments against map value input types, each method returns true or false, depending on matched types"
+		},
+		"final": {
+			"args": "compares this.constructor and args.callee, will throw error if not equal, a class with final call must not be a super",
+			"return": "this"
+		},
+		"statis": {
+			"args": "function arguments object if supported, or manually created Array [] with assigned 'callee' reference to the function class object",
+			"statis": "static function assign to object, these functions act like prototype functions and as such are not generated per new instance (superize), statis(Object s, Function constructor){s.myf=function(){};}",
+			"_super": "if null will use callee[prfx+callee.name+sffx] object to enumerate all assigned functions, used for member methods, functions in map will be assigned to 'this'",
+			"setname": "changes name of iterated function according to key, function.aname",
+			"setown": "adds constructor name to function name, requires setname, i.e. 'myfunction#myclass', function.oname",
+			"defname": "adds setname and setown to function.name property",
+			"return": "all functions assigned to this function class"
+		},
+		"getSuperName": {
+			"return": "package+::+name, works only on instances using constructor static properties"
+		},
+		"getSuperName2": {
+			"return": "package+::+name, works on instances and classes using constructor static properties"
+		},
+		"namespace": {
+			"ns": "id of namespace, will create new package in effect with prefix",
+			"cls": "function to import into package, uses internal call",
+			"pack": "if null uses this",
+			"return": "package object defining new namespace"
+		},
+		"usens": {
+			"ns": "id of namespace",
+			"pack": "if null uses this",
+			"return": "resolved package object using namespace prefix"
+		},
+		"internal": {
+			"cls": "class function, must provide name",
+			"pack": "if null uses this",
+			"return": "last package object"
+		},
+		"package": {
+			"name": "name of package, use .(dot) for delimiter",
+			"scope": "if null uses this, scope for attaching/reading package, use window in most of the time or globally accessible object",
+			"return": "last package object"
+		}
+	},
+	"static_examples": {},
+	"examples": {}
+}
