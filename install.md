@@ -3,7 +3,6 @@ __ProtoSS__ base is loaded and initiated using "new ZetaRet_Prototypes()". There
 __protoss.all.js__  - All ProtoSS functionality, no minimization applied, instance is generated immediately, __recommended__ use  
 __protoss.js__  - Standard ProtoSS functionality, no minimization applied, no instance  
 __min/protoss.min.js__  - Standard ProtoSS functionality, minimization applied, no instance, __smallest__  
-__min/protoss.tomin.js__  - Standard ProtoSS functionality, prepared for minimization, no instance  
 
 # Additional Files  
 __protoss.book.of.cheese.js__ must be preloaded before any other ProtoSS code, it adds polyfill implementation on base prototype primitives, usually not supported on mobile devices or old browsers  
@@ -25,7 +24,6 @@ __examples/inline.morph.XeltoSS.access.attributes.js__ design template of protec
 __protoss.all.js__ uses __dox/protoss.all.md__  
 __protoss.js__ uses __dox/protoss.md__  
 __min/protoss.min.js__ uses __dox/protoss.md__  
-__min/protoss.tomin.js__ uses __dox/protoss.md__  
 __dox/hints.txt__ exposes end case scenarios in OOP js concept  
 __dox/packager_guide.txt__ naming concept in packaging namespaces  
 __dox/jsondox_template.json__ structured template for PHP bundler and __Atom__ IDE using [ide-protoss](https://github.com/ZetaRet/ide-protoss)  
