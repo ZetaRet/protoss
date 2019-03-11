@@ -87,4 +87,3 @@ m.resolveCls=function(s, toppack, path){
 
 Example call resolveCls(zetaret.global.packages.clockwork.interfaces.IPatterns, window, "zetaret.global.packages.clockwork.patterns.interfaces");
 IPatterns is interface map, previously generated but attached to new path
-

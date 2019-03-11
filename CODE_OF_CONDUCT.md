@@ -40,11 +40,11 @@ Project maintainers who do not follow or enforce the Code of Conduct in good fai
 
 ## Terms of use
 
-Zeta Ret Terms apply https://zetaret.com/terms/ 
+Zeta Ret Terms apply https://zetaret.com/terms/
 
 ## Privacy Policy
 
-Zeta Ret Privacy Policy apply https://zetaret.com/privacy/ 
+Zeta Ret Privacy Policy apply https://zetaret.com/privacy/
 
 ## Attribution
 
