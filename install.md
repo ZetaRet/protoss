@@ -2,10 +2,12 @@
 __ProtoSS__ base is loaded and initiated using "new ZetaRet_Prototypes()". There are several bases you might choose to use:  
 __protoss.all.js__  - All ProtoSS functionality, no minimization applied, instance is generated immediately, __recommended__ use  
 __protoss.js__  - Standard ProtoSS functionality, no minimization applied, no instance  
+__min/protoss.all.min.js__  - All ProtoSS functionality, minimization applied, instance is generated immediately  
 __min/protoss.min.js__  - Standard ProtoSS functionality, minimization applied, no instance, __smallest__  
 
 # Additional Files  
 __protoss.book.of.cheese.js__ must be preloaded before any other ProtoSS code, it adds polyfill implementation on base prototype primitives, usually not supported on mobile devices or old browsers  
+__min/protoss.all.min.js.gz__ contains __protoss.all.min.js__  
 __min/protoss.min.js.gz__ contains __protoss.min.js__  
 __README.md__ ProtoSS home screen  
 
@@ -23,6 +25,7 @@ __examples/inline.morph.XeltoSS.access.attributes.js__ design template of protec
 # Documentation  
 __protoss.all.js__ uses __dox/protoss.all.md__  
 __protoss.js__ uses __dox/protoss.md__  
+__min/protoss.all.min.js__ uses __dox/protoss.all.md__  
 __min/protoss.min.js__ uses __dox/protoss.md__  
 __dox/hints.txt__ exposes end case scenarios in OOP js concept  
 __dox/packager_guide.txt__ naming concept in packaging namespaces  
