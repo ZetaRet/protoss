@@ -47,4 +47,4 @@ Plus (+) stands for added content
 Minus (-) stands for removed content  
 Asterix (\*) stands for modified content  
 
-It is recommended to add version static property in each branch class, and also in main comment section on top of the class file. Also provide information of the current version in commit title/description.  
+It is recommended to add version static property in each branch class, and also in main comment section on top of the class file. Also provide information of the current version in commit title/description.
