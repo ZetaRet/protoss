@@ -1,0 +1,108 @@
+{
+	"author": "Zeta Ret, Ivo Yankulovski",
+	"description": "Zeta Ret ProtoSS",
+	"text": "ProtoSS Class/Interface/Header Manager",
+	"requires": "protoss.all.js",
+	"version": "1.04c",
+	"date": "2017 - Today",
+	"supername": "ProtoSS",
+	"inherits": null,
+	"interfaces": ["IProtoSS"],
+	"static": {
+		"public_properties": {
+			"headerImplement": "Array: []",
+			"headerSuper": "Array: []",
+			"headerSuperList": "Array: []",
+			"headerSuperList2": "Array: []",
+			"stringmap": "Object: {}"
+		},
+		"protected_properties": {},
+		"private_properties": {},
+		"public_methods": {
+			"eventProps": "event*: Object, props*: Array; return Object",
+			"staticProps": "stat*: Object, props*: Object; return Object",
+			"getDefinitionByName": "sname*: String, toppack: Object; return Function"
+		},
+		"protected_methods": {},
+		"private_methods": {}
+	},
+	"public_properties": {
+		"autoImplement": "Boolean: true",
+		"autoSuper": "Boolean: true",
+		"autoSuperList": "Boolean: true",
+		"autoSuperList2": "Boolean: true",
+		"errorData": "Object: null",
+		"debug": "Function: null"
+	},
+	"protected_properties": {},
+	"private_properties": {},
+	"public_methods": {
+		"ProtoSS": "",
+		"toInterface": "i*: Object, pack: Object; return Object",
+		"stringPattern": "pat*: String, str*: String, pos: Number; return Array",
+		"getSuperCls": "sname*: String, toppack*: Object, path: String; return Function",
+		"resolveCls": "s*: Object, toppack: Object, path: String; return ProtoSS",
+		"resolveHeaders": "toppack: Object, path: String; return ProtoSS"
+	},
+	"protected_methods": {},
+	"private_methods": {},
+	"static_descriptions": {
+		"headerImplement": "define *implement* inheritance using an [ProtoSS Class|classsupername string, super in strings/class] template",
+		"headerSuper": "define *setSuper* inheritance using an [ProtoSS Class|classsupername string, super in strings/class] template",
+		"headerSuperList": "define *superList* inheritance using an [ProtoSS Clas|classsupername strings, Array of supers in strings/class] template",
+		"headerSuperList2": "define *superList2* inheritance using an [ProtoSS Class|classsupername string, Array of supers in strings/class] template",
+		"stringmap": "add dynamic string key-value pairs",
+		"eventProps": {
+			"event": "function object",
+			"props": "string properties",
+			"return": "event, props attached as uppercase keys including _CHANGE property"
+		},
+		"staticProps": {
+			"stat": "function object",
+			"props": "key-value pairs attached to stat object",
+			"return": "stat, props attached as is"
+		},
+		"getDefinitionByName": {
+			"sname": "class super name",
+			"toppack": "default is window"
+		}
+	},
+	"descriptions": {
+		"autoImplement": "resolveHeaders automatically implements interfaces using static __headerImplement__",
+		"autoSuper": "resolveHeaders automatically adds setSuper using static __headerSuper__",
+		"autoSuperList": "resolveHeaders automatically adds superList using static __headerSuperList__",
+		"autoSuperList2": "resolveHeaders automatically adds superList2 using static __headerSuperList2__",
+		"errorData": "resolveHeaders outputs error data upon throwing an error",
+		"debug": "resolveHeaders calls debug(\"error\", \"resolveHeaders\", o, o.errorData), where o=this",
+		"toInterface": {
+			"i": "key-value map of interface definitions",
+			"pack": "pack obj to *internal* the interface",
+			"return": "interface map"
+		},
+		"stringPattern": {
+			"pat": "pattern to search in str string",
+			"str": "string to search in for patterns",
+			"pos": "initial position to start the search",
+			"return": "0 - number of patterns found; 1 - str without found patterns"
+		},
+		"getSuperCls": {
+			"sname": "super name split in pipes | to allow multiple super check",
+			"toppack": "package object to search in",
+			"path": "path used to append to found patterns of parent search /",
+			"return": "first found reading left to right"
+		},
+		"resolveCls": {
+			"s": "map of string classes to convert using *getSuperCls*",
+			"toppack": "pass var to *getSuperCls*",
+			"path": "pass var to *getSuperCls*",
+			"return": "current scope object"
+		},
+		"resolveHeaders": {
+			"toppack": "pass var to *getSuperCls*",
+			"path": "pass var to *getSuperCls*",
+			"return": "current scope object, resolves all headers from static properties"
+		}
+	},
+	"static_examples": {},
+	"examples": {}
+}
