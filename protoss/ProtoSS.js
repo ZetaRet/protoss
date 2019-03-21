@@ -2,7 +2,7 @@
  * Author: Zeta Ret, Ivo Yankulovski
  * Zeta Ret ProtoSS
  * ProtoSS Class/Interface/Header Manager
- * Requires: protoss.all.js v1.04a
+ * Requires: protoss.all.js
  * Version: 1.04c
  * Date: 2017 - Today
  **/
