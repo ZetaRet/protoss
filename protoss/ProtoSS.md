@@ -2,7 +2,7 @@
 > __Zeta Ret ProtoSS__  
 # ProtoSS Class/Interface/Header Manager  
 > *Requires: protoss.all.js*  
-> *Version: 1.04c*  
+> *Version: 1.06*  
 > *Date: 2017 - Today*  
 
 __required*__
