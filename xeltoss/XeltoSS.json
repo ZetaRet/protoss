@@ -1,0 +1,416 @@
+{
+	"author": "Zeta Ret, Ivo Yankulovski",
+	"description": "Zeta Ret XeltoSS",
+	"text": "ProtoSS Transformator to JS Class",
+	"requires": "protoss.all.js",
+	"version": "1.06",
+	"date": "2017 - Today",
+	"supername": "XeltoSS",
+	"inherits": null,
+	"interfaces": ["IXeltoSS"],
+	"static": {
+		"public_properties": {
+			"__InitXeltoSSPrototypes": "Boolean: false"
+		},
+		"protected_properties": {},
+		"private_properties": {},
+		"public_methods": {
+			"InitXeltoSSPrototypes": "override: Boolean; return XeltoSS",
+			"superx": "args*: function_arguments|Array, cargs*: Array|Boolean , name: String; return  Object",
+			"getSuperx": "fn: Function, name: String; return Array",
+			"ix": "sfn*: Function, fn: Function, name: String; return Boolean",
+			"xcoped": "scope*: Object; return Function"
+		},
+		"protected_methods": {},
+		"private_methods": {}
+	},
+	"public_properties": {
+		"scriptContainer": "HTMLElement: null",
+		"scriptContainerAppendMethod": "String: 'appendChild'",
+		"protossPrefix": "String: 'protoss__'",
+		"xeltossPrefix": "String: 'xeltoss__'",
+		"xeltossMethodSuffix": "String: 'X'",
+		"statisAsStatic": "Boolean: false",
+		"embedMaps": "Object: {}",
+		"augmentKeyMap": "Object: {}",
+		"noKeyIdentificationChain": "Object: {}",
+		"toppack": "Object: null",
+		"scopeMap": "Object: {}",
+		"preserveScope": "Boolean: false",
+		"fractalizedScope": "Boolean: false",
+		"obscureTimers": "Boolean: false",
+		"setInterval": "Function: null",
+		"setTimeout": "Function: null",
+		"tokens": "Object: null",
+		"keywords": "Object: null",
+		"operators": "Object: null",
+		"autoget": "Boolean: true",
+		"autoGetPrefix": "String: 'get_'",
+		"autoset": "Boolean: true",
+		"autoSetPrefix": "String: 'set_'",
+		"methodJoin": "String: ''",
+		"bodyJoin": "String: ''",
+		"overextendHandler": "Function: null",
+		"classHandler": "Function: null",
+		"tossIgnore": "Boolean: false",
+		"deflatInterfaces": "Boolean: true",
+		"deflatAbstracts": "Boolean: true",
+		"deflatConstructs": "Boolean: true",
+		"deflatInheritance": "Boolean: true",
+		"deflatStruct": "Object: {}",
+		"objectStringify": "Function: null",
+		"arrayStringify": "Function: null",
+		"methodTransfer": "Boolean: false",
+		"autoConstructor": "Boolean: true",
+		"constructorKeys": "Array: ['construct', '_construct', '_constructor']",
+		"mergeConstructors": "Boolean: true",
+		"inverseMergeConstructors": "Boolean: false",
+		"replicaConstructors": "Boolean: false",
+		"constructorMap": "Object: {}",
+		"autoDestructor": "Boolean: true",
+		"destructorKeys": "Array: ['destruct', '_destruct', '_destructor']",
+		"allowSetters": "Boolean: true",
+		"allowGetters": "Boolean: true",
+		"allowAsync": "Boolean: false",
+		"AsyncFunction": "Function: null",
+		"allowGenerator": "Boolean: false",
+		"GeneratorFunction": "Function: null",
+		"ASTConstructor": "Function: null",
+		"bodyAssembler": "Function: null",
+		"methodAssembler": "Function: null",
+		"argsLookup": "Function: null",
+		"aststruct": "Object: null",
+		"proxyASTBuilder": "Function: null",
+		"proxyInstructions": "Function: null",
+		"deflat": "Function: null",
+		"chmod": "Number: 0"
+	},
+	"protected_properties": {},
+	"private_properties": {},
+	"public_methods": {
+		"XeltoSS": "",
+		"initTokens": "; return XeltoSS",
+		"initKeywords": "; return XeltoSS",
+		"initOperators": "; return XeltoSS",
+		"initAsync": "; return XeltoSS",
+		"initGenerator": "; return XeltoSS",
+		"updateTimers": "obscure: Boolean; return XeltoSS",
+		"hashString": "str*: String; return String",
+		"decomposeFunction": "f*: Function; return Array",
+		"deflatCls": "obj*: Object, maps: Object, interfaces: Boolean, abstracts: Boolean, constructs: Boolean, inheritance: Boolean; return XeltoSS",
+		"getConstructorArgs": "clsconstructor*: Function, obj*: Object, key*: String, data: Object; return String",
+		"buildInstructions": "fbody*: String, cls*: Function; return Array",
+		"buildASTObject": "cls*: Function; return Object",
+		"identifyKeyChain": "obj*: Object, identifyKeyHandler*: Function; return XeltoSS",
+		"addEmbedMap": "obj*: Object, keyHandlerMap*: Object; return XeltoSS",
+		"augmentKey": "obj*: Object, akeyMap*: Object; return XeltoSS",
+		"argumentKeyMatch": "orshift: Number, defval: Object, formatter: Function; return Function",
+		"valToString": "val*: Object; return String",
+		"findMethodInMaps": "obj*: Object, key*: String, method*: Function, maps*: Array; return Object",
+		"toCls": "obj*: Object, clsname: String, clssuper: String, deflat: Boolean, polymaps: Object, reservedwordsmap: Object, emptify: Boolean; return String",
+		"ClsFactoryFromStringCls": "clss*: String; return Function",
+		"toClsFactory": "obj*: Object, clsname: String, clssuper: String, deflat: Boolean, polymaps: Object, reservedwordsmap: Object, emptify: Boolean; return Function",
+		"toClsBlobScript": "clss*: String, prefix: String, suffix: String; return HTMLElement",
+		"toClsScript": "clss*: String, prefix: String, suffix: String; return HTMLElement",
+		"reconstruct": "cls*: Function, clsname: String, clssuper: String, deflat: Boolean, polymaps: Object, reservedwordsmap: Object, emptify: Boolean, useclsfactory: Boolean; return Function",
+		"autodestroy": "obj: Object; return Boolean",
+		"hybrid": "escls*: Function, protcls*: Function, obj*: Object, swap: Boolean, polymaps: Object; return XeltoSS",
+		"xeltoss": "cls*: Function, clsname: String, clssuper: String, deflat: Boolean, polymaps: Object, reservedwordsmap: Object, emptify: Boolean, useclsfactory: Boolean; return Function",
+		"protoss": "cls*: Function; return Function",
+		"_constructor": "",
+		"_destructor": ""
+	},
+	"protected_methods": {},
+	"private_methods": {},
+	"static_descriptions": {
+		"__InitXeltoSSPrototypes": "flag state of InitXeltoSSPrototypes",
+		"InitXeltoSSPrototypes": {
+			"this": "static method of XeltoSS Object",
+			"override": "mark XeltoSS Prototype for overriding, will reinstall prototypes in effect",
+			"return": "self XeltoSS class"
+		},
+		"superx": {
+			"this": "Object Prototype",
+			"args": "function arguments object if supported, or manually created Array [] with assigned 'callee' reference to the function class object",
+			"cargs": "Array used to call 'apply' of the super constructor function, Boolean true will use arguments as call arguments (cargs=args)",
+			"name": "used to define the name of the constructor in the prototype, default \\_\\_constructor",
+			"return": "constructor function result or 'undefined' for duplicated super constructor (or no constructor)"
+		},
+		"getSuperx": {
+			"this": "Object Prototype",
+			"fn": "if null will use this",
+			"name": "if null will use \\_\\_constructor",
+			"return": "of super constructor function or functions in XeltoSS mode (if super is aggregate will use \\_\\_constructor_list)"
+		},
+		"ix": {
+			"this": "Object Prototype",
+			"sfn": "super XeltoSS function to check against",
+			"fn": "if null will use this, to obtain all supers",
+			"name": "if null will use \\_\\_constructor",
+			"return": "true - if it exists in the inheritance tree or equals this constructor in XeltoSS mode, otherwise false"
+		},
+		"xcoped": {
+			"this": "Function Prototype",
+			"scope": "usually 'this' in classes or original function owner",
+			"return": "new function wrapper calling original using scope"
+		}
+	},
+	"descriptions": {
+		"scriptContainer": "container to append new script tags",
+		"scriptContainerAppendMethod": "method name to call at __scriptContainer__",
+		"protossPrefix": "prefix in package",
+		"xeltossPrefix": "prefix in package",
+		"xeltossMethodSuffix": "x scoped method suffix after transpile (add '\\_x' in function definition to preserve scope, lookup Function.prototype.xcoped)",
+		"statisAsStatic": "methods added using 'statis' will be converted to static of the class",
+		"embedMaps": "used in 'addEmbedMap' and 'toCls', matches object supername and key in order to build custom body properties defined externally",
+		"augmentKeyMap": "used in 'augmentKey' and 'argumentKeyMatch', identify alternative keys based on augmenting object supername",
+		"noKeyIdentificationChain": "used in 'argumentKeyMatch' and 'identifyKeyChain' to identify missing key values, misconfiguration might result 'void'",
+		"toppack": "top package you should set 'window' in most cases, used everywhere inside code to obtain classes by supername",
+		"scopeMap": "scope cache map used in external or proxy builders (usually will refer to it through XeltoSS this object as shared memory mechanism)",
+		"preserveScope": "protected methods using '\\_p' will generate scoped method and replace original (lookup Function.prototype.xcoped)",
+		"fractalizedScope": "used in external and proxy AST/instruction builders to successfully identify stacks of scope (usually achieved by defining functions inside each other and referring to scope outside its own), this concept is not implemented in the majority of source code parsers but in Virtual Machines",
+		"obscureTimers": "remove setInterval and setTimeout during hybridization process",
+		"setInterval": "reference to original setInterval function",
+		"setTimeout": "reference to original setTimeout function",
+		"tokens": "map of string tokens",
+		"keywords": "map of string keywords",
+		"operators": "map of string operators",
+		"autoget": "allow automatic conversion of marked methods as getters",
+		"autoGetPrefix": "method name prefix mark",
+		"autoset": "allow automatic conversion of marked methods as setters",
+		"autoSetPrefix": "method name prefix mark",
+		"methodJoin": "used string in joining method array",
+		"bodyJoin": "used string in joining body logic array",
+		"overextendHandler": "define custom extraction of body properties",
+		"classHandler": "define custom construction of class output string",
+		"tossIgnore": "disable ProtoSS transfer of prototypes, method maps and method transfer",
+		"deflatInterfaces": "used in assembly process if deflat allowed",
+		"deflatAbstracts": "used in assembly process if deflat allowed",
+		"deflatConstructs": "used in assembly process if deflat allowed",
+		"deflatInheritance": "used in assembly process if deflat allowed",
+		"deflatStruct": "used through 'deflatCls'",
+		"objectStringify": "custom stringification of objects, lookup JSON.stringify",
+		"arrayStringify": "custom stringification of arrays, lookup JSON.stringify",
+		"methodTransfer": "inherited methods will not be added to class definition, can be transfered from super prototype",
+		"autoConstructor": "constructor method key must be equal to class name to initiate default constructor policy, lookup 'constructorKeys'",
+		"constructorKeys": "add constructor body to class body",
+		"mergeConstructors": "allow all constructors including inherited to be merged in class constructor",
+		"inverseMergeConstructors": "use reversed order of super constructors",
+		"replicaConstructors": "allow merge of the same super constructor in diamond inheritance",
+		"constructorMap": "inherited cache of constructors, used in 'mergeConstructors' process",
+		"autoDestructor": "allow XeltoSS to auto destroy upon xeltoss hybridization",
+		"destructorKeys": "invoke destructor upon end of xeltoss hybridization",
+		"allowSetters": "extract and verify defined setters into new class",
+		"allowGetters": "extract and verify defined getters into new class",
+		"allowAsync": "extract and verify defined async methods into new class",
+		"AsyncFunction": "AsyncFunction Primitive definition",
+		"allowGenerator": "extract and verify defined generator methods into new class",
+		"GeneratorFunction": "GeneratorFunction Primitive definition",
+		"ASTConstructor": "Abstract Syntax Tree Primitive definition, lookup 'xeltoss/ASTConstructor.js'",
+		"bodyAssembler": "invoke upon every body property addition during class construction process",
+		"methodAssembler": "invoke upon every method addition during class construction process",
+		"argsLookup": "used in 'getConstructorArgs'",
+		"aststruct": "defined in 'buildASTObject' after calling 'buildInstructions'",
+		"proxyASTBuilder": "used in 'buildASTObject' as external Abstract Syntax Tree Object builder (usually Virtual Machine or source code parser)",
+		"proxyInstructions": "used in 'buildInstructions'",
+		"deflat": "extract any additional information regarding instance according to deflat properties",
+		"chmod": "used in 'buildInstructions' (usually defines mode of character reading throughout source code)",
+		"initTokens": {
+			"this": "constructs 'tokens' object",
+			"return": "self"
+		},
+		"initKeywords": {
+			"this": "constructs 'keywords' object",
+			"return": "self"
+		},
+		"initOperators": {
+			"this": "constructs 'operator' object",
+			"return": "self"
+		},
+		"initAsync": {
+			"this": "constructs 'AsyncFunction' and allows async",
+			"return": "self"
+		},
+		"initGenerator": {
+			"this": "constructs 'GeneratorFunction' and allows generator",
+			"return": "self"
+		},
+		"updateTimers": {
+			"obscure": "if true will remove setInterval/setTimeout otherwise will revert",
+			"return": "self"
+		},
+		"hashString": {
+			"str": "bitshifted version will be generated",
+			"return": "hash version of input str"
+		},
+		"decomposeFunction": {
+			"f": "any function",
+			"return": "0-name:__String__, 1-arguments keyname:__Array__, 2-function body:__String__, 3-hash of f body:__String__, 4-function header:__String__"
+		},
+		"deflatCls": {
+			"obj": "object in reconstruction, instance of ProtoSS constructor or custom format",
+			"maps": "extracted polymorphic maps from 'obj'",
+			"interfaces": "modify interfaces",
+			"abstracts": "modify abstract classes",
+			"constructs": "modify constructors",
+			"inheritance": "modify hierarchy and its constructors",
+			"return": "self"
+		},
+		"getConstructorArgs": {
+			"clsconstructor": "corresponding constructor in 'obj' key-value",
+			"obj": "host object",
+			"key": "key on host object",
+			"data": "additional data for 'argsLookup', usually polymorphic maps",
+			"return": "arguments string representation ready for function construction"
+		},
+		"buildInstructions": {
+			"fbody": "class source in string format",
+			"cls": "function reference to fbody string",
+			"return": "code instructions representing source"
+		},
+		"buildASTObject": {
+			"cls": "uses 'proxyASTBuilder' or 'new' instance as default behaviour in JS VM and 'buildInstructions' aststruct extraction",
+			"return": "default is cls instance as it is generated by JS VM"
+		},
+		"identifyKeyChain": {
+			"obj": "host object, obtains supername string",
+			"identifyKeyHandler": "function nkic(obj,k,d,s) mapped by supername",
+			"return": "self"
+		},
+		"addEmbedMap": {
+			"obj": "host object, obtains supername string",
+			"keyHandlerMap": "key-function object map, 'em[sname]\\[k]\\(obj,k,decomp,sname)', functions can be generated with 'argumentKeyMatch'",
+			"return": "self"
+		},
+		"augmentKey": {
+			"obj": "host object, obtains supername string",
+			"akeyMap": "key-array object map, must be generated 'augmentKeyMap[sname]\\[key]=[]' using lower case keys, used in 'argumentKeyMatch'",
+			"return": "self"
+		},
+		"argumentKeyMatch": {
+			"orshift": "configure argument index shift upon matching it with 'augmentKeyMap' by supername 's'",
+			"defval": "default value, return using 'valToString' and special keyword implementations (self, this, byte, word, void), lookup 'noKeyIdentificationChain'",
+			"formatter": "format upon return 'formatter(kv,fkv,defval,obj,k,d,s)'",
+			"return": "function(obj,k,d,s) used in 'addEmbedMap'"
+		},
+		"valToString": {
+			"val": "uses standard methods of convertion, objects and arrays may be converted using 'objectStringufy' and 'arrayStringify'",
+			"return": "parsed val into String, acceptable by VM as a property, i.e. class constructor property"
+		},
+		"findMethodInMaps": {
+			"obj": "obtains maps by map key",
+			"key": "method key",
+			"method": "method reference",
+			"maps": "map keys in supers order",
+			"return": "super method map owner of the method"
+		},
+		"toCls": {
+			"obj": "ProtoSS instance or ASTObject used to construct class string",
+			"clsname": "JS Class name or cls name",
+			"clssuper": "JS Super class name (extends property) or none",
+			"deflat": "will call external deflatter to finalize property and method extraction during reconstruction phase",
+			"polymaps": "initial polymorphic references",
+			"reservedwordsmap": "default key names",
+			"emptify": "empty Object/Array or null values in properties",
+			"return": "class representation in String format"
+		},
+		"ClsFactoryFromStringCls": {
+			"clss": "class representation in String format, will be wrapped in Function return body",
+			"return": "factory/generator of XeltoSS class, a call is required to return class reference"
+		},
+		"toClsFactory": {
+			"cls": "ProtoSS class, exchange in package default to XeltoSS",
+			"clsname": "JS Class name or cls name",
+			"clssuper": "JS Super class name (extends property) or none",
+			"deflat": "will call external deflatter to finalize property and method extraction during reconstruction phase",
+			"polymaps": "initial polymorphic references",
+			"reservedwordsmap": "default key names",
+			"emptify": "empty Object/Array or null values in properties",
+			"return": "factory/generator of XeltoSS class, a call is required to return class reference"
+		},
+		"toClsBlobScript": {
+			"clss": "script body converted to blob file with url",
+			"prefix": "surround prefix of script body",
+			"suffix": "surround suffix of script body",
+			"return": "script tag with blob url to js file"
+		},
+		"toClsScript": {
+			"clss": "script body imported in tag directly",
+			"prefix": "surround prefix of script body",
+			"suffix": "surround suffix of script body",
+			"return": "script tag with js body"
+		},
+		"reconstruct": {
+			"cls": "ProtoSS class, exchange in package default to XeltoSS",
+			"clsname": "JS Class name or cls name",
+			"clssuper": "JS Super class name (extends property) or none",
+			"deflat": "will call external deflatter to finalize property and method extraction during reconstruction phase",
+			"polymaps": "initial polymorphic references",
+			"reservedwordsmap": "default key names",
+			"emptify": "empty Object/Array or null values in properties",
+			"useclsfactory": "use 'toClsFactory' instead of 'toClsScript'",
+			"return": "XeltoSS class"
+		},
+		"autodestroy": {
+			"obj": "if 'autoDestructor' will try 'destructorKeys' on obj to call destructor method",
+			"return": "true=successful destroy"
+		},
+		"hybrid": {
+			"escls": "JS Class, any class can be converted to XeltoSS Hybrid",
+			"protcls": "ProtoSS Class, any class can be converted to prototype class of the XeltoSS Hybrid",
+			"obj": "ProtoSS or JS Class instance, extracts super hierarchy",
+			"swap": "exchange in package to XeltoSS Hybrid (JS+ProtoSS class)",
+			"polymaps": "polymorphic references as usually constructed by 'toCls'",
+			"return": "self"
+		},
+		"xeltoss": {
+			"cls": "ProtoSS class, exchange in package default to XeltoSS",
+			"clsname": "JS Class name or cls name",
+			"clssuper": "JS Super class name (extends property) or none",
+			"deflat": "will call external deflatter to finalize property and method extraction during reconstruction phase",
+			"polymaps": "initial polymorphic references",
+			"reservedwordsmap": "default key names",
+			"emptify": "empty Object/Array or null values in properties",
+			"useclsfactory": "use 'toClsFactory' instead of 'toClsScript'",
+			"return": "XeltoSS class"
+		},
+		"protoss": {
+			"cls": "XeltoSS class, exchange in package default to ProtoSS",
+			"return": "ProtoSS class"
+		},
+		"_constructor": {
+			"return": "creates static instance"
+		},
+		"_destructor": {
+			"return": "cleans static instance"
+		}
+	},
+	"static_examples": {},
+	"examples": {
+		"deflatCls": [
+			"if (o.deflat) {",
+			"\to.deflat.call(o, obj, maps, interfaces, abstracts, constructs, inheritance);",
+			"}"
+		],
+		"getConstructorArgs": [
+			"if (o.argsLookup) {",
+			"\treturn o.argsLookup.call(o, clsconstructor, obj, key, data);",
+			"}"
+		],
+		"buildInstructions": [
+			"var fbl = fbody.length, ch = o.chmod, instr = [];",
+			"if (fbl > 0 && o.proxyInstructions) {",
+			"\treturn o.proxyInstructions.call(o, fbody, cls, ch, instr);",
+			"}",
+			"return instr;"
+		],
+		"buildASTObject": [
+			"if (!o.proxyASTBuilder) {",
+			"\tvar ast = new cls();",
+			"\to.aststruct = o.buildInstructions(cls.toString(), cls);",
+			"\treturn ast;",
+			"}",
+			"return o.proxyASTBuilder.call(o, cls);"
+		]
+	}
+}

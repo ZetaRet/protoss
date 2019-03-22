@@ -2,8 +2,8 @@
  * Author: Zeta Ret, Ivo Yankulovski
  * Zeta Ret XeltoSS
  * ProtoSS Transformator to JS Class
- * Requires: protoss.all.js v1.04b
- * Version: 1.04c
+ * Requires: protoss.all.js
+ * Version: 1.06
  * Date: 2017 - Today
  **/
 window.internal(
