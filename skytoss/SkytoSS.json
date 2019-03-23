@@ -1,0 +1,326 @@
+{
+	"author": "Zeta Ret, Ivo Yankulovski",
+	"description": "Zeta Ret SkytoSS",
+	"text": "SkytoSS Accelerator, ProtoSS GPU Acceleration and Web Workers",
+	"requires": "protoss.all.js",
+	"version": "1.06",
+	"date": "2018 - Today",
+	"supername": "SkytoSS",
+	"inherits": null,
+	"interfaces": ["ISkytoSS"],
+	"static": {
+		"public_properties": {
+			"TEMPLATES": "Object: init",
+			"WORKERS": "Object: init",
+			"__InitSkytoSSPrototypes": "Boolean: false"
+		},
+		"protected_properties": {},
+		"private_properties": {},
+		"public_methods": {
+			"InitSkytoSSPrototypes": "override: Boolean; return SkytoSS",
+			"const": "key*: String, value*: Object; return Object",
+			"constMap": "value*: Object; return Object",
+			"shell": "keys*: Array; return Object",
+			"ys": "shell*: Object, dome*: Object; return Boolean",
+			"skydome": "name*: String, id*: String, shell: Object, holes: Object, scope: Object; return Object",
+			"deepsky": "keyreg*: RegExp, depth: Number, shell: Object, scope: Object, toppack: Object; return Array"
+		},
+		"protected_methods": {},
+		"private_methods": {}
+	},
+	"public_properties": {
+		"skytossName": "String: 'skytoss'",
+		"mainPrefix": "String: 'RTYPE FNAME(ARGS){'",
+		"propDefault": "String: comment",
+		"mainDefault": "String: comment",
+		"mainSuffix": "String: '}'",
+		"joinLine": "String: '\\n'",
+		"attributeName": "String: 'attribute'",
+		"workerIds": "Object: {}",
+		"gpuIds": "Object: {}",
+		"defaultWorkerType": "String: 'normal'",
+		"glContextIds": "Array: ['webgl2', 'webgl', 'experimental-webgl']",
+		"expressionMap": "WeakMap: new",
+		"templates": "Object: {}",
+		"debugGPU": "Boolean: false",
+		"gpuShaderLogHandler": "Function: null",
+		"autoDrawGPU": "Boolean: false",
+		"graviton": "Object: {}",
+		"definitions": "Object: {}"
+	},
+	"protected_properties": {},
+	"private_properties": {},
+	"public_methods": {
+		"SkytoSS": "",
+		"getTemplate": "id*: String; return Function",
+		"setTemplate": "id*: String, handler*: Function; return SkytoSS",
+		"iterateTemplate": "s1*: String, s2*: String, s3*: String, expression*: String; return String",
+		"ifElseTemplate": "conditions*: Array, elsebody: String; return String",
+		"argsTemplate": "args*: Array; return String",
+		"functionTemplate": "name: String, returnType: String, args: Array, props: Object, main: String|Array, prefix: String, suffix: String; return String",
+		"setExpressionMap": "type*: Function, handler*: Function; return SkytoSS",
+		"evalExpression": "exp*: Object; return Object",
+		"sourceTemplate": "attr: Object, mprops: Object, main: String|Array, functions: Object, prepend: String|Array, append: String|Array; return String",
+		"seedTemplate": "seed: Number; return Object",
+		"lineWrapper": "line*: Array, noreturn: Boolean, props: Object; return String",
+		"gpuWrapRandomizer": "seeder*: Object; return Object",
+		"gpuShader": "gpu*: WebGLRenderingContext, source*: String, type*: Number; return WebGLShader",
+		"gpuBuffer": "gpu*: WebGLRenderingContext, bufferdata*: Array, target: Number, type: ArrayBufferView, usage: Number; return WebGLBuffer",
+		"gpuPreProgrammer": "gpu*: WebGLRenderingContext, gpuData*: Object, id*: String, settings*: Object, bufferData*: Object",
+		"gpuProgrammer": "gpu*: WebGLRenderingContext, gpuData*: Object, id*: String, settings*: Object",
+		"newGPU": "sourcev*: String, sourcef*: String, id: String, options: Object, width: Number, height: Number; return String",
+		"addGPU": "gpu*: WebGLRenderingContext, sourcev*: String, sourcef*: String, id: String; return String",
+		"getGPU": "id*: String; return Object",
+		"useGPU": "id*: String, handler: Function, settings: Object, bufferData: Object, readBufferType: ArrayBufferView, glPreProgrammer: Function, glProgrammer: Function, glClear: Function; return Boolean",
+		"clearGPUBuffer": "id*: String; return Boolean",
+		"deleteGPU": "id*: String; return Boolean",
+		"gpuProperty": "value*: String, type: String; return Object",
+		"gpuAttribute": "type*: String, value: String, attrname: String, noattrname: Boolean, loc: Object; return Object",
+		"gpuFunction": "rtype: String, args: Array, props: Object, main: String|Array, prefix: String, suffix: String; return Object",
+		"gpuUniform": "value*: String, int: Boolean; return Object",
+		"gpuUniformMatrix": "value*: String, num*: Number, transpose: Boolean; return Object",
+		"gpuBufferData": "data*: Array, size*: Number, target: Number, type: ArrayBufferView, usage: Number,  dataType: Number, vector: ArrayBufferView, buffer: WebGLBuffer, noloc: Boolean, loc: Object, normalized: Boolean, stride: Number, offset: Number; return Object",
+		"gpuSettings": "uniform: Object, drawMethod: Function, drawArgs: Array, drawCount: Number, bufferCellSize: Number, readFormat: Number, readType: Number; return Object",
+		"newWorker": "src*: String, id: String, type: String, options: Object, srcurl: Boolean; return String",
+		"getWorker": "id*: String; return Worker|SharedWorker",
+		"commandWorker": "id*: String, command*: String, data: Object, transfer: Array; return Boolean",
+		"deleteWorker": "id*: String; return Boolean"
+	},
+	"protected_methods": {},
+	"private_methods": {},
+	"static_descriptions": {
+		"TEMPLATES": "object enumerating template string ids",
+		"WORKERS": "object enumerating worker string types",
+		"__InitSkytoSSPrototypes": "flag state of InitSkytoSSPrototypes",
+		"InitSkytoSSPrototypes": {
+			"override": "mark SkytoSS Prototype for overriding, will reinstall prototypes in effect",
+			"return": "self SkytoSS class"
+		},
+		"const": {
+			"this": "Object Prototype",
+			"key": "key of constant",
+			"value": "value of constant",
+			"return": "argument value, dynamically defined constant to scope"
+		},
+		"constMap": {
+			"this": "Object Prototype",
+			"value": "map of key-value to create constants",
+			"return": "argument value, dynamically defined constants to scope"
+		},
+		"shell": {
+			"this": "Object Prototype",
+			"keys": "keys to extract from scope",
+			"return": "object with key-types based on constructor of value from scope"
+		},
+		"ys": {
+			"this": "Object Prototype",
+			"shell": "object to test type interface in the dome",
+			"dome": "dome definition in package or scope",
+			"return": "shell keys must not be in dome holes, must be defined and value of the key must pass test of the type [constructor, instanceOf, ProtoSS.is]"
+		},
+		"skydome": {
+			"this": "Object Prototype",
+			"name": "name of created new package in scope",
+			"id": "id of the SkyDome in the created package",
+			"shell": "shell with key-types to test interface",
+			"holes": "keys of the holes to forbid shell interface",
+			"scope": "scope to create package in or this",
+			"return": "SkyDome object definition {name, type, shell, holes}"
+		},
+		"deepsky": {
+			"this": "Object Prototype",
+			"keyreg": "keys of objects inside packaging system must pass test",
+			"depth": "depth to test packaging system",
+			"shell": "shell to test objects using SkytoSS.ys",
+			"scope": "object/package in packaging system or this",
+			"toppack": "top package or window",
+			"return": "found objects in the entire packaging system passing the test of keyreg and shell"
+		}
+	},
+	"descriptions": {
+		"skytossName": "name identifier of SkytoSS instance",
+		"mainPrefix": "prefix template of main function",
+		"propDefault": "function properties string template in the event of no properties applied",
+		"mainDefault": "main function body template in the event of no source",
+		"mainSuffix": "suffix template of main function",
+		"joinLine": "line joiner string used in source array join statement",
+		"attributeName": "default vertex shader property prefix",
+		"workerIds": "map of Workers by id",
+		"gpuIds": "map of GPU Data by id",
+		"defaultWorkerType": "Worker or SharedWorker based on type",
+		"glContextIds": "GL get context types",
+		"expressionMap": "map of constructor types used in 'evalExpression'",
+		"templates": "map of template function used in source print",
+		"debugGPU": "use console features on GPU activity",
+		"gpuShaderLogHandler": "output shader log status",
+		"autoDrawGPU": "activate auto GPU functionality in 'useGPU'",
+		"graviton": "accelerator meta data by custom id, used in buffers/particles/randomizer",
+		"definitions": "definitions by id used in workers, ProtoSS synthesis instructions",
+		"getTemplate": {
+			"id": "id of template in the map",
+			"return": "template function handler"
+		},
+		"setTemplate": {
+			"id": "id of template handler in the map",
+			"handler": "function mapped to template id",
+			"return": "self"
+		},
+		"iterateTemplate": {
+			"s1": "statement 1 of the for iterator, initialization",
+			"s2": "statement 2 of the for iterator, precondition",
+			"s3": "statement 3 of the for iterator, counter",
+			"expression": "iterator expression source, loop body",
+			"return": "for iterator source template"
+		},
+		"ifElseTemplate": {
+			"conditions": "array of [condition, body], 'if' on index 0, 'else if' for any consequential index",
+			"elsebody": "'else' body",
+			"return": "[if, else if, else] source template"
+		},
+		"argsTemplate": {
+			"args": "array of strings in 2 templates, [1] 'Type key' or [2] 'key'",
+			"return": "map of key type"
+		},
+		"functionTemplate": {
+			"name": "name of function or 'main'",
+			"returnType": "type of return or 'void'",
+			"args": "array of arguments",
+			"props": "map of properties",
+			"main": "body source",
+			"prefix": "prefix function source or 'mainPrefix'",
+			"suffix": "suffix function source or 'mainSuffix'",
+			"return": "function with arguments, return type and body source template"
+		},
+		"setExpressionMap": {
+			"type": "constructor function to evaluate value by type",
+			"handler": "type function handler by value",
+			"return": "self"
+		},
+		"evalExpression": {
+			"exp": "expression to evaluate using 'expressionMap'",
+			"return": "type evaluation by map or exp"
+		},
+		"sourceTemplate": {
+			"attr": "map of attributes",
+			"mprops": "map of properties",
+			"main": "main body source",
+			"functions": "map of functions",
+			"prepend": "prepend source to final output",
+			"append": "append source to final output",
+			"return": "gpu source program"
+		},
+		"seedTemplate": {
+			"seed": "initial seed or 0",
+			"return": "randomizer seed object"
+		},
+		"lineWrapper": {
+			"line": "array of source lines",
+			"noreturn": "mark last line as return",
+			"props": "replace properties in line string by key value",
+			"return": "source of lines"
+		},
+		"gpuWrapRandomizer": {
+			"seeder": "randomizer seed object",
+			"return": "GPU wrapper object {attr, code, main}"
+		},
+		"gpuShader": {
+			"gpu": "compile shader source in context",
+			"source": "shader source code in GL format",
+			"type": "vertex or fragment",
+			"return": "compiled shader in context in case of no error"
+		},
+		"gpuBuffer": {
+			"gpu": "create and bind buffer in context",
+			"bufferdata": "data of the buffer",
+			"target": "target of the buffer [array, elements, etc.]",
+			"type": "type of buffer data, default Float32Array",
+			"usage": "usage of the buffer in context",
+			"return": "configured context buffer"
+		},
+		"newGPU": {
+			"sourcev": "vertex shader GL source",
+			"sourcef": "fragment shader GL source",
+			"id": "id of the gpu in gpuIds",
+			"options": "options of the context instance",
+			"width": "width of context or 0xff",
+			"height": "height of context or 0xff",
+			"return": "id of gpu in gpuIds"
+		},
+		"addGPU": {
+			"gpu": "link program to context",
+			"sourcev": "create vertex shader from GL source",
+			"sourcef": "create fragment shader from GL source",
+			"id": "id of gpu in gpuIds or auto generated",
+			"return": "id of gpu in gpuIds"
+		},
+		"getGPU": {
+			"id": "id in gpuIds",
+			"return": "gpu data with shaders, buffer, program"
+		},
+		"useGPU": {
+			"id": "id of gpu in gpuIds",
+			"handler": "function resolver of context pixel output",
+			"settings": "settings used in this drawing and programming of context",
+			"bufferData": "buffers used in this drawing",
+			"readBufferType": "read pixels of context, default Uint8Array",
+			"glPreProgrammer": "gpu function to preprogram the context, buffers and attributes, or autoDrawGPU",
+			"glProgrammer": "gpu function to program the context, uniforms and draw, or autoDrawGPU",
+			"glClear": "clear function (gpu, gpuData, id, settings) or autoDrawGPU",
+			"return": "gpu data status"
+		},
+		"clearGPUBuffer": {
+			"id": "id of gpu in gpuIds",
+			"return": "gpu data buffer status"
+		},
+		"deleteGPU": {
+			"id": "id of gpu in gpuIds",
+			"return": "gpu data status"
+		},
+		"gpuProperty": {
+			"return": "property object"
+		},
+		"gpuAttribute": {
+			"return": "attribute object"
+		},
+		"gpuFunction": {
+			"return": "function template object"
+		},
+		"gpuUniform": {
+			"return": "uniform object"
+		},
+		"gpuUniformMatrix": {
+			"return": "uniform matrix object"
+		},
+		"gpuBufferData": {
+			"return": "buffer data object"
+		},
+		"gpuSettings": {
+			"return": "gpu settings object"
+		},
+		"newWorker": {
+			"src": "JavaScript source code, url to .js file or Blob url",
+			"id": "id of worker in the map or auto generated",
+			"type": "type of worker [normal, shared]",
+			"options": "options of worker instance",
+			"srcurl": "use src as url",
+			"return": "id of worker"
+		},
+		"getWorker": {
+			"id": "id of worker in workerIds",
+			"return": "worker from map 'workerIds'"
+		},
+		"commandWorker": {
+			"id": "id of worker in workerIds",
+			"command": "sent command",
+			"data": "command data [Object, Array]",
+			"transfer": "array of Transferable objects [ArrayBuffer, MessagePort, ImageBitmap]",
+			"return": "worker status"
+		},
+		"deleteWorker": {
+			"id": "select worker by id, and terminate externally by posting a message",
+			"return": "worker status"
+		}
+	},
+	"static_examples": {},
+	"examples": {}
+}
