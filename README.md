@@ -4,11 +4,6 @@
 
 [![Zeta Ret ProtoSS Cover](https://zetaret.com/images/protoss_cover.jpg)](https://zetaret.com/projects/protoss/)  
 
-## Demos  
-Canvas Live Demo based on OOP ProtoSS in ES6 Class Standard [ProtoSS + XeltoSS]:  
-Zeta Ret Clockwork website: https://zetaret.com/projects/clockwork/  
-Zeta Ret Clockwork demo: https://clockwork.lovesvn.com/demo/  
-
 ## Summary  
 
 Features on top of regular prototyping: super, superize, setSuper, setSubclass, getSupers, getSupers2, getReversedSupers, superList, superList2, getThis, getSuper, callSuper, callSuper2, callSuperX, callProto, callProto2, callProtoX, hasSuper, is, getNextSuper, getNextSuperX, abstract, implement, interface, final, statis, getSuperName, getSuperName2, namespace, usens, internal, package, rndstr
@@ -21,6 +16,14 @@ Minimized ProtoSS, ~1kb in gzip transfer
 [ProtoSS Documentation](https://github.com/ZetaRet/protoss/wiki/ProtoSS-Documentation)  
 [XeltoSS Documentation](https://github.com/ZetaRet/protoss/wiki/XeltoSS-Documentation)  
 [SkytoSS Documentation](https://github.com/ZetaRet/protoss/wiki/SkytoSS-Documentation)  
+
+## Atom IDE  
+[ProtoSS package for Atom IDE](https://atom.io/packages/ide-protoss)  
+
+## Demos  
+Canvas Live Demo based on OOP ProtoSS in ES6 Class Standard [ProtoSS + XeltoSS]:  
+Zeta Ret Clockwork website: https://zetaret.com/projects/clockwork/  
+Zeta Ret Clockwork demo: https://clockwork.lovesvn.com/demo/  
 
 ## Examples:  
 - https://github.com/ZetaRet/protoss/tree/master/examples  
@@ -41,5 +44,5 @@ This library may be used directly for OOP in JavaScript, still, a cross-compiler
 
 [Polymorphism Source of Theory](http://lucacardelli.name/indexPapers.html)  
 
-:alien: ProtoSS Website: https://protoss.xyz/  
+ProtoSS Website: https://protoss.xyz/  
 Author: Zeta Ret, Ivo Yankulovski, 2017 https://zetaret.com/  
