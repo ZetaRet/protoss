@@ -1,4 +1,4 @@
-[![Zeta Ret ProtoSS Logo](https://zetaret.com/images/protoss_logo_name.png)](https://protoss.xyz/)  
+[![Zeta Ret ProtoSS Logo](https://zetaret.com/images/protoss_logo_name.png)](https://protoss.zetaret.com/)  
 
 ## Zeta Ret ProtoSS Library - Prototype Supers-Subclass  
 
@@ -23,7 +23,7 @@ Minimized ProtoSS, ~1kb in gzip transfer
 ## Demos  
 Canvas Live Demo based on OOP ProtoSS in ES6 Class Standard [ProtoSS + XeltoSS]:  
 Zeta Ret Clockwork website: https://zetaret.com/projects/clockwork/  
-Zeta Ret Clockwork demo: https://clockwork.lovesvn.com/demo/  
+Zeta Ret Clockwork demo: https://clockwork.zetaret.com/demo/  
 
 ## Examples:  
 - https://github.com/ZetaRet/protoss/tree/master/examples  
@@ -44,5 +44,5 @@ This library may be used directly for OOP in JavaScript, still, a cross-compiler
 
 [Polymorphism Source of Theory](http://lucacardelli.name/indexPapers.html)  
 
-ProtoSS Website: https://protoss.xyz/  
+ProtoSS Website: https://protoss.zetaret.com/  
 Author: Zeta Ret, Ivo Yankulovski, 2017 https://zetaret.com/  
