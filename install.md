@@ -41,4 +41,4 @@ __XeltoSS.js__ can be found in __xeltoss/XeltoSS.js__ including documentation, h
 __SkytoSS.js__ can be found in __skytoss/SkytoSS.js__ including documentation, header and interface  
 
 # Headers & Load Order
-Classes are loaded always before Headers in HTML. Each Header requires a hard reference to ProtoSS Class definition, any other reference-to inside the Header Array, present or super class(es), can be soft string literal which is resolved later. Backend may pack JS code in either way of <script src="file.js"\> method or output it directly into the script tag.
+Classes are loaded always before Headers in HTML. Each Header requires a hard reference to ProtoSS Class definition, all other references inside the Header Array, present or super class(es), can be soft string literals resolved later. Backend may pack JS code in either way of <script src="file.js"\> method or output it directly into the script tag.
