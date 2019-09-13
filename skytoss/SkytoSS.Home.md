@@ -1,6 +1,6 @@
 ## SkytoSS - ProtoSS GPU Acceleration and Web Workers
 
-[![Zeta Ret SkytoSS Logo](https://protoss.xyz/images/logo_skytoss.png)](https://protoss.xyz/)
+[![Zeta Ret SkytoSS Logo](https://protoss.zetaret.com/images/logo_skytoss.png)](https://protoss.zetaret.com/)
 
 __SkytoSS__ introduces the following new features in our __ProtoSS__ technology:  
 
