@@ -7,6 +7,8 @@ __min/protoss.min.js__  - Standard ProtoSS functionality, minimization applied, 
 
 # Additional Files  
 __protoss.book.of.cheese.js__ must be preloaded before any other ProtoSS code, it adds polyfill implementation on base prototype primitives, usually not supported on mobile devices or old browsers  
+__protoss.node.cheese.js__  must be preloaded before any ProtoSS file in Node.js server  
+__protoss.node.module.js__  simple ProtoSS module loading external JS files and setting scope  
 __min/protoss.all.min.js.gz__ contains __protoss.all.min.js__  
 __min/protoss.min.js.gz__ contains __protoss.min.js__  
 __README.md__ ProtoSS home screen  
@@ -21,6 +23,7 @@ __examples/transform.ProtoSS.XeltoSS.js__ transform ProtoSS Class to XeltoSS Cla
 __examples/inline.morph.XeltoSS.js__ design template of protected scope using printed XeltoSS classes  
 __examples/inline.morph.XeltoSS.intersect.js__ design template of protected scope using printed XeltoSS classes and protoss.all.js infrastructure  
 __examples/inline.morph.XeltoSS.access.attributes.js__ design template of protected/private/internal/namespace scope using printed XeltoSS classes, protoss.all.js infrastructure and CRUD-compliant AccessAttribute class prototype  
+__examples/node_example.js__ ProtoSS module example using __require__ and consoles ProtoSS Objects  
 
 # Documentation  
 __protoss.all.js__ uses __dox/protoss.all.md__  
