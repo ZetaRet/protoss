@@ -11,11 +11,11 @@ Features on top of regular prototyping: super, superize, setSuper, setSubclass, 
 Minimized ProtoSS, ~1kb in gzip transfer  
 
 ## Documentation  
-[Wiki Documentation](https://github.com/ZetaRet/protoss/wiki/Documentation)  
-[Install and Repository](https://github.com/ZetaRet/protoss/wiki/Install-and-Repository)  
-[ProtoSS Documentation](https://github.com/ZetaRet/protoss/wiki/ProtoSS-Documentation)  
-[XeltoSS Documentation](https://github.com/ZetaRet/protoss/wiki/XeltoSS-Documentation)  
-[SkytoSS Documentation](https://github.com/ZetaRet/protoss/wiki/SkytoSS-Documentation)  
+[protoss.all.js](https://github.com/ZetaRet/protoss/blob/master/dox/protoss.all.md)  
+[Install and Repository](https://github.com/ZetaRet/protoss/blob/master/install.md)  
+[ProtoSS Extension](https://github.com/ZetaRet/protoss/blob/master/protoss/ProtoSS.md)  
+[XeltoSS Extension](https://github.com/ZetaRet/protoss/blob/master/xeltoss/XeltoSS.md)  
+[SkytoSS Extension](https://github.com/ZetaRet/protoss/blob/master/skytoss/SkytoSS.md)  
 
 ## Atom IDE  
 [![Zeta Ret ProtoSS Atom IDE](https://raw.githubusercontent.com/ZetaRet/atom.io-packages/master/images/atom-ide-protoss-bar-br.png)](https://atom.io/packages/ide-protoss)  
