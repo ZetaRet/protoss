@@ -1,9 +1,9 @@
 {
-	"name": "Zeta Ret ProtoSS",
+	"name": "Zeta Ret ProtoSS - Prototype Supers-Subclass",
 	"type": "protossdox",
 	"path": "dox/",
 	"src": "",
-	"namespace": "",
+	"namespace": "zetaret.global.packages.protoss",
 	"relative": true,
 	"markdown": true
 }
