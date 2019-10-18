@@ -226,9 +226,9 @@ function XeltoSS() {
 			body = fs.substr(bodyoi),
 			hspl = header.split(')')[0].split('('),
 			hdata = hspl[0];
-		hdata = hdata.replace('function', '').replace(/ /gi, '');
+		hdata = hdata.replace('function', '').replace(new RegExp('[\\s]*', 'g'), '');
 		fa[0] = fn || hdata;
-		fa[1] = hspl[1].replace(/ /gi, '').split(',');
+		fa[1] = hspl[1].replace(new RegExp('[\\s]*', 'g'), '').split(',');
 		if (!fa[1][0]) fa[1] = [];
 		fa[2] = body;
 		fa[3] = o.hashString(body);
