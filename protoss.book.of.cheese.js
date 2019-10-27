@@ -1,12 +1,11 @@
 /**
  * Author: Zeta Ret, Ivo Yankulovski
- * ProtoSS book of cheese. Load the book before protoss*.js to cheese up the browser
- * Provides backwards compatibility in old browsers
- * Version: 1.04
+ * ProtoSS book of cheese. Load the book before protoss*.js
+ * Provides backwards compatibility in browser/server
+ * Version: 1.0.5
  * Date: 2018 - Today
  **/
 
-/*adds name getter to Function prototype, cache to aname as it is used in protoss*/
 if (!(function testfunctionnamegetter() {}).name) {
 	Object.defineProperty(Function.prototype, 'name', {
 		get: function() {
@@ -21,7 +20,7 @@ if (!(function testfunctionnamegetter() {}).name) {
 		}
 	});
 }
-/*adds apply to function prototype based on call upto 14 arguments*/
+
 if (!Function.prototype.apply) {
 	Function.prototype.apply = function(scope, args, f) {
 		if (!f) f = this;
@@ -60,7 +59,7 @@ if (!Function.prototype.apply) {
 		}
 	};
 }
-/*adds unique Array prototype*/
+
 if (!Array.prototype.unique) {
 	if (Array.from && window['Set'] && Set && Set.prototype.entries && Set.prototype.values) {
 		Array.prototype.unique = function() {
@@ -80,7 +79,7 @@ if (!Array.prototype.unique) {
 		};
 	}
 }
-/*adds padStart and padEnd String prototype*/
+
 if (!String.prototype.padStart) {
 	String.prototype.padStart = function(targetLength, padString) {
 		var s = "",
@@ -101,5 +100,10 @@ if (!String.prototype.padEnd) {
 		if (!padString) padString = ' ';
 		while (s.length < dif) s += padString;
 		return String(this) + s.slice(0, dif);
+	};
+}
+if (!String.prototype.substr) {
+	String.prototype.substr = function(start, length) {
+		return this.substring(start, start + length);
 	};
 }
