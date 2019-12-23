@@ -6,5 +6,7 @@
 	"namespace": "zetaret.global.packages.protoss",
 	"relative": true,
 	"markdown": true,
-	"bind": false
+	"bind": false,
+	"version": "1.5.0",
+	"license": "MIT"
 }
