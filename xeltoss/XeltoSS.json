@@ -3,7 +3,7 @@
 	"description": "Zeta Ret XeltoSS",
 	"text": "ProtoSS Transformator to JS Class",
 	"requires": "protoss.all.js",
-	"version": "1.06",
+	"version": "1.7.0",
 	"date": "2017 - Today",
 	"supername": "XeltoSS",
 	"inherits": null,

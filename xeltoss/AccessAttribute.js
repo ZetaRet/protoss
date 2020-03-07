@@ -1,6 +1,9 @@
 /**
+ * Author: Zeta Ret
  * AccessAttribute Prototype
- */
+ * Version: 1.7.0
+ * Date: 2020 - Today
+ **/
 Object.prototype.getAccessAttribute = function(namespace, accessor, methods, iidLength) {
 	var reference = this,
 		scope = {},

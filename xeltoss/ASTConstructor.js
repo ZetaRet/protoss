@@ -2,7 +2,7 @@
  * Author: Zeta Ret, Ivo Yankulovski
  * Zeta Ret XeltoSS ASTConstructor
  * Generates ASTConstructorInstance of type Function
- * Version: 1.01
+ * Version: 1.7.0
  * Date: 2018 - Today
  **/
 function ASTConstructor(key, data, datahandler) {

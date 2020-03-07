@@ -3,7 +3,7 @@
  * Zeta Ret XeltoSS
  * ProtoSS Transformator to JS Class
  * Requires: protoss.all.js
- * Version: 1.06
+ * Version: 1.7.0
  * Date: 2017 - Today
  **/
 window.internal(
