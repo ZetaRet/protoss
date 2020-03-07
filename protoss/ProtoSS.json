@@ -3,7 +3,7 @@
 	"description": "Zeta Ret ProtoSS",
 	"text": "ProtoSS Class/Interface/Header Manager",
 	"requires": "protoss.all.js",
-	"version": "1.06",
+	"version": "1.7.0",
 	"date": "2017 - Today",
 	"supername": "ProtoSS",
 	"inherits": null,

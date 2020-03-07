@@ -3,7 +3,7 @@
  * Zeta Ret ProtoSS
  * ProtoSS Class/Interface/Header Manager
  * Requires: protoss.all.js
- * Version: 1.06
+ * Version: 1.7.0
  * Date: 2017 - Today
  **/
 window.internal(
