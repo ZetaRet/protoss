@@ -1,7 +1,7 @@
 /**
  * Author: Zeta Ret
  * ProtoSS Node Module.
- * Version: 1.00
+ * Version: 1.7.0
  * Date: 2019 - Today
  **/
 

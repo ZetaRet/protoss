@@ -1,7 +1,7 @@
 /**
  * Author: Zeta Ret, Ivo Yankulovski
  * ProtoSS Node.js cheese. Simple polyfill for the ProtoSS library.
- * Version: 1.01
+ * Version: 1.7.0
  * Date: 2019 - Today
  **/
 

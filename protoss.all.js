@@ -1,7 +1,7 @@
 /**
  * Author: Zeta Ret, Ivo Yankulovski
  * ProtoSS - Prototype Supers-Subclass Library
- * Version: 1.05
+ * Version: 1.7.0
  * Date: 2017 - Today
  **/
 function ZetaRet_Prototypes() {
