@@ -2,7 +2,7 @@
 > __Zeta Ret SkytoSS__  
 # SkytoSS Accelerator, ProtoSS GPU Acceleration and Web Workers  
 > *Requires: protoss.all.js*  
-> *Version: 1.06*  
+> *Version: 1.7.0*  
 > *Date: 2018 - Today*  
 
 __required*__

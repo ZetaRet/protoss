@@ -3,7 +3,7 @@
 	"description": "Zeta Ret SkytoSS",
 	"text": "SkytoSS Accelerator, ProtoSS GPU Acceleration and Web Workers",
 	"requires": "protoss.all.js",
-	"version": "1.06",
+	"version": "1.7.0",
 	"date": "2018 - Today",
 	"supername": "SkytoSS",
 	"inherits": null,
