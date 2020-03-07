@@ -3,7 +3,7 @@
 	"description": "Object prototypes for OOP",
 	"text": "ProtoSS - Prototype Supers-Subclass",
 	"requires": null,
-	"version": "1.05",
+	"version": "1.7.0",
 	"date": "2017 - Today",
 	"supername": "ZetaRet_Prototypes",
 	"inherits": null,
