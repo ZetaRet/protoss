@@ -1,8 +1,8 @@
-[![Zeta Ret ProtoSS Logo](https://zetaret.com/images/protoss_logo_name.png)](https://protoss.zetaret.com/)  
+[![Zeta Ret ProtoSS Logo](https://raw.githubusercontent.com/ZetaRet/atom.io-packages/master/images/local/protoss_logo_name.png)](https://protoss.zetaret.com/)  
 
 ## Zeta Ret ProtoSS Library - Prototype Supers-Subclass  
 
-[![Zeta Ret ProtoSS Cover](https://zetaret.com/images/protoss_cover.jpg)](https://zetaret.com/projects/protoss/)  
+[![Zeta Ret ProtoSS Cover](https://raw.githubusercontent.com/ZetaRet/atom.io-packages/master/images/local/protoss_cover.jpg)](https://zetaret.com/projects/protoss/)  
 
 ## Summary  
 
