@@ -1,0 +1,24 @@
+{
+	"compilerOptions": {
+		"target": "ES2020",
+		"module": "CommonJS",
+		"noImplicitAny": true,
+		"removeComments": true,
+		"preserveConstEnums": true,
+		"sourceMap": false,
+		"allowJs": true,
+		"outDir": "ts/"
+	},
+	"files": [
+		"index.ts"
+	],
+	"include": [
+		"protoss.all.js",
+		"ProtoSS/**/*",
+		"XeltoSS/**/*",
+		"SkytoSS/**/*"
+	],
+	"exclude": [
+		"node_modules"
+	]
+}
