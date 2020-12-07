@@ -1,0 +1,29 @@
+{
+	"author": "Zeta Ret",
+	"description": "XeltoSS Abstract Syntax Tree Constructor",
+	"text": "Generates ASTConstructorInstance of type Function",
+	"requires": "",
+	"version": "1.7.0",
+	"date": "2018 - Today",
+	"supername": "ASTConstructor",
+	"inherits": null,
+	"interfaces": null,
+	"static": {
+		"public_properties": {},
+		"protected_properties": {},
+		"private_properties": {},
+		"public_methods": {},
+		"protected_methods": {},
+		"private_methods": {}
+	},
+	"public_properties": {},
+	"protected_properties": {},
+	"private_properties": {},
+	"public_methods": {},
+	"protected_methods": {},
+	"private_methods": {},
+	"static_descriptions": {},
+	"descriptions": {},
+	"static_examples": {},
+	"examples": {}
+}
