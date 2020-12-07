@@ -1,4 +1,4 @@
-> __Author: Zeta Ret, Ivo Yankulovski__  
+> __Author: Zeta Ret__  
 > __Zeta Ret ProtoSS__  
 # ProtoSS Class/Interface/Header Manager  
 > *Requires: protoss.all.js*  
@@ -42,19 +42,19 @@ default null, resolveHeaders calls debug("error", "resolveHeaders", o, o.errorDa
 
 ##  
 __ProtoSS() : *void*__  
-  
+
 > *return __void__*  
 
 ##  
 __toInterface(*Object* i, *Object* pack) : *Object*__  
-  
+
 - __i*__ - __*Object*__, key-value map of interface definitions  
 - pack - __*Object*__, pack obj to *internal* the interface  
 > *return __Object__, interface map*  
 
 ##  
 __stringPattern(*String* pat, *String* str, *Number* pos) : *Array*__  
-  
+
 - __pat*__ - __*String*__, pattern to search in str string  
 - __str*__ - __*String*__, string to search in for patterns  
 - pos - __*Number*__, initial position to start the search  
@@ -62,7 +62,7 @@ __stringPattern(*String* pat, *String* str, *Number* pos) : *Array*__
 
 ##  
 __getSuperCls(*String* sname, *Object* toppack, *String* path) : *Function*__  
-  
+
 - __sname*__ - __*String*__, super name split in pipes | to allow multiple super check  
 - __toppack*__ - __*Object*__, package object to search in  
 - path - __*String*__, path used to append to found patterns of parent search /  
@@ -70,7 +70,7 @@ __getSuperCls(*String* sname, *Object* toppack, *String* path) : *Function*__
 
 ##  
 __resolveCls(*Object* s, *Object* toppack, *String* path) : *ProtoSS*__  
-  
+
 - __s*__ - __*Object*__, map of string classes to convert using *getSuperCls*  
 - toppack - __*Object*__, pass var to *getSuperCls*  
 - path - __*String*__, pass var to *getSuperCls*  
@@ -78,7 +78,7 @@ __resolveCls(*Object* s, *Object* toppack, *String* path) : *ProtoSS*__
 
 ##  
 __resolveHeaders(*Object* toppack, *String* path) : *ProtoSS*__  
-  
+
 - toppack - __*Object*__, pass var to *getSuperCls*  
 - path - __*String*__, pass var to *getSuperCls*  
 > *return __ProtoSS__, current scope object, resolves all headers from static properties*  
@@ -111,21 +111,21 @@ default {}, add dynamic string key-value pairs
 
 ##  
 __eventProps(*Object* event, *Array* props) : *Object*__  
-  
+
 - __event*__ - __*Object*__, function object  
 - __props*__ - __*Array*__, string properties  
 > *return __Object__, event, props attached as uppercase keys including _CHANGE property*  
 
 ##  
 __staticProps(*Object* stat, *Object* props) : *Object*__  
-  
+
 - __stat*__ - __*Object*__, function object  
 - __props*__ - __*Object*__, key-value pairs attached to stat object  
 > *return __Object__, stat, props attached as is*  
 
 ##  
 __getDefinitionByName(*String* sname, *Object* toppack) : *Function*__  
-  
+
 - __sname*__ - __*String*__, class super name  
 - toppack - __*Object*__, default is window  
 > *return __Function__*  

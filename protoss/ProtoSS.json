@@ -1,5 +1,5 @@
 {
-	"author": "Zeta Ret, Ivo Yankulovski",
+	"author": "Zeta Ret",
 	"description": "Zeta Ret ProtoSS",
 	"text": "ProtoSS Class/Interface/Header Manager",
 	"requires": "protoss.all.js",
