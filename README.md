@@ -29,15 +29,6 @@ Canvas Live Demo based on OOP ProtoSS in ES6 Class Standard [ProtoSS + XeltoSS]:
 ## Examples:  
 - https://github.com/ZetaRet/protoss/tree/master/examples  
 
-- Example with function overloads and 2 super classes. Usage of properties and methods.  
-https://jsfiddle.net/zetaret/cj5yy4qu/  
-- Game Example with Builders, Buildings, Upgrades, Units.  
-https://jsfiddle.net/zetaret/asusm0uz/  
-- Extended Prototypes framework with abstract, interface, implement, final.  
-https://jsfiddle.net/zetaret/8h0ugxym/  
-- Extended Prototypes framework with getSuperName, namespace, usens, internal, package.  
-https://jsfiddle.net/zetaret/sw0j28qj/  
-
 ## Note  
 Some JavaScript versions or JS servers do not support arguments, it must be recreated manually (or by your compiler/interpreter/texttemplate) in the beginning of the function as an array with the same behaviour including a reference to the class function in callee parameter.  
 
