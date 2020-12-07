@@ -1,5 +1,5 @@
 {
-	"author": "Zeta Ret, Ivo Yankulovski",
+	"author": "Zeta Ret",
 	"description": "Zeta Ret XeltoSS",
 	"text": "ProtoSS Transformator to JS Class",
 	"requires": "protoss.all.js",
