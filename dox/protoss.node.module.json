@@ -1,0 +1,29 @@
+{
+	"author": "Zeta Ret",
+	"description": "ProtoSS Node Module",
+	"text": "Virtual Machine script loader",
+	"requires": "fs, vm",
+	"version": "1.7.1",
+	"date": "2019 - Today",
+	"supername": "zetaret.node::protossnodemodule",
+	"inherits": null,
+	"interfaces": null,
+	"static": {
+		"public_properties": {},
+		"protected_properties": {},
+		"private_properties": {},
+		"public_methods": {},
+		"protected_methods": {},
+		"private_methods": {}
+	},
+	"public_properties": {},
+	"protected_properties": {},
+	"private_properties": {},
+	"public_methods": {},
+	"protected_methods": {},
+	"private_methods": {},
+	"static_descriptions": {},
+	"descriptions": {},
+	"static_examples": {},
+	"examples": {}
+}

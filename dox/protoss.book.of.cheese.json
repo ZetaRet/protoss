@@ -1,0 +1,29 @@
+{
+	"author": "Zeta Ret",
+	"description": "ProtoSS book of cheese. Load the book before protoss*.js",
+	"text": "Provides backwards compatibility in browser/server",
+	"requires": "",
+	"version": "1.7.1",
+	"date": "2018 - Today",
+	"supername": "zetaret.global::protossbookofcheese",
+	"inherits": [],
+	"interfaces": [],
+	"static": {
+		"public_properties": {},
+		"protected_properties": {},
+		"private_properties": {},
+		"public_methods": {},
+		"protected_methods": {},
+		"private_methods": {}
+	},
+	"public_properties": {},
+	"protected_properties": {},
+	"private_properties": {},
+	"public_methods": {},
+	"protected_methods": {},
+	"private_methods": {},
+	"static_descriptions": {},
+	"descriptions": {},
+	"static_examples": {},
+	"examples": {}
+}
