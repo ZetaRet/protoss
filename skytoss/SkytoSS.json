@@ -1,5 +1,5 @@
 {
-	"author": "Zeta Ret, Ivo Yankulovski",
+	"author": "Zeta Ret",
 	"description": "Zeta Ret SkytoSS",
 	"text": "SkytoSS Accelerator, ProtoSS GPU Acceleration and Web Workers",
 	"requires": "protoss.all.js",

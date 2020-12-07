@@ -1,4 +1,4 @@
-> __Author: Zeta Ret, Ivo Yankulovski__  
+> __Author: Zeta Ret__  
 > __Zeta Ret SkytoSS__  
 # SkytoSS Accelerator, ProtoSS GPU Acceleration and Web Workers  
 > *Requires: protoss.all.js*  
@@ -90,25 +90,25 @@ default {}, definitions by id used in workers, ProtoSS synthesis instructions
 
 ##  
 __SkytoSS() : *void*__  
-  
+
 > *return __void__*  
 
 ##  
 __getTemplate(*String* id) : *Function*__  
-  
+
 - __id*__ - __*String*__, id of template in the map  
 > *return __Function__, template function handler*  
 
 ##  
 __setTemplate(*String* id, *Function* handler) : *SkytoSS*__  
-  
+
 - __id*__ - __*String*__, id of template handler in the map  
 - __handler*__ - __*Function*__, function mapped to template id  
 > *return __SkytoSS__, self*  
 
 ##  
 __iterateTemplate(*String* s1, *String* s2, *String* s3, *String* expression) : *String*__  
-  
+
 - __s1*__ - __*String*__, statement 1 of the for iterator, initialization  
 - __s2*__ - __*String*__, statement 2 of the for iterator, precondition  
 - __s3*__ - __*String*__, statement 3 of the for iterator, counter  
@@ -117,20 +117,20 @@ __iterateTemplate(*String* s1, *String* s2, *String* s3, *String* expression) : 
 
 ##  
 __ifElseTemplate(*Array* conditions, *String* elsebody) : *String*__  
-  
+
 - __conditions*__ - __*Array*__, array of [condition, body], 'if' on index 0, 'else if' for any consequential index  
 - elsebody - __*String*__, 'else' body  
 > *return __String__, [if, else if, else] source template*  
 
 ##  
 __argsTemplate(*Array* args) : *String*__  
-  
+
 - __args*__ - __*Array*__, array of strings in 2 templates, [1] 'Type key' or [2] 'key'  
 > *return __String__, map of key type*  
 
 ##  
 __functionTemplate(*String* name, *String* returnType, *Array* args, *Object* props, *String|Array* main, *String* prefix, *String* suffix) : *String*__  
-  
+
 - name - __*String*__, name of function or 'main'  
 - returnType - __*String*__, type of return or 'void'  
 - args - __*Array*__, array of arguments  
@@ -142,20 +142,20 @@ __functionTemplate(*String* name, *String* returnType, *Array* args, *Object* pr
 
 ##  
 __setExpressionMap(*Function* type, *Function* handler) : *SkytoSS*__  
-  
+
 - __type*__ - __*Function*__, constructor function to evaluate value by type  
 - __handler*__ - __*Function*__, type function handler by value  
 > *return __SkytoSS__, self*  
 
 ##  
 __evalExpression(*Object* exp) : *Object*__  
-  
+
 - __exp*__ - __*Object*__, expression to evaluate using 'expressionMap'  
 > *return __Object__, type evaluation by map or exp*  
 
 ##  
 __sourceTemplate(*Object* attr, *Object* mprops, *String|Array* main, *Object* functions, *String|Array* prepend, *String|Array* append) : *String*__  
-  
+
 - attr - __*Object*__, map of attributes  
 - mprops - __*Object*__, map of properties  
 - main - __*String|Array*__, main body source  
@@ -166,13 +166,13 @@ __sourceTemplate(*Object* attr, *Object* mprops, *String|Array* main, *Object* f
 
 ##  
 __seedTemplate(*Number* seed) : *Object*__  
-  
+
 - seed - __*Number*__, initial seed or 0  
 > *return __Object__, randomizer seed object*  
 
 ##  
 __lineWrapper(*Array* line, *Boolean* noreturn, *Object* props) : *String*__  
-  
+
 - __line*__ - __*Array*__, array of source lines  
 - noreturn - __*Boolean*__, mark last line as return  
 - props - __*Object*__, replace properties in line string by key value  
@@ -180,13 +180,13 @@ __lineWrapper(*Array* line, *Boolean* noreturn, *Object* props) : *String*__
 
 ##  
 __gpuWrapRandomizer(*Object* seeder) : *Object*__  
-  
+
 - __seeder*__ - __*Object*__, randomizer seed object  
 > *return __Object__, GPU wrapper object {attr, code, main}*  
 
 ##  
 __gpuShader(*WebGLRenderingContext* gpu, *String* source, *Number* type) : *WebGLShader*__  
-  
+
 - __gpu*__ - __*WebGLRenderingContext*__, compile shader source in context  
 - __source*__ - __*String*__, shader source code in GL format  
 - __type*__ - __*Number*__, vertex or fragment  
@@ -194,7 +194,7 @@ __gpuShader(*WebGLRenderingContext* gpu, *String* source, *Number* type) : *WebG
 
 ##  
 __gpuBuffer(*WebGLRenderingContext* gpu, *Array* bufferdata, *Number* target, *ArrayBufferView* type, *Number* usage) : *WebGLBuffer*__  
-  
+
 - __gpu*__ - __*WebGLRenderingContext*__, create and bind buffer in context  
 - __bufferdata*__ - __*Array*__, data of the buffer  
 - target - __*Number*__, target of the buffer [array, elements, etc.]  
@@ -204,7 +204,7 @@ __gpuBuffer(*WebGLRenderingContext* gpu, *Array* bufferdata, *Number* target, *A
 
 ##  
 __gpuPreProgrammer(*WebGLRenderingContext* gpu, *Object* gpuData, *String* id, *Object* settings, *Object* bufferData) : *void*__  
-  
+
 - __gpu*__ - __*WebGLRenderingContext*__,   
 - __gpuData*__ - __*Object*__,   
 - __id*__ - __*String*__,   
@@ -214,7 +214,7 @@ __gpuPreProgrammer(*WebGLRenderingContext* gpu, *Object* gpuData, *String* id, *
 
 ##  
 __gpuProgrammer(*WebGLRenderingContext* gpu, *Object* gpuData, *String* id, *Object* settings) : *void*__  
-  
+
 - __gpu*__ - __*WebGLRenderingContext*__,   
 - __gpuData*__ - __*Object*__,   
 - __id*__ - __*String*__,   
@@ -223,7 +223,7 @@ __gpuProgrammer(*WebGLRenderingContext* gpu, *Object* gpuData, *String* id, *Obj
 
 ##  
 __newGPU(*String* sourcev, *String* sourcef, *String* id, *Object* options, *Number* width, *Number* height) : *String*__  
-  
+
 - __sourcev*__ - __*String*__, vertex shader GL source  
 - __sourcef*__ - __*String*__, fragment shader GL source  
 - id - __*String*__, id of the gpu in gpuIds  
@@ -234,7 +234,7 @@ __newGPU(*String* sourcev, *String* sourcef, *String* id, *Object* options, *Num
 
 ##  
 __addGPU(*WebGLRenderingContext* gpu, *String* sourcev, *String* sourcef, *String* id) : *String*__  
-  
+
 - __gpu*__ - __*WebGLRenderingContext*__, link program to context  
 - __sourcev*__ - __*String*__, create vertex shader from GL source  
 - __sourcef*__ - __*String*__, create fragment shader from GL source  
@@ -243,13 +243,13 @@ __addGPU(*WebGLRenderingContext* gpu, *String* sourcev, *String* sourcef, *Strin
 
 ##  
 __getGPU(*String* id) : *Object*__  
-  
+
 - __id*__ - __*String*__, id in gpuIds  
 > *return __Object__, gpu data with shaders, buffer, program*  
 
 ##  
 __useGPU(*String* id, *Function* handler, *Object* settings, *Object* bufferData, *ArrayBufferView* readBufferType, *Function* glPreProgrammer, *Function* glProgrammer, *Function* glClear) : *Boolean*__  
-  
+
 - __id*__ - __*String*__, id of gpu in gpuIds  
 - handler - __*Function*__, function resolver of context pixel output  
 - settings - __*Object*__, settings used in this drawing and programming of context  
@@ -262,26 +262,26 @@ __useGPU(*String* id, *Function* handler, *Object* settings, *Object* bufferData
 
 ##  
 __clearGPUBuffer(*String* id) : *Boolean*__  
-  
+
 - __id*__ - __*String*__, id of gpu in gpuIds  
 > *return __Boolean__, gpu data buffer status*  
 
 ##  
 __deleteGPU(*String* id) : *Boolean*__  
-  
+
 - __id*__ - __*String*__, id of gpu in gpuIds  
 > *return __Boolean__, gpu data status*  
 
 ##  
 __gpuProperty(*String* value, *String* type) : *Object*__  
-  
+
 - __value*__ - __*String*__,   
 - type - __*String*__,   
 > *return __Object__, property object*  
 
 ##  
 __gpuAttribute(*String* type, *String* value, *String* attrname, *Boolean* noattrname, *Object* loc) : *Object*__  
-  
+
 - __type*__ - __*String*__,   
 - value - __*String*__,   
 - attrname - __*String*__,   
@@ -291,7 +291,7 @@ __gpuAttribute(*String* type, *String* value, *String* attrname, *Boolean* noatt
 
 ##  
 __gpuFunction(*String* rtype, *Array* args, *Object* props, *String|Array* main, *String* prefix, *String* suffix) : *Object*__  
-  
+
 - rtype - __*String*__,   
 - args - __*Array*__,   
 - props - __*Object*__,   
@@ -302,14 +302,14 @@ __gpuFunction(*String* rtype, *Array* args, *Object* props, *String|Array* main,
 
 ##  
 __gpuUniform(*String* value, *Boolean* int) : *Object*__  
-  
+
 - __value*__ - __*String*__,   
 - int - __*Boolean*__,   
 > *return __Object__, uniform object*  
 
 ##  
 __gpuUniformMatrix(*String* value, *Number* num, *Boolean* transpose) : *Object*__  
-  
+
 - __value*__ - __*String*__,   
 - __num*__ - __*Number*__,   
 - transpose - __*Boolean*__,   
@@ -317,7 +317,7 @@ __gpuUniformMatrix(*String* value, *Number* num, *Boolean* transpose) : *Object*
 
 ##  
 __gpuBufferData(*Array* data, *Number* size, *Number* target, *ArrayBufferView* type, *Number* usage, *Number* dataType, *ArrayBufferView* vector, *WebGLBuffer* buffer, *Boolean* noloc, *Object* loc, *Boolean* normalized, *Number* stride, *Number* offset) : *Object*__  
-  
+
 - __data*__ - __*Array*__,   
 - __size*__ - __*Number*__,   
 - target - __*Number*__,   
@@ -335,7 +335,7 @@ __gpuBufferData(*Array* data, *Number* size, *Number* target, *ArrayBufferView* 
 
 ##  
 __gpuSettings(*Object* uniform, *Function* drawMethod, *Array* drawArgs, *Number* drawCount, *Number* bufferCellSize, *Number* readFormat, *Number* readType) : *Object*__  
-  
+
 - uniform - __*Object*__,   
 - drawMethod - __*Function*__,   
 - drawArgs - __*Array*__,   
@@ -347,7 +347,7 @@ __gpuSettings(*Object* uniform, *Function* drawMethod, *Array* drawArgs, *Number
 
 ##  
 __newWorker(*String* src, *String* id, *String* type, *Object* options, *Boolean* srcurl) : *String*__  
-  
+
 - __src*__ - __*String*__, JavaScript source code, url to .js file or Blob url  
 - id - __*String*__, id of worker in the map or auto generated  
 - type - __*String*__, type of worker [normal, shared]  
@@ -357,13 +357,13 @@ __newWorker(*String* src, *String* id, *String* type, *Object* options, *Boolean
 
 ##  
 __getWorker(*String* id) : *Worker|SharedWorker*__  
-  
+
 - __id*__ - __*String*__, id of worker in workerIds  
 > *return __Worker|SharedWorker__, worker from map 'workerIds'*  
 
 ##  
 __commandWorker(*String* id, *String* command, *Object* data, *Array* transfer) : *Boolean*__  
-  
+
 - __id*__ - __*String*__, id of worker in workerIds  
 - __command*__ - __*String*__, sent command  
 - data - __*Object*__, command data [Object, Array]  
@@ -372,7 +372,7 @@ __commandWorker(*String* id, *String* command, *Object* data, *Array* transfer) 
 
 ##  
 __deleteWorker(*String* id) : *Boolean*__  
-  
+
 - __id*__ - __*String*__, select worker by id, and terminate externally by posting a message  
 > *return __Boolean__, worker status*  
 
@@ -396,7 +396,7 @@ default false, flag state of InitSkytoSSPrototypes
 
 ##  
 __InitSkytoSSPrototypes(*Boolean* override) : *SkytoSS*__  
-  
+
 - override - __*Boolean*__, mark SkytoSS Prototype for overriding, will reinstall prototypes in effect  
 > *return __SkytoSS__, self SkytoSS class*  
 
