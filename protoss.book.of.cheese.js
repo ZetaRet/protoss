@@ -1,11 +1,3 @@
-/**
- * Author: Zeta Ret, Ivo Yankulovski
- * ProtoSS book of cheese. Load the book before protoss*.js
- * Provides backwards compatibility in browser/server
- * Version: 1.7.0
- * Date: 2018 - Today
- **/
-
 if (!(function testfunctionnamegetter() {}).name) {
 	Object.defineProperty(Function.prototype, 'name', {
 		get: function() {

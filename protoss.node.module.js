@@ -1,10 +1,3 @@
-/**
- * Author: Zeta Ret
- * ProtoSS Node Module.
- * Version: 1.7.0
- * Date: 2019 - Today
- **/
-
 var fs = require('fs'),
 	vm = require('vm');
 
@@ -14,7 +7,7 @@ var protossXFiles = [
 	'protoss/protoss.all.js',
 	'protoss/protoss/ProtoSS.js',
 	'protoss/xeltoss/XeltoSS.js',
-	'protoss/skytoss/SkytoSS.js',
+	'protoss/skytoss/SkytoSS.js'
 ];
 
 function loadExternals(jsfiles) {
