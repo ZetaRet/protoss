@@ -1,0 +1,9 @@
+{
+	"name": "protoss",
+	"version": "1.9.0",
+	"author": "Zeta Ret",
+	"license": "MIT",
+	"dependencies": {
+		"@types/zetaret-protoss": "git+https://github.com/ZetaRet/zetaret-protoss-types.git"
+	}
+}
