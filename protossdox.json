@@ -1,12 +1,15 @@
 {
 	"name": "Zeta Ret ProtoSS - Prototype Supers-Subclass",
 	"type": "protossdox",
+	"url": "https://github.com/ZetaRet/protoss",
+	"author": "Zeta Ret",
 	"path": "dox/",
 	"src": "",
 	"namespace": "zetaret.global.packages.protoss",
 	"relative": true,
 	"markdown": true,
 	"bind": false,
+	"ext": ["js", "ts"],
 	"version": "1.9.0",
 	"license": "MIT"
 }
